@@ -24,12 +24,23 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/app.v1.css",
+              "src/assets/css/hacks.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/app.plugin.js",
+              "src/assets/js/app.v1.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -50,7 +61,71 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "staging": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "dev-01": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev-01.ts"
+                }
+              ]
+            },
+            "dev-04": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev-04.ts"
+                }
+              ]
+            },
+            "dev-05": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev-05.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -63,6 +138,18 @@
             },
             "development": {
               "buildTarget": "CaptureMig:build:development"
+            },
+            "staging": {
+              "buildTarget": "CaptureMig:build:staging"
+            },
+            "dev-01": {
+              "buildTarget": "CaptureMig:build:dev-01"
+            },
+            "dev-04": {
+              "buildTarget": "CaptureMig:build:dev-04"
+            },
+            "dev-05": {
+              "buildTarget": "CaptureMig:build:dev-05"
             }
           },
           "defaultConfiguration": "development"
@@ -92,5 +179,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

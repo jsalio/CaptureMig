@@ -1,0 +1,109 @@
+div.col-xs-4:hover {
+    background-color: #f3f4f8;
+  }
+  
+  i.i.i-circleright.text-active {
+    color: #7f7f7f;
+  }
+  
+  .arrow_box {
+    position: relative;
+    background: #0072bc;
+  }
+  .ui-table.ui-table-hoverable-rows
+    .ui-table-tbody
+    > tr:not(.ui-state-highlight):hover {
+    background: #f1f1f159 !important;
+  }
+  .ui-table .ui-table-tbody > tr {
+    background: #ffffff !important;
+    color: #222222;
+  }
+  .bs-tooltip-auto[x-placement^="top"] .arrow::before,
+  .bs-tooltip-top .arrow::before {
+    border: none !important;
+  }
+  .arrow_box:after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(0, 114, 188, 0);
+    border-left-color: #0072bc;
+    border-width: 30px;
+    margin-top: -30px;
+  }
+  .btn-ribbon {
+    height: 60px;
+    width: 105px;
+    /* NO BORDER */
+    border: 1px solid transparent !important;
+    background: #f1f1f1 !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+  }
+  
+  /* HOVER EFECT */
+  .btn-ribbon:hover {
+    color: #788288 !important;
+    background-color: #e6e6e6 !important;
+    border-radius: 0;
+  }
+  
+  .panel-ribbon {
+    padding: 5px !important;
+    background: #f1f1f1;
+  }
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-bottom: none;
+  }
+  .panel-default .panel-heading {
+    background-color: #f1f1f1;
+  }
+  .btn-group {
+    padding-left: 5px;
+  }
+  .panel-footer.no-padder.center {
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    background: none;
+    color: #a0a0a0;
+  }
+  .viewer-container {
+    padding: 0;
+  }
+  /* .tab-content {
+    background: #f1f1f1;
+  } */
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    height: 100%;
+  }
+  .timeline-panel {
+    background: white;
+  }
+  li.timeline-inverted.ng-star-inserted {
+    margin-top: 10px;
+  }
+  
+  .panel.panel-default > .panel-heading,
+  .panel.panel-default > .panel-footer {
+    border-color: #3333334a;
+  }

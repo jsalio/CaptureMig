@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<app-block-ui app-block-ui [isBlocked]="blocked" [message]="'Please wait...'">
+  <div class="align-center login__container">
+
+    <section id="content" class="animated fadeInUp login__body ">
+      <div class="login__image">
+
+      </div>
+      <div class="login__content">
+        <div class="text-left">
+          <a class="login__logo">
+            <img src="http://prodoctivity.info/ProDoctivity-img/ProDoctivity-logo.png" />
+          </a>
+          <div class="login__productname">
+            Capture
+          </div>
+        </div>
+        <div class="language">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle language__item" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="language__flag">
+                  <img [src]="isEnglishLanguagueSelected() ? 'http://prodoctivity.info/ProDoctivity-img/usa-flag.jpg'
+                : 'http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg'" alt="">
+                </div>
+                {{ isEnglishLanguagueSelected() ? 'English' : "Spanish" | translate }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="navbarDropdown">
+                <label btnRadio="en" (click)="setLanguage('en')" class="dropdown-item language__item"
+                  [ngClass]="currentLanguage === 'en' ? 'btn-primary' : 'btn-default'" tabindex="0" role="button">
+                  <div class="language__flag" btnRadio="en" (click)="setLanguage('en')">
+                    <img src="http://prodoctivity.info/ProDoctivity-img/usa-flag.jpg" alt="">
+                  </div>
+                  {{ "English" | translate }}
+                </label>
+                <label btnRadio="es" (click)="setLanguage('es')" class="dropdown-item language__item"
+                  [ngClass]="currentLanguage === 'es' ? 'btn-primary' : 'btn-default'" tabindex="0" role="button">
+                  <div class="language__flag" btnRadio="es" (click)="setLanguage('es')">
+                    <img src="http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg" alt="">
+                  </div>
+                  {{ "Spanish" | translate }}
+                </label>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+        <form [formGroup]="loginForm" class="" (ngSubmit)="authenticate()">
+          <div class="form-group field">
+            <input type="input" class="form-group__field" placeholder="{{ 'UsernameDescription' | translate }}"
+              formControlName="username" id="name">
+            <label for="name" class="form-group__label">
+              {{ "UsernameDescription" | translate }}
+            </label>
+            <span class="text-danger animated fadeInDown" *ngIf="isFieldInvalid('username')">{{
+              "InvalidUsername" | translate
+              }}</span>
+          </div>
+          <div class="form-group field">
+            <input type="password" class="form-group__field" placeholder="{{ 'PasswordDescription' | translate }}"
+              formControlName="password" id="password">
+            <label for="password" class="form-group__label">
+              {{ "PasswordDescription" | translate }}
+            </label>
+            <span class="text-danger animated fadeInDown" *ngIf="isFieldInvalid('password')">{{
+              "PasswordRequiredDescription" | translate
+              }}</span>
+          </div>
+          <a [href]="getUrlToResetPassword()" class="login__label">
+            {{ "ForgotPasswordQuestion" | translate }}
+          </a>
+          <div class="login__btn">
+            <button type="submit" class="btn-login effect" [disabled]="!loginForm.valid">
+              {{ "SignInDescription" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <div *ngIf="isThereAuthError" class="login__alert animated fadeInUp">
+      <div class="login__icon">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <div class="login__message">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <footer id="footer">
+      <div class="text-center padder mt-2">
+        <div class="footer__version">
+          <small>{{ "ProDoctivityRightsDescription" | translate }} &copy;
+            {{ actualDate | date: "yyyy" }}
+          </small>
+        </div>
+        <div class="footer__version">
+          <small>{{ "Version" | translate }} {{ currentApplicationVersion }}
+          </small>
+        </div>
+      </div>
+    </footer>
+  </div>
+</app-block-ui>
