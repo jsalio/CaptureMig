@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
   currentLanguage = '';
   TOKEN_KEY = 'accessToken';
   dashboardActive: boolean = false;
+  environment:string=""
 
   constructor(
     private authService: AuthService,
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
     this.authService.logout('');
     this.currentLanguage = this.translateService.currentLang;
     this.createLoginForm();
+    this.environment = environment.environment
   }
 
   authenticate(): void {
