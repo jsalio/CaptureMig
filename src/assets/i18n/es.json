@@ -1278,5 +1278,6 @@
     "ZoomImageIn": "Acercar la imagen",
     "ZoomImageOut": "Alejar la imagen",
     "ZoomIn": "Acercarse",
-    "ZoomOut": "Alejarse"
+    "ZoomOut": "Alejarse",
+    "InitSessionPleaseWait":"Iniciando session espere por favor ......"
 }

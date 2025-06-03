@@ -1271,5 +1271,6 @@
     "ZoomImageIn": "Zoom image in",
     "ZoomImageOut": "Zoom image out",
     "ZoomIn": "Zoom in",
-    "ZoomOut": "Zoom out"
+    "ZoomOut": "Zoom out",
+    "InitSessionPleaseWait":"Initialze session please wait ......"
 }
