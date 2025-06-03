@@ -234,6 +234,17 @@
     right: 50px;
     z-index: 2;
   }
+  .language .nav-item {
+    position: relative;
+  }
+  .language .dropdown-menu {
+    position: absolute;
+    transform: none !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    margin-top: 0.5rem;
+  }
   .language__flag {
     width: 25px;
     height: 25px;

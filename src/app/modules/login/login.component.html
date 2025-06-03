@@ -18,31 +18,35 @@
         </div>
         <div class="language">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle language__item" href="#" id="navbarDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item" dropdown>
+              <a class="nav-link dropdown-toggle language__item" dropdownToggle id="languageDropdown" role="button"
+                aria-controls="language-dropdown">
                 <div class="language__flag">
                   <img [src]="isEnglishLanguagueSelected() ? 'http://prodoctivity.info/ProDoctivity-img/usa-flag.jpg'
-                : 'http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg'" alt="">
+                : 'http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg'" [alt]="isEnglishLanguagueSelected() ? 'English flag' : 'Spanish flag'">
                 </div>
-                {{ isEnglishLanguagueSelected() ? 'English' : "Spanish" | translate }}
+                {{ isEnglishLanguagueSelected() ? 'English' : 'Spanish' | translate }}
               </a>
-              <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="navbarDropdown">
-                <label btnRadio="en" (click)="setLanguage('en')" class="dropdown-item language__item"
-                  [ngClass]="currentLanguage === 'en' ? 'btn-primary' : 'btn-default'" tabindex="0" role="button">
-                  <div class="language__flag" btnRadio="en" (click)="setLanguage('en')">
-                    <img src="http://prodoctivity.info/ProDoctivity-img/usa-flag.jpg" alt="">
-                  </div>
-                  {{ "English" | translate }}
-                </label>
-                <label btnRadio="es" (click)="setLanguage('es')" class="dropdown-item language__item"
-                  [ngClass]="currentLanguage === 'es' ? 'btn-primary' : 'btn-default'" tabindex="0" role="button">
-                  <div class="language__flag" btnRadio="es" (click)="setLanguage('es')">
-                    <img src="http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg" alt="">
-                  </div>
-                  {{ "Spanish" | translate }}
-                </label>
-              </div>
+              <ul id="language-dropdown" class="dropdown-menu dropdown-menu-right rounded" *dropdownMenu>
+                <li>
+                  <a class="dropdown-item language__item" (click)="setLanguage('en')"
+                    [class.active]="currentLanguage === 'en'">
+                    <div class="language__flag">
+                      <img src="http://prodoctivity.info/ProDoctivity-img/usa-flag.jpg" alt="English flag">
+                    </div>
+                    {{ 'English' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item language__item" (click)="setLanguage('es')"
+                    [class.active]="currentLanguage === 'es'">
+                    <div class="language__flag">
+                      <img src="http://prodoctivity.info/ProDoctivity-img/spain-flag.jpg" alt="Spanish flag">
+                    </div>
+                    {{ 'Spanish' | translate }}
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
 
