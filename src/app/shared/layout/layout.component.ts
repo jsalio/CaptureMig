@@ -191,13 +191,17 @@ export class LayoutComponent {
   onAccept(dontAskAgain: boolean) {
     // Manejar la acción de aceptar
     console.log('Aceptado, no preguntar de nuevo:', dontAskAgain);
-    this.isModalOpen = false
+    this.closeModal(false);
   }
 
   onCancel() {
-    this.isModalOpen = false
+    this.closeModal(false);
     // Manejar la acción de cancelar
   }
 
   onDontAskAgainChange = (e) => {}
+
+  closeModal = (isOpen:boolean) =>{
+    this.isModalOpen = !isOpen;
+  }
 }

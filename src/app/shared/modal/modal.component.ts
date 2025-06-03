@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ContentChild, TemplateRef, input, OnInit, OnChanges, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Component, Output, EventEmitter, ContentChild, TemplateRef, signal, computed, effect, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -15,67 +15,61 @@ type options = 'Yes/No' | 'Ok/Cancel' | 'Accept/Reject' | 'Apply/Cancel' | 'Acce
   styleUrls: ['./modal.component.css'],
   providers: [TranslateService, SkippableOptionService]
 })
-export class ModalComponent implements OnInit, OnChanges {
-  @Input() isOpen = false;
-  @Input() title = '';
-  @Input() showDontAskAgain: boolean = false;
-  @Input() headerType: ModalHeaderType = 'danger';
-  @Input() optionType: options = 'Ok/Cancel';
-  @Input() isLoading = false;
-  @Input() remenberKey: SkipModalType = ''
-  @Input() custom: string = ''
+export class ModalComponent {
 
+  isOpen = input<boolean> (false);
+  title = input<string>('');
+  showDontAskAgain = input<boolean> (false);
+  headerType = input<ModalHeaderType>('danger');
+  optionType = input<options>('Ok/Cancel');
+  isLoading = input<boolean> (false);
+  remenberKey = input<SkipModalType>('');
+  custom = input<string> ('');
 
   @Output() accept = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<void>();
   @Output() dontAskAgainChange = new EventEmitter<boolean>();
+  @Output() onCloseModal = new EventEmitter<boolean>()
 
   @ContentChild('modalContent') content!: TemplateRef<any>;
 
-  dontAskAgain = false;
-  displayTwoOptions = true;
+  dontAskAgain = signal(false);
+  displayTwoOptions = signal(true);
   private readonly PREDEFINED_OPTIONS: options[] = ['Accept/Reject', 'Ok/Cancel', 'Yes/No', 'Apply/Cancel'];
 
-  constructor(private readonly cdr: ChangeDetectorRef, private readonly useSkippable: SkippableOptionService) {
+  headerClass = computed(() => 
+    this.headerType() === 'default' ? '' : this.headerType()
+  );
 
-  }
+  constructor(private readonly useSkippable: SkippableOptionService) {
 
-  ngOnInit(): void {
+    effect(() => {
+      const currentOption = this.optionType();
+      const customOption = this.custom();
+      this.displayTwoOptions.set(this.shouldDisplayTwoOptions(currentOption, customOption));
+    }, { allowSignalWrites: true });
 
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.checkOptions(changes)
-
-    if (this.remenberKey) {
-      let isChecked = this.useSkippable.isSkippable(this.remenberKey);
-      if (isChecked) {
-        console.info('skipping modal because is checked');
-        this.accept.emit(true);
+    effect(() => {
+      const key = this.remenberKey();
+      if (key) {
+        const isChecked = this.useSkippable.isSkippable(key);
+        if (isChecked) {
+          console.info('skipping modal because is checked');
+          this.accept.emit(true);
+        }
       }
-    }
-
-    this.cdr.detectChanges()
+    }, { allowSignalWrites: true });
   }
 
-  checkOptions = (changes: SimpleChanges): void => {
-    if (!changes['optionType']) return;
-
-    const newOption = changes['optionType'].currentValue;
-    const customOption = changes['custom'].currentValue;
-    this.displayTwoOptions = this.shouldDisplayTwoOptions(newOption, customOption);
-    console.log(this.displayTwoOptions)
-  }
-
-  shouldDisplayTwoOptions = (option: options, customText: string): boolean => {
+  private shouldDisplayTwoOptions(option: options, customText: string): boolean {
     return this.isPredefinedOption(option) || this.isValidCustomOption(option, customText);
   }
 
-  isPredefinedOption = (option: options): boolean => {
+  private isPredefinedOption(option: options): boolean {
     return this.PREDEFINED_OPTIONS.includes(option);
   }
 
-  isValidCustomOption = (option: string, customText: string): boolean => {
+  private isValidCustomOption(option: string, customText: string): boolean {
     return option === 'Custom' && customText.includes('/');
   }
 
@@ -87,9 +81,9 @@ export class ModalComponent implements OnInit, OnChanges {
       'Apply/Cancel': 'Apply',
       'Accept': 'AcceptButton',
       'Cancel': 'Cancel',
-      'Custom': this.custom.split('/')[0]
+      'Custom': this.custom().split('/')[0]
     };
-    return optionRecord[this.optionType];
+    return optionRecord[this.optionType()];
   }
 
   renderCancelOption = () => {
@@ -100,34 +94,29 @@ export class ModalComponent implements OnInit, OnChanges {
       'Accept': 'AcceptButton',
       'Apply/Cancel': 'Cancel',
       'Cancel': 'Cancel',
-      'Custom': this.custom.split('/')[1]
+      'Custom': this.custom().split('/')[1]
     };
-    return optionRecord[this.optionType];
-  }
-
-
-
-  get headerClass(): string {
-    return this.headerType === 'default' ? '' : this.headerType;
+    return optionRecord[this.optionType()];
   }
 
   onAccept(): void {
-    if (this.remenberKey === 'ResetNotificationSkip') {
+    if (this.remenberKey() === 'ResetNotificationSkip') {
       this.useSkippable.resetSkipOption();
     }
-    this.accept.emit(this.dontAskAgain);
-    this.isOpen = false;
-
-
+    this.accept.emit(this.dontAskAgain());
+    // this.isOpen.set(false);
+    this.onCloseModal.emit(true)
   }
 
   onCancel(): void {
     this.cancel.emit();
-    this.isOpen = false;
+    this.onCloseModal.emit(true)
+    // this.isOpen.set(false);
   }
 
   onDontAskAgainChange(e: Event): void {
-    const isChecked = (e.target as HTMLInputElement).checked
-    this.useSkippable.setSkippable(this.remenberKey, isChecked)
+    const isChecked = (e.target as HTMLInputElement).checked;
+    this.useSkippable.setSkippable(this.remenberKey(), isChecked);
+    this.dontAskAgain.set(isChecked);
   }
 }

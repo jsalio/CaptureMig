@@ -323,10 +323,11 @@
     {{'AreSureResetAllNotificationSettings'|translate}}
   </app-modal> -->
 
-  <app-modal [isOpen]="isModalOpen" title="ResetNotifications"
+  <app-modal [isOpen]="isModalOpen" [title]="'ResetNotifications'"
     [showDontAskAgain]="modalDisplayContent === 'ShowShortcuts'? false : true" [headerType]="'warning'"
     [optionType]="modalDisplayContent === 'ShowShortcuts'? 'Accept' : 'Ok/Cancel'" [remenberKey]="modalDisplayContent === 'ShowShortcuts'? '' : 'ResetNotificationSkip'"
-    (accept)="onAccept($event)" (cancel)="onCancel()" (dontAskAgainChange)="onDontAskAgainChange($event)">
+    (accept)="onAccept($event)" (cancel)="onCancel()" (dontAskAgainChange)="onDontAskAgainChange($event)" 
+    (onCloseModal)="closeModal($event)"  >
     <ng-template #modalContent>
       @if(modalDisplayContent == 'ShowShortcuts'){
       <p>Shortcuts</p>
