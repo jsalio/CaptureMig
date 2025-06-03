@@ -35,8 +35,7 @@
               "src/styles.css",
               "src/assets/css/app.v1.css",
               "src/assets/css/hacks.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/ngx-bootstrap/dropdown/dropdown.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "src/assets/js/app.plugin.js",

@@ -1,0 +1,35 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onCancel()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header" [ngClass]="headerClass">
+        <h2 class="modal-title">{{ title| translate }}</h2>
+        <button class="close-button" (click)="onCancel()">&times;</button>
+      </div>
+      
+      <div class="modal-content">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </div>
+  
+      <div class="modal-footer">
+        <div class="footer-content">
+          <div class="modal-buttons">
+            <button class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading" *ngIf="displayTwoOptions">
+              {{ renderCancelOption() | translate }}
+            </button>
+            <button class="btn btn-primary" (click)="onAccept()" [disabled]="isLoading" >
+              <span *ngIf="isLoading" class="button-loading">⟳</span>
+              {{ renderOkOption() |translate }}
+            </button>
+          </div>
+          
+          <div class="separator"></div>
+          
+          <div class="dont-ask-again" *ngIf="showDontAskAgain">
+            <label>
+              <input type="checkbox" [(ngModel)]="dontAskAgain" (change)="onDontAskAgainChange($event)">
+              {{ 'DoNotShowAgain' | translate }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

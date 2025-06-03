@@ -14,11 +14,14 @@ import { CacheStorageService } from '../../services/cache-storage.service';
 import { ToastNotificationService, ToastType } from '../../services/toast-notification.service';
 import { CommonModule } from '@angular/common';
 import { BsDropdownModule, BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { ModalComponent } from '../modal/modal.component';
+
+type ModalDisplay ='ResetNotification'|'ShowShortcuts'|''
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, BsDropdownModule],
+  imports: [RouterModule, TranslateModule, ModalComponent, CommonModule, BsDropdownModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
   providers:[
@@ -38,6 +41,8 @@ export class LayoutComponent {
   fullScreenMode = false;
   module: Module;
   modalResetOpen: boolean = false;
+  isModalOpen = false;
+  modalDisplayContent:ModalDisplay = ''
 
   constructor(
     private currentUserService: CurrentUserService,
@@ -142,7 +147,8 @@ export class LayoutComponent {
   }
 
   showShortcutModal() {
-    // this.shortCutsModal.show();
+    this.modalDisplayContent = 'ShowShortcuts'
+    this.isModalOpen = true
   }
 
   displayToast(title: string, message: string, toastType: ToastType): void {
@@ -173,6 +179,25 @@ export class LayoutComponent {
   }
 
   resetUserNotification = () => {
-    this.modalResetOpen = true;
+    this.modalDisplayContent = 'ResetNotification'
+    this.isModalOpen = true
   }
+
+  openModal(contentDisplay:ModalDisplay) {
+    this.isModalOpen = true;
+    this.modalDisplayContent = contentDisplay
+  }
+
+  onAccept(dontAskAgain: boolean) {
+    // Manejar la acción de aceptar
+    console.log('Aceptado, no preguntar de nuevo:', dontAskAgain);
+    this.isModalOpen = false
+  }
+
+  onCancel() {
+    this.isModalOpen = false
+    // Manejar la acción de cancelar
+  }
+
+  onDontAskAgainChange = (e) => {}
 }

@@ -1,262 +1,225 @@
 <body class="" id="mainBody">
-    <section [class]="fullScreenMode ? 'vbox full-screen' : 'vbox'">
-      <header class="c-header box-shadow">
-        <div>
-          <a [routerLink]="['/dashboard']" class="c-header-brand">
-            <img src="assets/images/white-logo.svg" width="100%" height="100%" />
-          </a>
-          <div *ngIf="batchMetadataVisibility && batchMetadata" class="c-bach">
-            <div>
-              <div>{{ 'Batchname' | translate }}</div>
-              <div class="c-bach-name" placement="bottom">
-                {{batchMetadata.name}}
-              </div>
+  <section [class]="fullScreenMode ? 'vbox full-screen' : 'vbox'">
+    <header class="c-header box-shadow">
+      <div>
+        <a [routerLink]="['/dashboard']" class="c-header-brand">
+          <img src="assets/images/white-logo.svg" width="100%" height="100%" />
+        </a>
+        <div *ngIf="batchMetadataVisibility && batchMetadata" class="c-bach">
+          <div>
+            <div>{{ 'Batchname' | translate }}</div>
+            <div class="c-bach-name" placement="bottom">
+              {{batchMetadata.name}}
             </div>
-            <div class="c-bach-page-container">
-              <div class="c-bach-page">
-                <div style="text-align: center;">{{ 'BatchId' | translate}}</div>
-                <div style=" font-weight: bold; font-size: large; text-align: center;">{{batchMetadata.id}}</div>
-              </div>
-              <div class="c-bach-page" *ngIf="module !== 'Scan'">
-                <div style="text-align: center;">{{ 'Pages' | translate}}</div>
-                <div style=" font-weight: bold; text-align: center; font-size: large;">
-                  {{batchMetadata.pages}}
-                </div>
+          </div>
+          <div class="c-bach-page-container">
+            <div class="c-bach-page">
+              <div style="text-align: center;">{{ 'BatchId' | translate}}</div>
+              <div style=" font-weight: bold; font-size: large; text-align: center;">{{batchMetadata.id}}</div>
+            </div>
+            <div class="c-bach-page" *ngIf="module !== 'Scan'">
+              <div style="text-align: center;">{{ 'Pages' | translate}}</div>
+              <div style=" font-weight: bold; text-align: center; font-size: large;">
+                {{batchMetadata.pages}}
               </div>
             </div>
           </div>
         </div>
-  
-        <ul class="navbar-nav c-user">
-          <li class="dropdown" dropdown>
-            <a class="dropdown-toggle" dropdownToggle>
-              <span class="thumb-sm avatar pull-left">
-                <img src="assets/images/avatar.png" />
-              </span>
-              {{ currentUser ? currentUser.username : ''}}
-            </a>
-            <ul class="dropdown-menu animated fadeInDown" *dropdownMenu>
-              <span class="arrow top"></span>
-              <li>
-                <a (click)="showShortcutModal()">{{ "Shortcuts" | translate }}</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a (click)="setLanguage('en')">{{ "English" | translate }}</a>
-              </li>
-              <li>
-                <a (click)="setLanguage('es')">{{ "Spanish" | translate }}</a>
-              </li>
-              <li class="divider"></li>
-                <li>
-                  <a (click)="resetUserNotification()">{{'Notifications'|translate}}</a>
-                </li>
-              <li class="divider"></li>
-              <li>
-                <a (click)="logOut()" [routerLink]="['/login']">{{ "Logout" | translate }}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <button class="c-header-btn" (click)="openNav()">☰</button>
-  
-        <div id="mySidebar" class="c-header-responsive">
-          <div class="c-header-responsive__header">
-            <span class="thumb-sm avatar">
+      </div>
+
+      <ul class="navbar-nav c-user">
+        <li class="dropdown" dropdown>
+          <a class="dropdown-toggle" dropdownToggle>
+            <span class="thumb-sm avatar pull-left">
               <img src="assets/images/avatar.png" />
             </span>
             {{ currentUser ? currentUser.username : ''}}
-            <button class="c-header-responsive__btn" (click)="closeNav()">×</button>
-          </div>
-          <div class="c-header-responsive__body">
-            <ul class="nav">
-              <li routerLinkActive="active">
-                <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
-                  Dashboard
-                </a>
-              </li>
-              <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
-                <a [routerLink]="['/digitalizer']">
-                  {{ "DigitalizeDocument" | translate }}
-                </a>
-              </li>
-              <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
-                <a [routerLink]="['/digitalization-exception']">
-                  {{ "DigitalizationException" | translate }}</a>
-              </li>
-              <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
-                <a [routerLink]="['/qa-scan']">
-                  {{ "QaScan" | translate }}</a>
-              </li>
-              <li routerLinkActive="active">
-                <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
-                  {{ "Indexing" | translate }}</a>
-              </li>
-  
-              <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
-                <a [routerLink]="['/qa-index']">
-                  {{ "QAIndex" | translate }}
-                </a>
-              </li>
-              <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
-                <a [routerLink]="['/batches-to-release']">
-                  {{ "BatchesToRelease" | translate }}
-                </a>
-              </li>
-            </ul>
-            <hr>
-            <ul class="nav">
-              <li routerLinkActive="active">
-                <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
-                  [routerLink]="['/index-supervision']">
-                  <i class="fa fa-eye" style="
-                  margin-right: 10px;
-              "></i>
-                  {{ "IndexSupervision" | translate }}</a>
-              </li>
-  
-              <!--Project options panel-->
-              <li routerLinkActive="active">
-                <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/project-control']"
-                  class="button">
-                  <i class="fa fa-tasks" style="margin-right: 10px;">
-                  </i>
-                  {{ "Project" | translate }}
-                </a>
-              </li>
-              <!--Project options panel-->
-  
-              <li routerLinkActive="active">
-                <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
-                  class="button">
-                  <i class="fa fa-columns" style="
-                  margin-right: 10px;
-              "></i>
-                  {{ "BatchControlpanel" | translate }}
-                </a>
-              </li>
-              <li routerLinkActive="active">
-                <a routerLinkActive="active" *ngIf="checkPermission('configuration')" [routerLink]="['/configuration']"
-                  class="button" style="
-                   margin-right:10px;">
-                  <i class="fa fa-cog hidden-sm" style="
-                  margin-right: 10px;
-              "></i>
-                  {{ "ConfigurationLabel" | translate }}</a>
-              </li>
-            </ul>
-            <hr>
-            <ul class="nav">
-              <li>
-                <a (click)="setLanguage('en')">{{ "English" | translate }}</a>
-              </li>
-              <li>
-                <a (click)="setLanguage('es')">{{ "Spanish" | translate }}</a>
-              </li>
-            </ul>
-            <div class="c-header-responsive__footer">
-              <button (click)="showShortcutModal()">{{ "Shortcuts" | translate }}</button>
-              <button (click)="logOut()" [routerLink]="['/login']"><i class="fa fa-sign-out mr-2"
-                  aria-hidden="true"></i>{{
-                "Logout" | translate }}</button>
-            </div>
-  
-          </div>
+          </a>
+          <ul class="dropdown-menu animated fadeInDown" *dropdownMenu>
+            <span class="arrow top"></span>
+            <li>
+              <a (click)="openModal('ShowShortcuts')">{{ "Shortcuts" | translate }}</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="setLanguage('en')">{{ "English" | translate }}</a>
+            </li>
+            <li>
+              <a (click)="setLanguage('es')">{{ "Spanish" | translate }}</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="openModal('ResetNotification')">{{'Notifications'|translate}}</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="logOut()" [routerLink]="['/login']">{{ "Logout" | translate }}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <button class="c-header-btn" (click)="openNav()">☰</button>
+
+      <div id="mySidebar" class="c-header-responsive">
+        <div class="c-header-responsive__header">
+          <span class="thumb-sm avatar">
+            <img src="assets/images/avatar.png" />
+          </span>
+          {{ currentUser ? currentUser.username : ''}}
+          <button class="c-header-responsive__btn" (click)="closeNav()">×</button>
         </div>
-      </header>
-      <section class="hbox stretch">
-        <section id="content">
-          <section class="vbox ">
-            <section class="panel border-0 shadow-none">
-              <header class="panel-heading text-right bg-light">
-                <ul class="nav nav-tabs">
-                  <li routerLinkActive="active">
-                    <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
-                      Dashboard
-                    </a>
-                  </li>
-                  <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
-                    <a [routerLink]="['/digitalizer']">
-                      {{ "DigitalizeDocument" | translate }}
-                    </a>
-                  </li>
-                  <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
-                    <a [routerLink]="['/digitalization-exception']">
-                      {{ "DigitalizationException" | translate }}</a>
-                  </li>
-                  <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
-                    <a [routerLink]="['/qa-scan']">
-                      {{ "QaScan" | translate }}</a>
-                  </li>
-                  <li routerLinkActive="active">
-                    <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
-                      {{ "Indexing" | translate }}</a>
-                  </li>
-  
-                  <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
-                    <a [routerLink]="['/qa-index']">
-                      {{ "QAIndex" | translate }}
-                    </a>
-                  </li>
-                  <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
-                    <a [routerLink]="['/batches-to-release']">
-                      {{ "BatchesToRelease" | translate }}
-                    </a>
-                  </li>
-                </ul>
-  
-  
-                <ul class="nav nav-tabs r-options-mobile">
-                  <li routerLinkActive="active" data-toggle="dropdown">
-                    <a routerLinkActive="active"
-                      *ngIf="checkPermission('indexSupervision' || 'indexSupervision' || 'controlPanel' || 'configuration') ">
-                      <i class="fa fa-bars" style="margin-right: 10px;"></i>
-                      {{ "Options" | translate }}</a>
-                  </li>
-                  <ul class="dropdown-menu">
-                    <li routerLinkActive="active">
-                      <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
-                        [routerLink]="['/index-supervision']">
-                        <i class="fa fa-eye" style="
-                                margin-right: 10px;
-                            "></i>
-                        {{ "IndexSupervision" | translate }}</a>
-                    </li>
-                    <li routerLinkActive="active">
-                      <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
-                        [routerLink]="['/project-control']" class="button">
-                        <i class="fa fa-tasks" style="margin-right: 10px;">
-                        </i>
-                        {{ "Project" | translate }}
-                      </a>
-                    </li>
-                    <li routerLinkActive="active">
-                      <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
-                        [routerLink]="['/batch-control']" class="button">
-                        <i class="fa fa-columns" style="
-                                margin-right: 10px;
-                            "></i>
-                        {{ "BatchControlpanel" | translate }}
-                      </a>
-                    </li>
-                    <li routerLinkActive="active">
-                      <a routerLinkActive="active" *ngIf="checkPermission('configuration')"
-                        [routerLink]="['/configuration']" class="button">
-                        <i class="fa fa-cog hidden-sm" style="
-                                margin-right: 10px;
-                            "></i>
-                        {{ "ConfigurationLabel" | translate }}</a>
-                    </li>
-                  </ul>
-                </ul>
-  
-                <ul class="nav nav-tabs pull-right r-options">
+        <div class="c-header-responsive__body">
+          <ul class="nav">
+            <li routerLinkActive="active">
+              <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
+                Dashboard
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
+              <a [routerLink]="['/digitalizer']">
+                {{ "DigitalizeDocument" | translate }}
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
+              <a [routerLink]="['/digitalization-exception']">
+                {{ "DigitalizationException" | translate }}</a>
+            </li>
+            <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
+              <a [routerLink]="['/qa-scan']">
+                {{ "QaScan" | translate }}</a>
+            </li>
+            <li routerLinkActive="active">
+              <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
+                {{ "Indexing" | translate }}</a>
+            </li>
+
+            <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
+              <a [routerLink]="['/qa-index']">
+                {{ "QAIndex" | translate }}
+              </a>
+            </li>
+            <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
+              <a [routerLink]="['/batches-to-release']">
+                {{ "BatchesToRelease" | translate }}
+              </a>
+            </li>
+          </ul>
+          <hr>
+          <ul class="nav">
+            <li routerLinkActive="active">
+              <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
+                [routerLink]="['/index-supervision']">
+                <i class="fa fa-eye" style="
+                  margin-right: 10px;
+              "></i>
+                {{ "IndexSupervision" | translate }}</a>
+            </li>
+
+            <!--Project options panel-->
+            <li routerLinkActive="active">
+              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/project-control']"
+                class="button">
+                <i class="fa fa-tasks" style="margin-right: 10px;">
+                </i>
+                {{ "Project" | translate }}
+              </a>
+            </li>
+            <!--Project options panel-->
+
+            <li routerLinkActive="active">
+              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
+                class="button">
+                <i class="fa fa-columns" style="
+                  margin-right: 10px;
+              "></i>
+                {{ "BatchControlpanel" | translate }}
+              </a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLinkActive="active" *ngIf="checkPermission('configuration')" [routerLink]="['/configuration']"
+                class="button" style="
+                   margin-right:10px;">
+                <i class="fa fa-cog hidden-sm" style="
+                  margin-right: 10px;
+              "></i>
+                {{ "ConfigurationLabel" | translate }}</a>
+            </li>
+          </ul>
+          <hr>
+          <ul class="nav">
+            <li>
+              <a (click)="setLanguage('en')">{{ "English" | translate }}</a>
+            </li>
+            <li>
+              <a (click)="setLanguage('es')">{{ "Spanish" | translate }}</a>
+            </li>
+          </ul>
+          <div class="c-header-responsive__footer">
+            <button (click)="showShortcutModal()">{{ "Shortcuts" | translate }}</button>
+            <button (click)="logOut()" [routerLink]="['/login']"><i class="fa fa-sign-out mr-2"
+                aria-hidden="true"></i>{{
+              "Logout" | translate }}</button>
+          </div>
+
+        </div>
+      </div>
+    </header>
+    <section class="hbox stretch">
+      <section id="content">
+        <section class="vbox ">
+          <section class="panel border-0 shadow-none">
+            <header class="panel-heading text-right bg-light">
+              <ul class="nav nav-tabs">
+                <li routerLinkActive="active">
+                  <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
+                    Dashboard
+                  </a>
+                </li>
+                <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
+                  <a [routerLink]="['/digitalizer']">
+                    {{ "DigitalizeDocument" | translate }}
+                  </a>
+                </li>
+                <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
+                  <a [routerLink]="['/digitalization-exception']">
+                    {{ "DigitalizationException" | translate }}</a>
+                </li>
+                <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
+                  <a [routerLink]="['/qa-scan']">
+                    {{ "QaScan" | translate }}</a>
+                </li>
+                <li routerLinkActive="active">
+                  <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
+                    {{ "Indexing" | translate }}</a>
+                </li>
+
+                <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
+                  <a [routerLink]="['/qa-index']">
+                    {{ "QAIndex" | translate }}
+                  </a>
+                </li>
+                <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
+                  <a [routerLink]="['/batches-to-release']">
+                    {{ "BatchesToRelease" | translate }}
+                  </a>
+                </li>
+              </ul>
+
+
+              <ul class="nav nav-tabs r-options-mobile">
+                <li routerLinkActive="active" data-toggle="dropdown">
+                  <a routerLinkActive="active"
+                    *ngIf="checkPermission('indexSupervision' || 'indexSupervision' || 'controlPanel' || 'configuration') ">
+                    <i class="fa fa-bars" style="margin-right: 10px;"></i>
+                    {{ "Options" | translate }}</a>
+                </li>
+                <ul class="dropdown-menu">
                   <li routerLinkActive="active">
                     <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
                       [routerLink]="['/index-supervision']">
                       <i class="fa fa-eye" style="
-                              margin-right: 10px;
-                          "></i>
+                                margin-right: 10px;
+                            "></i>
                       {{ "IndexSupervision" | translate }}</a>
                   </li>
                   <li routerLinkActive="active">
@@ -267,39 +230,76 @@
                       {{ "Project" | translate }}
                     </a>
                   </li>
-  
                   <li routerLinkActive="active">
-                    <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
-                      class="button">
+                    <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
+                      [routerLink]="['/batch-control']" class="button">
                       <i class="fa fa-columns" style="
-                              margin-right: 10px;
-                          "></i>
+                                margin-right: 10px;
+                            "></i>
                       {{ "BatchControlpanel" | translate }}
                     </a>
                   </li>
                   <li routerLinkActive="active">
                     <a routerLinkActive="active" *ngIf="checkPermission('configuration')"
-                      [routerLink]="['/configuration']" class="button" style="
-                               margin-right:10px;">
+                      [routerLink]="['/configuration']" class="button">
                       <i class="fa fa-cog hidden-sm" style="
-                              margin-right: 10px;
-                          "></i>
+                                margin-right: 10px;
+                            "></i>
                       {{ "ConfigurationLabel" | translate }}</a>
                   </li>
                 </ul>
-              </header>
-              <div class="panel-body panel-ribbon">
-                <div class="tab-content">
-                  <!-- <app-ribbon></app-ribbon> -->
-                </div>
+              </ul>
+
+              <ul class="nav nav-tabs pull-right r-options">
+                <li routerLinkActive="active">
+                  <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
+                    [routerLink]="['/index-supervision']">
+                    <i class="fa fa-eye" style="
+                              margin-right: 10px;
+                          "></i>
+                    {{ "IndexSupervision" | translate }}</a>
+                </li>
+                <li routerLinkActive="active">
+                  <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
+                    [routerLink]="['/project-control']" class="button">
+                    <i class="fa fa-tasks" style="margin-right: 10px;">
+                    </i>
+                    {{ "Project" | translate }}
+                  </a>
+                </li>
+
+                <li routerLinkActive="active">
+                  <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
+                    class="button">
+                    <i class="fa fa-columns" style="
+                              margin-right: 10px;
+                          "></i>
+                    {{ "BatchControlpanel" | translate }}
+                  </a>
+                </li>
+                <li routerLinkActive="active">
+                  <a routerLinkActive="active" *ngIf="checkPermission('configuration')"
+                    [routerLink]="['/configuration']" class="button" style="
+                               margin-right:10px;">
+                    <i class="fa fa-cog hidden-sm" style="
+                              margin-right: 10px;
+                          "></i>
+                    {{ "ConfigurationLabel" | translate }}</a>
+                </li>
+              </ul>
+            </header>
+            <div class="panel-body panel-ribbon">
+              <div class="tab-content">
+                <!-- <app-ribbon></app-ribbon> -->
               </div>
-            </section>
-            <router-outlet></router-outlet>
+            </div>
           </section>
+          <router-outlet></router-outlet>
         </section>
       </section>
     </section>
-    <!-- <div (onHidden)="onHiddenShortCuts()" bsModal #shortCutsModal="bs-modal" class="modal fade" tabindex="-1"
+  </section>
+  <!-- <div (onHidden)="onHiddenShortCuts()" bsModal #shortCutsModal="bs-modal" class="modal fade" tabindex="-1"
       role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -318,9 +318,21 @@
         </div>
       </div>
     </div> -->
-    <!-- <app-modal [options]="'Ok/Cancel'" [title]="'ResetNotifications'" [open]="modalResetOpen" (onOk)="confirmReset()"
+  <!-- <app-modal [options]="'Ok/Cancel'" [title]="'ResetNotifications'" [open]="modalResetOpen" (onOk)="confirmReset()"
     (onHideOrCancel)="onCancelResetAction()" [type]="'warning'" [remember]="true" [key]="'SkipResetRemoveCacheModal'">
     {{'AreSureResetAllNotificationSettings'|translate}}
   </app-modal> -->
-  </body>
-  
+
+  <app-modal [isOpen]="isModalOpen" title="ResetNotifications"
+    [showDontAskAgain]="modalDisplayContent === 'ShowShortcuts'? false : true" [headerType]="'warning'"
+    [optionType]="modalDisplayContent === 'ShowShortcuts'? 'Accept' : 'Ok/Cancel'" [remenberKey]="modalDisplayContent === 'ShowShortcuts'? '' : 'ResetNotificationSkip'"
+    (accept)="onAccept($event)" (cancel)="onCancel()" (dontAskAgainChange)="onDontAskAgainChange($event)">
+    <ng-template #modalContent>
+      @if(modalDisplayContent == 'ShowShortcuts'){
+      <p>Shortcuts</p>
+      }@else {
+      {{'AreSureResetAllNotificationSettings'|translate}}
+      }
+    </ng-template>
+  </app-modal>
+</body>
