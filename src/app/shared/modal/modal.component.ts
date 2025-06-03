@@ -6,6 +6,7 @@ import { SkipModalType, SkippableOptionService } from '../../services/skippable-
 
 type ModalHeaderType = 'default' | 'danger' | 'warning' | 'info' | 'success';
 type options = 'Yes/No' | 'Ok/Cancel' | 'Accept/Reject' | 'Apply/Cancel' | 'Accept' | 'Cancel' | 'Custom'
+type ModalPosition = 'center' | 'middle-top' | 'top' | 'middle-left' | 'left' | 'middle-right' | 'right';
 
 @Component({
   selector: 'app-modal',
@@ -25,6 +26,7 @@ export class ModalComponent {
   isLoading = input<boolean> (false);
   remenberKey = input<SkipModalType>('');
   custom = input<string> ('');
+  position = input<ModalPosition>('center');
 
   @Output() accept = new EventEmitter<boolean>();
   @Output() cancel = new EventEmitter<void>();

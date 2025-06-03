@@ -14,15 +14,66 @@
 .modal-container {
   background-color: white;
   border-radius: 5px;
-  box-shadow: 1px 9px 4px rgba(0, 0, 0, 0.1);;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-  
+  box-shadow: 1px 9px 4px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  animation: modalFadeIn 0.3s ease-out;
+  opacity: 0;
+  animation: modalFadeIn 0.3s ease-out forwards;
+  position: relative;
+}
+
+/* Posiciones del modal */
+.position-center {
+  /* Esta es la posición por defecto, no necesita cambios */
+}
+
+.position-middle-top {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  animation: modalFadeInTop 0.3s ease-out forwards;
+}
+
+.position-top {
+  position: absolute;
+  top: 5%;
+  transform: translateY(0);
+  animation: modalFadeInTop 0.3s ease-out forwards;
+}
+
+.position-middle-left {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: modalFadeInLeft 0.3s ease-out forwards;
+}
+
+.position-left {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: modalFadeInLeft 0.3s ease-out forwards;
+}
+
+.position-middle-right {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: modalFadeInRight 0.3s ease-out forwards;
+}
+
+.position-right {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: modalFadeInRight 0.3s ease-out forwards;
 }
 
 .modal-header {
@@ -144,15 +195,46 @@
 @keyframes modalFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
+@keyframes modalFadeInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-70%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
 
+@keyframes modalFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate(-20px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@keyframes modalFadeInRight {
+  from {
+    opacity: 0;
+    transform: translate(20px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
 
 @keyframes spin {
   0% {

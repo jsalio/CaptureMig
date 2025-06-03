@@ -1,5 +1,5 @@
 <div class="modal-overlay" *ngIf="isOpen()" (click)="onCancel()">
-    <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-container" [class]="'modal-container position-' + position()" (click)="$event.stopPropagation()">
       <div class="modal-header" [ngClass]="headerClass()">
         <h2 class="modal-title">{{ title() | translate }}</h2>
         <button class="close-button" (click)="onCancel()">&times;</button>
