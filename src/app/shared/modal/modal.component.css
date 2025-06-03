@@ -13,8 +13,10 @@
 
 .modal-container {
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 1px 9px 4px rgba(0, 0, 0, 0.1);;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
@@ -68,11 +70,10 @@
   opacity: 0.8;
 }
 
-.modal-content {
+.modal-content-body {
   padding: 1rem;
   overflow-y: auto;
   flex-grow: 1;
-  border: 1px solid rgb(147 182 241 / 42%) !important;
 }
 
 .modal-footer {
