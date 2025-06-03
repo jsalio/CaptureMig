@@ -11,23 +11,23 @@
   
       <div class="modal-footer">
         <div class="footer-content">
-          <div class="modal-buttons">
-            <button class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading" *ngIf="displayTwoOptions">
-              {{ renderCancelOption() | translate }}
-            </button>
-            <button class="btn btn-primary" (click)="onAccept()" [disabled]="isLoading" >
-              <span *ngIf="isLoading" class="button-loading">⟳</span>
-              {{ renderOkOption() |translate }}
-            </button>
-          </div>
-          
-          <div class="separator"></div>
-          
-          <div class="dont-ask-again" *ngIf="showDontAskAgain">
-            <label>
-              <input type="checkbox" [(ngModel)]="dontAskAgain" (change)="onDontAskAgainChange($event)">
-              {{ 'DoNotShowAgain' | translate }}
-            </label>
+          <div class="left-section">
+            <div class="modal-buttons">
+              <button class="btn btn-secondary" (click)="onCancel()" [disabled]="isLoading" *ngIf="displayTwoOptions">
+                {{ renderCancelOption() | translate }}
+              </button>
+              <button class="btn btn-primary" (click)="onAccept()" [disabled]="isLoading">
+                <span *ngIf="isLoading" class="button-loading">⟳</span>
+                {{ renderOkOption() |translate }}
+              </button>
+            </div>
+
+            <div class="dont-ask-again" *ngIf="showDontAskAgain">
+              <label>
+                <input type="checkbox" [(ngModel)]="dontAskAgain" (change)="onDontAskAgainChange($event)">
+                {{ 'DoNotShowAgain' | translate }}
+              </label>
+            </div>
           </div>
         </div>
       </div>

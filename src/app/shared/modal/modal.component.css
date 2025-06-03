@@ -83,7 +83,12 @@
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.left-section {
+  display: flex;
   align-items: center;
   gap: 1rem;
 }
@@ -99,6 +104,7 @@
   gap: 0.5rem;
   color: #666;
   font-size: 0.9rem;
+  margin-left: 1rem;
 }
 
 .btn {
@@ -146,9 +152,7 @@
   }
 }
 
-.separator {
-    margin-left: 80px!important;
-}
+
 
 @keyframes spin {
   0% {
