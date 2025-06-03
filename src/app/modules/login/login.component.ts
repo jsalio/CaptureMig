@@ -98,7 +98,8 @@ export class LoginComponent implements OnInit {
   private goToDefaultPage() {
     this.setBlock(false)
     this.isThereAuthError = false;
-    this.router.navigate(['/dashboard']);
+    // this.router.navigate(['/dashboard']);
+    this.router.navigate(['/site']);
   }
 
   private buildSendOfflineSynchronizationSettingRequest(userInformation: UserProfile) {

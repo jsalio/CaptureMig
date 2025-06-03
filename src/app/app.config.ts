@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { translateModule } from './translate-config';
 import { TranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(routes),
     provideAnimations(),
+    provideToastr(),
     BsDropdownModule.forRoot().providers,
     BlockUIModule.forRoot().providers,
     translateModule.providers!,

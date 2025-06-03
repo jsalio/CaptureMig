@@ -12,13 +12,22 @@ import { LayoutService } from '../../services/layout.service';
 import { FullScreenService } from '../../services/full-screen.service';
 import { CacheStorageService } from '../../services/cache-storage.service';
 import { ToastNotificationService, ToastType } from '../../services/toast-notification.service';
+import { CommonModule } from '@angular/common';
+import { BsDropdownModule, BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterModule, TranslateModule],
+  imports: [RouterModule, TranslateModule, CommonModule, BsDropdownModule],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrl: './layout.component.css',
+  providers:[
+    CurrentUserService,TranslateService,AuthService,FullScreenService,HubService,ToastNotificationService, CacheStorageService,
+    {
+      provide: BsDropdownConfig,
+      useValue: { autoClose: true, insideClick: true }
+    }
+  ]
 })
 export class LayoutComponent {
   currentUser: UserProfile;
@@ -95,6 +104,21 @@ export class LayoutComponent {
     localStorage.setItem('language', language);
   }
 
+  // showShortcutModal() {
+  //   this.modalResetOpen = true;
+  // }
+
+  // resetUserNotification() {
+  //   // Implement notification reset logic here
+  //   this.toastNotificationsService.show('Notifications reset successfully', ToastType.Success);
+  // }
+
+  // logOut() {
+  //   this.authService.logout().subscribe(() => {
+  //     this.router.navigate(['/login']);
+  //   });
+  // }
+
   checkPermission(permissionKey: string): boolean {
     if (!this.currentUser) {
       return false;
@@ -109,7 +133,7 @@ export class LayoutComponent {
 
   logOut() {
     this.hubConnection.stop().then();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
     this.authService.logout(this.currentUser.username);
   }
 
