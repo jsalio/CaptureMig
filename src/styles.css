@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
 
+/* Remove underline from menu items */
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+    text-decoration: none;
+}
+
 .ribbon-icon {
     height: 36px;
     background-position: center;
