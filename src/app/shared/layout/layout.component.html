@@ -299,39 +299,17 @@
       </section>
     </section>
   </section>
-  <!-- <div (onHidden)="onHiddenShortCuts()" bsModal #shortCutsModal="bs-modal" class="modal fade" tabindex="-1"
-      role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title pull-left">{{ 'Shortcuts' | translate }}</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="onHiddenShortCuts()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <app-shortcuts-list></app-shortcuts-list>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" (click)="onHiddenShortCuts()">{{ 'Ok' | translate }}</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-  <!-- <app-modal [options]="'Ok/Cancel'" [title]="'ResetNotifications'" [open]="modalResetOpen" (onOk)="confirmReset()"
-    (onHideOrCancel)="onCancelResetAction()" [type]="'warning'" [remember]="true" [key]="'SkipResetRemoveCacheModal'">
-    {{'AreSureResetAllNotificationSettings'|translate}}
-  </app-modal> -->
 
   <app-modal [isOpen]="isModalOpen" [title]="'ResetNotifications'"
-    [showDontAskAgain]="modalDisplayContent === 'ShowShortcuts'? false : true" [headerType]="'warning'"
-    [optionType]="modalDisplayContent === 'ShowShortcuts'? 'Accept' : 'Ok/Cancel'" [remenberKey]="modalDisplayContent === 'ShowShortcuts'? '' : 'ResetNotificationSkip'"
+    [showDontAskAgain]="modalDisplayContent === 'ShowShortcuts'? false : true" [headerType]="'info'"
+    [optionType]="modalDisplayContent === 'ShowShortcuts'? 'Accept' : 'Ok/Cancel'" 
+    [remenberKey]="modalDisplayContent === 'ShowShortcuts'? '' : 'ResetNotificationSkip'"
     (accept)="onAccept($event)" (cancel)="onCancel()" (dontAskAgainChange)="onDontAskAgainChange($event)" 
     (onCloseModal)="closeModal($event)" [position]="'middle-top'"  >
     <ng-template #modalContent>
       @if(modalDisplayContent == 'ShowShortcuts'){
       <p>Shortcuts</p>
-      <!-- <app-shortcuts-list></app-shortcuts-list> -->
+      <app-shortcuts></app-shortcuts>
       }@else {
       {{'AreSureResetAllNotificationSettings'|translate}}
       }

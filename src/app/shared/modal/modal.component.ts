@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ContentChild, TemplateRef, signal, computed, effect, input } from '@angular/core';
+import { Component, Output, EventEmitter, ContentChild, TemplateRef, signal, computed, effect, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -14,7 +14,8 @@ type ModalPosition = 'center' | 'middle-top' | 'top' | 'middle-left' | 'left' | 
   imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
-  providers: [TranslateService, SkippableOptionService]
+  providers: [TranslateService, SkippableOptionService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalComponent {
 
