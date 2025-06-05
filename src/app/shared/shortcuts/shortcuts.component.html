@@ -1,1 +1,68 @@
-<p>shortcuts works!</p>
+<p-accordion>
+  <p-accordionTab header="{{'Digitization' | translate}}" [selected]="true">
+    <p-table #scanTable [value]="scanShortcuts" [responsive]="true" [rows]="10"
+    styleClass="table" dataKey="id">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>
+          {{ 'Action' | translate }}
+        </th>
+        <th>
+          {{ 'KeyCombination' | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-shortcut>
+      <tr [pSelectableRow]="shortcut" styleClass="centerText">
+        <td>{{ shortcut.action | translate }}</td>
+        <td>{{ shortcut.key }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </p-accordionTab>
+  <p-accordionTab header="{{'Indexation' | translate}}">
+    <p-table #indexTable [value]="indexShortcuts" [responsive]="true" [rows]="10"
+    styleClass="table" dataKey="id">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>
+          {{ 'Action' | translate }}
+        </th>
+        <th>
+          {{ 'KeyCombination' | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-shortcut>
+      <tr [pSelectableRow]="shortcut" styleClass="centerText">
+        <td>{{ shortcut.action | translate }}</td>
+        <td>{{ shortcut.key }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </p-accordionTab>
+  <p-accordionTab header="{{'DocumentViewer' | translate}}">
+    <p-table #documentViewerTable [value]="documentViewerShortcuts" [responsive]="true" [rows]="10"
+    styleClass="table" dataKey="id">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>
+          {{ 'Action' | translate }}
+        </th>
+        <th>
+          {{ 'KeyCombination' | translate }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-shortcut>
+      <tr [pSelectableRow]="shortcut" styleClass="centerText">
+        <td>{{ shortcut.action | translate }}</td>
+        <td>{{ shortcut.key }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </p-accordionTab>
+</p-accordion>
+
+
+

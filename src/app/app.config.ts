@@ -9,6 +9,8 @@ import { translateModule } from './translate-config';
 import { TranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +19,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideToastr(),
+    providePrimeNG({
+      theme:{
+        preset:Aura,
+        options: {
+          darkModeSelector: false || 'none'
+      }
+      }
+    }),
     BsDropdownModule.forRoot().providers,
     BlockUIModule.forRoot().providers,
     translateModule.providers!,

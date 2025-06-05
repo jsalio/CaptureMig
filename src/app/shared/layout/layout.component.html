@@ -71,35 +71,35 @@
         <div class="c-header-responsive__body">
           <ul class="nav">
             <li routerLinkActive="active">
-              <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
+              <a [routerLink]="['/site/dashboard']" *ngIf="checkPermission('dashboard')">
                 Dashboard
               </a>
             </li>
             <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
-              <a [routerLink]="['/digitalizer']">
+              <a [routerLink]="['/site/scan']">
                 {{ "DigitalizeDocument" | translate }}
               </a>
             </li>
             <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
-              <a [routerLink]="['/digitalization-exception']">
+              <a [routerLink]="['/site/scan-exception']">
                 {{ "DigitalizationException" | translate }}</a>
             </li>
             <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
-              <a [routerLink]="['/qa-scan']">
+              <a [routerLink]="['/site/qa-scan']">
                 {{ "QaScan" | translate }}</a>
             </li>
             <li routerLinkActive="active">
-              <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
+              <a [routerLink]="['/site/index']" *ngIf="checkPermission('index')">
                 {{ "Indexing" | translate }}</a>
             </li>
 
             <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
-              <a [routerLink]="['/qa-index']">
+              <a [routerLink]="['/site/qa-index']">
                 {{ "QAIndex" | translate }}
               </a>
             </li>
             <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
-              <a [routerLink]="['/batches-to-release']">
+              <a [routerLink]="['/site/release']">
                 {{ "BatchesToRelease" | translate }}
               </a>
             </li>
@@ -108,7 +108,7 @@
           <ul class="nav">
             <li routerLinkActive="active">
               <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
-                [routerLink]="['/index-supervision']">
+                [routerLink]="['/site/supervision']">
                 <i class="fa fa-eye" style="
                   margin-right: 10px;
               "></i>
@@ -117,7 +117,7 @@
 
             <!--Project options panel-->
             <li routerLinkActive="active">
-              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/project-control']"
+              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/site/project']"
                 class="button">
                 <i class="fa fa-tasks" style="margin-right: 10px;">
                 </i>
@@ -127,7 +127,7 @@
             <!--Project options panel-->
 
             <li routerLinkActive="active">
-              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
+              <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/site/batch-control']"
                 class="button">
                 <i class="fa fa-columns" style="
                   margin-right: 10px;
@@ -136,7 +136,7 @@
               </a>
             </li>
             <li routerLinkActive="active">
-              <a routerLinkActive="active" *ngIf="checkPermission('configuration')" [routerLink]="['/configuration']"
+              <a routerLinkActive="active" *ngIf="checkPermission('configuration')" [routerLink]="['/site/configuration']"
                 class="button" style="
                    margin-right:10px;">
                 <i class="fa fa-cog hidden-sm" style="
@@ -171,35 +171,35 @@
             <header class="panel-heading text-right bg-light">
               <ul class="nav nav-tabs">
                 <li routerLinkActive="active">
-                  <a [routerLink]="['/dashboard']" *ngIf="checkPermission('dashboard')">
+                  <a [routerLink]="['/site/dashboard']" *ngIf="checkPermission('dashboard')">
                     Dashboard
                   </a>
                 </li>
                 <li routerLinkActive="active" *ngIf="checkPermission('digitalize')">
-                  <a [routerLink]="['/digitalizer']">
+                  <a [routerLink]="['/site/scan']">
                     {{ "DigitalizeDocument" | translate }}
                   </a>
                 </li>
                 <li routerLinkActive="active" *ngIf="checkPermission('digitalizationException')">
-                  <a [routerLink]="['/digitalization-exception']">
+                  <a [routerLink]="['/site/scan-exception']">
                     {{ "DigitalizationException" | translate }}</a>
                 </li>
                 <li routerLinkActive="active" *ngIf="checkPermission('qaScan')">
-                  <a [routerLink]="['/qa-scan']">
+                  <a [routerLink]="['/site/qa-scan']">
                     {{ "QaScan" | translate }}</a>
                 </li>
                 <li routerLinkActive="active">
-                  <a [routerLink]="['/document-index']" *ngIf="checkPermission('index')">
+                  <a [routerLink]="['/site/index']" *ngIf="checkPermission('index')">
                     {{ "Indexing" | translate }}</a>
                 </li>
 
                 <li routerLinkActive="active" *ngIf="checkPermission('qaIndex')">
-                  <a [routerLink]="['/qa-index']">
+                  <a [routerLink]="['/site/qa-index']">
                     {{ "QAIndex" | translate }}
                   </a>
                 </li>
                 <li routerLinkActive="active" *ngIf="checkPermission('batchesToRelease')">
-                  <a [routerLink]="['/batches-to-release']">
+                  <a [routerLink]="['/site/release']">
                     {{ "BatchesToRelease" | translate }}
                   </a>
                 </li>
@@ -216,7 +216,7 @@
                 <ul class="dropdown-menu">
                   <li routerLinkActive="active">
                     <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
-                      [routerLink]="['/index-supervision']">
+                      [routerLink]="['/site/supervision']">
                       <i class="fa fa-eye" style="
                                 margin-right: 10px;
                             "></i>
@@ -232,7 +232,7 @@
                   </li>
                   <li routerLinkActive="active">
                     <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
-                      [routerLink]="['/batch-control']" class="button">
+                      [routerLink]="['/site/batch-control']" class="button">
                       <i class="fa fa-columns" style="
                                 margin-right: 10px;
                             "></i>
@@ -241,7 +241,7 @@
                   </li>
                   <li routerLinkActive="active">
                     <a routerLinkActive="active" *ngIf="checkPermission('configuration')"
-                      [routerLink]="['/configuration']" class="button">
+                      [routerLink]="['/site/configuration']" class="button">
                       <i class="fa fa-cog hidden-sm" style="
                                 margin-right: 10px;
                             "></i>
@@ -253,7 +253,7 @@
               <ul class="nav nav-tabs pull-right r-options">
                 <li routerLinkActive="active">
                   <a routerLinkActive="active" *ngIf="checkPermission('indexSupervision')"
-                    [routerLink]="['/index-supervision']">
+                    [routerLink]="['/site/supervision']">
                     <i class="fa fa-eye" style="
                               margin-right: 10px;
                           "></i>
@@ -261,7 +261,7 @@
                 </li>
                 <li routerLinkActive="active">
                   <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')"
-                    [routerLink]="['/project-control']" class="button">
+                    [routerLink]="['/site/project']" class="button">
                     <i class="fa fa-tasks" style="margin-right: 10px;">
                     </i>
                     {{ "Project" | translate }}
@@ -269,7 +269,7 @@
                 </li>
 
                 <li routerLinkActive="active">
-                  <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/batch-control']"
+                  <a routerLinkActive="active" *ngIf="checkPermission('controlPanel')" [routerLink]="['/site/batch-control']"
                     class="button">
                     <i class="fa fa-columns" style="
                               margin-right: 10px;
@@ -279,7 +279,7 @@
                 </li>
                 <li routerLinkActive="active">
                   <a routerLinkActive="active" *ngIf="checkPermission('configuration')"
-                    [routerLink]="['/configuration']" class="button" style="
+                    [routerLink]="['/site/configuration']" class="button" style="
                                margin-right:10px;">
                     <i class="fa fa-cog hidden-sm" style="
                               margin-right: 10px;
@@ -300,15 +300,14 @@
     </section>
   </section>
 
-  <app-modal [isOpen]="isModalOpen" [title]="'ResetNotifications'"
+  <app-modal [isOpen]="isModalOpen" [title]="modalDisplayContent === 'ShowShortcuts'? 'Shortcuts' : 'ResetNotifications'"
     [showDontAskAgain]="modalDisplayContent === 'ShowShortcuts'? false : true" [headerType]="'info'"
     [optionType]="modalDisplayContent === 'ShowShortcuts'? 'Accept' : 'Ok/Cancel'" 
     [remenberKey]="modalDisplayContent === 'ShowShortcuts'? '' : 'ResetNotificationSkip'"
     (accept)="onAccept($event)" (cancel)="onCancel()" (dontAskAgainChange)="onDontAskAgainChange($event)" 
-    (onCloseModal)="closeModal($event)" [position]="'middle-top'"  >
+    (onCloseModal)="closeModal($event)" [position]="modalDisplayContent === 'ShowShortcuts'? 'center' : 'middle-top'"  >
     <ng-template #modalContent>
       @if(modalDisplayContent == 'ShowShortcuts'){
-      <p>Shortcuts</p>
       <app-shortcuts></app-shortcuts>
       }@else {
       {{'AreSureResetAllNotificationSettings'|translate}}
