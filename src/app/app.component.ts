@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
+import { routeTransitionAnimations } from './animations';
 
 
 @Component({
@@ -11,7 +11,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   standalone: true,
   imports: [RouterOutlet, CommonModule, FormsModule, TranslateModule ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  animations: [routeTransitionAnimations]
 })
 export class AppComponent {
   selectedLanguage = 'en';
@@ -21,5 +22,9 @@ export class AppComponent {
   switchLanguage(lang: string) {
     this.translate.use(lang); // Cambia el idioma
     
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
   }
 }
