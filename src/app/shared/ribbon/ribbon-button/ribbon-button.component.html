@@ -1,0 +1,7 @@
+<a type="button" *ngIf="display" class="c-ribbon-btn" data-toggle="tooltip" data-placement="bottom"
+  tooltip="{{ tooltipText() | translate }}" (click)="handleRibbonButonClick()">
+    <div class={{iconClass()}}></div>
+    <span class="c-ribbon-text">
+    {{ label() | translate }}
+  </span>
+</a>

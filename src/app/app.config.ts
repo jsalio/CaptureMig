@@ -11,6 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideToastr(),
+    TooltipModule.forRoot().providers,
     providePrimeNG({
       theme:{
         preset:Aura,
