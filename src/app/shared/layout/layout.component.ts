@@ -16,13 +16,14 @@ import { CommonModule } from '@angular/common';
 import { BsDropdownModule, BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { ModalComponent } from '../modal/modal.component';
 import { ShortcutsComponent } from '../shortcuts/shortcuts.component';
+import { RibbonComponent } from '../ribbon/ribbon.component';
 
 type ModalDisplay ='ResetNotification'|'ShowShortcuts'|''
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterModule, TranslateModule, ModalComponent,ShortcutsComponent, CommonModule, BsDropdownModule],
+  imports: [RouterModule, TranslateModule, ModalComponent,ShortcutsComponent, CommonModule, BsDropdownModule, RibbonComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
   providers:[
