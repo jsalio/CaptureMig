@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver, Type, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver, Type, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-ribbon',
@@ -10,42 +11,63 @@ import { filter } from 'rxjs/operators';
     templateUrl: './ribbon.component.html',
     styleUrl: './ribbon.component.css'
 })
-export class RibbonComponent implements OnInit {
+export class RibbonComponent implements OnInit, OnDestroy {
     @ViewChild('ribbonContainer', { read: ViewContainerRef, static: true })
     private containerRef!: ViewContainerRef;
+    // Subject para manejar la limpieza de suscripciones
+    private destroy$ = new Subject<void>();
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private componentFactoryResolver: ComponentFactoryResolver
+        // private componentFactoryResolver: ComponentFactoryResolver
     ) { }
 
+
     ngOnInit() {
-        // Subscribe to route changes
+        this.setupRouteSubscription();
+        this.loadInitialRibbon();
+    }
+
+
+    private setupRouteSubscription(): void {
         this.router.events.pipe(
-            filter(event => event instanceof NavigationEnd)
+            filter(event => event instanceof NavigationEnd),
+            takeUntil(this.destroy$)
         ).subscribe(() => {
-            // Get the current route data
-            this.route.firstChild?.data.subscribe(data => {
+            this.loadRibbonFromRoute();
+        });
+    }
+
+    private loadInitialRibbon(): void {
+        this.loadRibbonFromRoute();
+    }
+
+    private loadRibbonFromRoute(): void {
+        this.route.firstChild?.data.pipe(
+            takeUntil(this.destroy$)
+        ).subscribe({
+            next: (data) => {
                 const ribbonName = data['ribbon'] + "Component";
-                debugger;
                 if (ribbonName) {
                     this.loadRibbonComponent(ribbonName);
                 }
-            });
-        });
-
-        // Initial load
-        this.route.firstChild?.data.subscribe(data => {
-            const ribbonName = data['ribbon'] + "Component";
-            if (ribbonName) {
-                this.loadRibbonComponent(ribbonName);
+            },
+            error: (error) => {
+                console.error('Error loading route data:', error);
             }
         });
     }
 
+    ngOnDestroy() {
+        // Limpieza de suscripciones
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
     private async loadRibbonComponent(ribbonName: string) {
         try {
+            console.log(ribbonName)
             switch (ribbonName) {
 
                 case "RibbonDashboardComponent":

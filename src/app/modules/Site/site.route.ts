@@ -43,7 +43,7 @@ export const SITE_ROUTES: Routes = [
       {
         path:'supervision',
         loadComponent:() => import('./supervision/supervision.component').then(c => c.SupervisionComponent),
-        data: { animation: 'supervision' }
+        data: { animation: 'supervision',ribbon:'RibbonSupervision' }
       },
       {
         path:'project',
