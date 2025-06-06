@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { SliderComponent } from '../slider/slider.component';
 import { RibbonButtonComponent } from '../ribbon-button/ribbon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -55,7 +55,12 @@ export class RibbonConfigurationComponent {
   barcodeSeparatorsPrintActive = signal<boolean>(false);
   showGlobalSection = signal<boolean>(true);
   showActionOptions = signal<boolean>(false);
-  resetCacheModalIsOpen = signal<boolean>(false)
+  resetCacheModalIsOpen = signal<boolean>(false);
+
+  // Computed signal for workflow access
+  checkAccesToWorkflow = computed(() => {
+    return this.showWorkflowSection() && this.currentUserService.currentUser.specialPermissions.hasWorkflowsAdministration;
+  });
 
   showAllSections = () => {
     debugger
@@ -76,10 +81,9 @@ export class RibbonConfigurationComponent {
   }
 
   setRibbonWorkflowSection = () => {
-    debugger
     this.hideAllSections();
-    this.canShowWorkflowList.set(false);
     this.showWorkflowSection.set(true);
+    this.canShowWorkflowList.set(true);
     this.showGoBackButton.set(true);
   }
 
@@ -439,9 +443,5 @@ export class RibbonConfigurationComponent {
 
   showNewWorkflowScreen = () => {
     this.ribbonConfigurationService.emitNewWorkflowEvent();
-  }
-
-  checkAccesToWorkflow = ():boolean => {
-    return this.showWorkflowSection() && this.currentUserService.currentUser.specialPermissions.hasWorkflowsAdministration
   }
 }
