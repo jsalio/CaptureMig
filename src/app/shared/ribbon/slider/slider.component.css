@@ -1,0 +1,36 @@
+.controlRibbonWrapper {
+    display: flex;
+}
+
+.batchControlRibbon {
+    display: flex;
+    /* max-width: 1240px; */
+    width: 100%;
+}
+
+.controlRibbonWrapper {
+    display: flex;
+}
+
+.controlRibbonWrapper button {
+    background: #d2d2d2;
+    color: #878787;
+    display: none;
+    transition: all 0.2s;
+}
+
+.controlRibbonWrapper button:hover {
+    background: #b6b6b6;
+}
+
+@media screen and (max-width: 1390px) {
+    .batchControlRibbon {
+        overflow-x: auto;
+    }
+    .controlRibbonWrapper button {
+        display: initial;
+    }
+    .batchControlRibbon {
+        overflow-x: auto;
+    }
+}

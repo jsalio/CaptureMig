@@ -1,1 +1,246 @@
-<p>ribbon-configuration works!</p>
+<app-slider>
+    <div class="c-ribbon-container">
+        <!-- Navigation section -->
+        <div *ngIf="showGoBackButton" class="c-ribbon br-r">
+            <app-ribbon-button label="GoBack" iconClass="back-icon ribbon-icon" tooltip="bottom" tooltipText="GoBack"
+                [onButtonClick]="goBack" />
+            <div class="c-ribbon-footer" style="text-align: center">
+                {{ "Navegation" | translate }}
+            </div>
+        </div>
+        <!-- Navigation section  -->
+
+        <!-- Worflow/batch class section -->
+        <div *ngIf="showWorkflowSection && currentUserService?.currentUser?.specialPermissions?.hasWorkflowsAdministration"
+            class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="Workflows" iconClass="applications-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="Workflows" [onButtonClick]="goBack" [display]="canShowWorkflowList()" />
+                <app-ribbon-button label="NewWorkflow" iconClass="new-app-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="NewWorkflow" [onButtonClick]="goBack" [display]="showCreateWorkflow()" />
+            </div>
+            <div *ngIf="workflowAdministrationActive; else workflowAdministrationInactive" class="c-ribbon-footer">
+                {{ "Workflows" | translate }}
+            </div>
+            <ng-template #workflowAdministrationInactive>
+                <div class="c-ribbon-footer">
+                    {{ "Workflows" | translate }}
+                </div>
+            </ng-template>
+        </div>
+        <!-- Worflow/batch class section -->
+
+        <!-- Roles sections-->
+        <div *ngIf="showRolesSection" class="c-ribbon br-r">
+            <app-ribbon-button label="RolesPermission" iconClass="roles-permission-icon ribbon-icon" tooltip="bottom"
+                tooltipText="RolesPermission" [onButtonClick]="showRolesList"
+                [display]="canShowRolesList() || rolesAdministrationActive()" />
+            <div *ngIf="canShowRolesList || rolesAdministrationActive">
+                <div *ngIf="rolesAdministrationActive; else rolesAdministrationInactive" class="c-ribbon-footer"
+                    style="text-align: center">
+                    {{ "RolesAdministration" | translate }}
+                </div>
+                <ng-template #rolesAdministrationInactive>
+                    <div class="c-ribbon-footer">
+                        {{ "RolesAdministration" | translate }}
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <!-- Roles sections-->
+
+        <!-- Scanner section -->
+        <div *ngIf="showScannerProfilesSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="ScannerProfilesDescription" iconClass="scanner-configuration-icon ribbon-icon"
+                    tooltip="bottom" tooltipText="ScannerProfilesDescription" [onButtonClick]="showScanProfilesList" />
+                <app-ribbon-button label="CreateScannerProfile" iconClass="scanner-list-icon ribbon-icon"
+                    tooltip="bottom" tooltipText="CreateScannerProfile" [onButtonClick]="showScanProfilesCreationScreen"
+                    [display]="showCreateScanProfile()" />
+            </div>
+            <div *ngIf="scanProfileActive; else scanProfileInactive" class="c-ribbon-footer">
+                {{ "Scanner" | translate }}
+            </div>
+            <ng-template #scanProfileInactive>
+                <div class="c-ribbon-footer">
+                    {{ "Scanner" | translate }}
+                </div>
+            </ng-template>
+        </div>
+        <!-- Scanner section -->
+
+        <!-- External props -->
+        <div *ngIf="showExternalPropertiesSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="ExternalProperties" iconClass="external-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="ExternalProperties" [onButtonClick]="showExternalPropertiesList"
+                    [display]="canShowExternalPropertiesList()" />
+                <app-ribbon-button label="NewExternalProperty" iconClass="new-app-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="NewExternalProperty" [onButtonClick]="showNewExternalPropertyScreen"
+                    [display]="externalPropertiesActive()" />
+            </div>
+            <div *ngIf="externalPropertiesActive; else externalPropertiesInactive" class="c-ribbon-footer">
+                {{ "Administration" | translate }}
+            </div>
+            <ng-template #externalPropertiesInactive>
+                <div class="c-ribbon-footer">
+                    {{ "ConfigurationLabel" | translate }}
+                </div>
+            </ng-template>
+        </div>
+        <!-- External props -->
+
+        <!-- Webhook section  -->
+        <div *ngIf="showWebHookSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="WebHooks" iconClass="webhooks-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="WebHooks" [onButtonClick]="showWebHooksList" [display]="canShowWebHooksList()" />
+                <app-ribbon-button label="NewWebHooks" iconClass="webhooks-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="NewWebHooks" [onButtonClick]="showWebHookCreateScreen" [display]="webHookActive()" />
+            </div>
+            <div *ngIf="webHookActive; else webHookInactive" class="c-ribbon-footer">
+                {{ "WebHookAdministration" | translate }}
+            </div>
+            <ng-template #webHookInactive>
+                <div class="c-ribbon-footer">
+                    {{ "WebHookAdministration" | translate }}
+                </div>
+            </ng-template>
+        </div>
+        <!-- WebHoook Section -->
+
+        <!-- Barcode section -->
+        <div *ngIf="showBarcodeSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="Barcode" iconClass="barcode-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="Barcode" [onButtonClick]="showBatchSeparatorPrinting"
+                    [display]="canShowBatchSeparatorPrintingList()" />
+                <app-ribbon-button label="ComposedBarcodeConfiguration" iconClass="barcode-icon ribbon-icon"
+                    tooltip="bottom" tooltipText="ComposedBarcodeConfiguration"
+                    [onButtonClick]="showComposedBarcodeConfiguration" [display]="barcodeSeparatorsPrintActive()" />
+            </div>
+            <div *ngIf="barcodeSeparatorsPrintActive; else barcodeSeparatorPrintInactive" class="c-ribbon-footer">
+                {{ "Barcode" | translate }}
+            </div>
+            <ng-template #barcodeSeparatorPrintInactive>
+                <div class="c-ribbon-footer">
+                    {{ "Barcode" | translate }}
+                </div>
+            </ng-template>
+        </div>
+        <!-- Barcode section -->
+
+
+        <!-- Schedule offline -->
+        <div *ngIf="showSynchronizationScheduleSection" class="c-ribbon br-r">
+            <app-ribbon-button label="OfflineScheduleList" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                tooltipText="OfflineScheduleList" [onButtonClick]="showScheduleList"
+                [display]="canShowScheduleList()" />
+            <div *ngIf="canShowScheduleList" class="c-ribbon-footer">
+                {{ "OfflineSynchronizationSchedule" | translate }}
+            </div>
+        </div>
+        <!-- Schedule offline -->
+
+        <!-- Volume section -->
+        <div *ngIf="showVolumeSection" class="c-ribbon br-r">
+            <app-ribbon-button label="Volume" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                tooltipText="Volume" [onButtonClick]="showVolumeCreationModule" [display]="canShowVolumeList()" />
+            <div *ngIf="canShowVolumeList" class="c-ribbon-footer">
+                {{ "VolumeData" | translate }}
+            </div>
+        </div>
+        <!-- Volume section -->
+
+        <!-- Garbage -->
+        <div *ngIf="showGarbageSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="Garbage" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                    tooltipText="Garbage" [onButtonClick]="showGotoGarbage" />
+            </div>
+            <div class="c-ribbon-footer">
+                {{ "Garbage" | translate }}
+            </div>
+        </div>
+        <!-- Garbage -->
+
+        <!-- Global -->
+        <div *ngIf="showGlobalSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="Actions" iconClass="applications-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="Actions" [onButtonClick]="setRibbonGlobalSection" [display]="!showActionOptions()" />
+
+                <app-ribbon-button label="CleanCacheData" iconClass="delete-batch-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="CleanCacheData" [onButtonClick]="showUpdateCacheData"
+                    [display]="showActionOptions()" />
+
+                <app-ribbon-button label="ResetNotifications" iconClass="delete-batch-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="ResetNotifications" [onButtonClick]="emitResetNotifications"
+                    [display]="showActionOptions()" />
+
+                <app-ribbon-button label="ClearServerCache" iconClass="delete-batch-icon ribbon-icon" tooltip="bottom"
+                    tooltipText="ClearServerCache" [onButtonClick]="emitDeleteAllCacheData"
+                    [display]="showActionOptions()" />
+
+            </div>
+            <div class="c-ribbon-footer">
+                {{ "GlobalActions" | translate }}
+            </div>
+        </div>
+        <!-- Global section  -->
+
+        <!-- Project section -->
+        <div *ngIf="showProjectSection" class="c-ribbon br-r">
+            <div class="c-ribbon-group">
+                <app-ribbon-button label="ProjectConfig" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                    tooltipText="ProjectConfig" [onButtonClick]="showProjectSectionModule"
+                    [display]="canShowProjectSection()" />
+                <app-ribbon-button label="CreateNewProject" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                    tooltipText="CreateNewProject" [onButtonClick]="createProject" [display]="showCreateNewProject()" />
+            </div>
+            <div class="c-ribbon-footer">
+                {{ "ProjectConfig" | translate }}
+            </div>
+        </div>
+        <!-- Project section -->
+
+        <!-- Logger -->
+        <div *ngIf="showGeneralLogSection" class="c-ribbon br-r">
+            <app-ribbon-button label="GeneralLog" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                tooltipText="GeneralLog" [onButtonClick]="showGeneralLogModule" [display]="canShowGeneralLog()" />
+            <div *ngIf="canShowGeneralLog" class="c-ribbon-footer">
+                {{ "GeneralLogData" | translate }}
+            </div>
+        </div>
+        <!--Logger -->
+
+        <!-- Licencias OCR TODO:Esto se debe de remover  a otra aplicacion de gestion de estos temas-->
+        <div *ngIf="showLicenseConfiguration" class="c-ribbon br-r">
+            <app-ribbon-button label="Licenses" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                tooltipText="Licenses" [onButtonClick]="showLicenseConfigurationsModule"
+                [display]="canShowLicenseConfigurations()" />
+            <div *ngIf="canShowLicenseConfigurations" class="c-ribbon-footer">
+                {{ "LicenseConfiguration" | translate }}
+            </div>
+        </div>
+        <!-- Licencias OCR -->
+
+        <!-- System metricts -->
+        <div *ngIf="showChartMetricsSection" class="c-ribbon br-r">
+            <app-ribbon-button label="ChartMetricts" iconClass="schedule-icon-list ribbon-icon" tooltip="bottom"
+                tooltipText="ChartMetricts" [onButtonClick]="showChartMetricModule" />
+            <div *ngIf="canShowChartMetrict" class="c-ribbon-footer">
+                {{ "ChartMetricts" | translate }}
+            </div>
+        </div>
+        <!-- System metricts -->
+    </div>
+</app-slider>
+
+<app-modal [isOpen]="resetCacheModalIsOpen()" title="CleanCacheDataTitle" [optionType]="'Accept/Reject'"
+    [headerType]="'warning'" (accept)="onAccept($event)" (cancel)="onCancel()" (onCloseModal)="closeModal($event)"
+    [position]="'middle-top'" >
+    <ng-template #modalContent>
+        <p>{{ "CleanCacheDataQuestion" | translate }}</p>
+    </ng-template>
+</app-modal>

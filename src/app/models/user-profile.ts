@@ -10,22 +10,35 @@ import { OfflineWorkSetting } from './offline-work-setting';
  * @interface UserProfile
  */
 export interface UserProfile {
-    id: number;
+    // id: number;
+    // username: string;
+    // email: string;
+    // firstName: string;
+    // lastName: string;
+    // isActive: boolean;
+    // isSystem: boolean;
+    // isArchived: boolean;
+    // dateCreated: Date;
+    // dateModified: Date;
+    // createdBy: string;
+    // modifiedBy: string;
+    // roles: string[];
+    // permissions: string[];
+    // settings: any;
+    // workflowStepsPermissions:StepAccessPermitions
+    // offlineSynchronizationSettings:Array<OfflineWorkSetting>
+    // tokenExpirationDate:string
     username: string;
+    fullName: string;
+    licensedResources: string[];
+    token: string;
+    tokenExpirationDate: Date;
+    lifeOfTokenInMinutes: number;
+    specialAccesses: string[];
+    company: string;
     email: string;
-    firstName: string;
-    lastName: string;
-    isActive: boolean;
-    isSystem: boolean;
-    isArchived: boolean;
-    dateCreated: Date;
-    dateModified: Date;
-    createdBy: string;
-    modifiedBy: string;
-    roles: string[];
-    permissions: string[];
-    settings: any;
-    workflowStepsPermissions:StepAccessPermitions
-    offlineSynchronizationSettings:Array<OfflineWorkSetting>
-    tokenExpirationDate:string
+    roles: RolesConfigurationModel[];
+    specialPermissions: RoleSpecialPermission;
+    workflowStepsPermissions: StepAccessPermitions;
+    offlineSynchronizationSettings: Array<OfflineWorkSetting>;
 }

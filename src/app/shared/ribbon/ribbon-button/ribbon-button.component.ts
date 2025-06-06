@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
@@ -13,13 +13,13 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 export class RibbonButtonComponent {
 
   label = input<string>('');
-  onButtonClick = input<() => void>
-  display = input<boolean>(false)
+  @Input()   onButtonClick:() => void 
+  display = input<boolean>(true)
   iconClass = input<string>('')
   tooltip? = input<'right' | 'left' | 'top' | 'bottom'|''>('')
   tooltipText = input<string>('')
 
   handleRibbonButonClick = () =>{
-    this.handleRibbonButonClick()
+    this.onButtonClick()
   }
 }

@@ -1,0 +1,131 @@
+select.form-control:not([size]):not([multiple]) {
+    height: 31px;
+    padding: 1px 10px;
+}
+
+.sml {
+    width: 65px !important;
+}
+
+.md {
+    width: 75px !important;
+}
+
+.lg {
+    width: 85px !important;
+}
+
+/* .xl {
+    width: 95px;
+  } */
+.xxl {
+    width: 110px !important;
+}
+
+.col-lg-6.no-bg {
+    background: none;
+    background-color: transparent !important;
+    border: none !important;
+    margin-top: -7px;
+}
+
+progressbar.progress.sm {
+    width: 85px !important;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.panel-footer {
+    font-size: 11px;
+}
+
+a.btn-ribbon.btn.btn-default {
+    width: auto;
+    height: 86px;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 0;
+}
+
+.panel.panel-default.fit.br-l.br-r {
+    border-right: 1px solid #dddddd !important;
+}
+
+.page-information {
+    height: 92px;
+    display: flex;
+    align-items: center;
+}
+
+span.ammount-box {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.span.amount {
+    display: flex;
+    align-items: center;
+    width: auto !important;
+}
+
+.date-range-index {
+    width: initial;
+}
+
+.ui-calendar {
+    left: -12px;
+    width: 178px;
+}
+
+.page-information.aligning {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.ammount-box a.btn.btn-default {
+    border: none;
+}
+
+label {
+    color: #495057;
+}
+
+label.ui-dropdown-label.ui-inputtext.ui-corner-all.ng-star-inserted {
+    color: #656565;
+}
+
+select#scannerProfile,
+select#scannerSource {
+    color: #656565;
+}
+
+.btn-ribbon.sm>span {
+    font-size: 12px;
+    margin-left: 0px;
+}
+
+.ammount-numbers {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+}
+
+.br-r-0 {
+    border-right: 0;
+}
+
+.br-l-0 {
+    border-left: 0;
+}

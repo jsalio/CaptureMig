@@ -1,0 +1,9 @@
+<div class="controlRibbonWrapper">
+    <button *ngIf="buttonsOnRibbon > 2" class="btn" (click)="scrollLeft($event)"><i
+        class="fa fa-chevron-left"></i></button>
+    <div class="batchControlRibbon" id="ribbonScroll">
+      <ng-content></ng-content>
+    </div>
+    <button *ngIf="buttonsOnRibbon > 2" class="btn" (click)="scrollRight($event)"><i
+        class="fa fa-chevron-right"></i></button>
+  </div>

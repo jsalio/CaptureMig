@@ -1,1 +1,117 @@
-<p>ribbon-scan works!</p>
+<app-slider>
+
+  <div class="c-ribbon-container">
+    <div *ngIf="!isReadyToWork()" class="c-ribbon br-r">
+      <app-ribbon-button label="NewBatch" iconClass="new-batch-icon ribbon-icon" tooltip="bottom" tooltipText="NewBatch"
+        [onButtonClick]="newBatch" />
+      <div class="c-ribbon-footer">{{ "Batches" | translate }}</div>
+    </div>
+
+    <div class="c-ribbon" *ngIf="isReadyToWork()">
+      <div class="c-ribbon-group">
+        <app-ribbon-button label="DigitalizeDocument" iconClass="digitalize-icon ribbon-icon" tooltip="top"
+          tooltipText="DigitalizeDocument" [onButtonClick]="digitalizeDocuments" />
+        <app-ribbon-button label="RedigitalizePage" iconClass="redigitalize-icon ribbon-icon" tooltip="top"
+          tooltipText="DigitalizeDocument" [onButtonClick]="redigitalizeDocument" />
+        <app-ribbon-button label="ImportPages" iconClass="import-icon ribbon-icon" tooltip="top"
+          tooltipText="ImportPages" [onButtonClick]="importPages" />
+        <app-ribbon-button [display]="!isRejectedDocumentView() && canRedigitilize()" label="SendRecognition"
+          iconClass="release-batch-icon ribbon-icon" ooltip="top" tooltipText="DigitalizeDocument"
+          [onButtonClick]="sendToRecognition" />
+      </div>
+      <div class="c-ribbon-footer">
+        {{ "Digitalization" | translate }}
+      </div>
+    </div>
+
+    <div class="c-ribbon" *ngIf="isReadyToWork && returnedRecognitionMode">
+      <app-ribbon-button label="SendToDigitalizationExceptionQueue" iconClass="import-icon ribbon-icon" ooltip="top"
+        tooltipText="SendToDigitalizationExceptionQueue" [onButtonClick]="sendToExceptionQueue" />
+      <div class="c-ribbon-footer">
+        {{ "Document" | translate }}
+      </div>
+    </div>
+
+    <div *ngIf="!isReadyToWork" class="hidden panel panel-default fit">
+      <div class="col-lg-12  page-information">
+        <span class="col-lg-6">
+          {{ "BatchName" | translate }}:
+          <span class="amount">{{ currentBatch.name }}</span>
+        </span>
+        <span class="col-lg-6">
+          {{ "TotalPages" | translate }}:
+          <span *ngIf="!isRejectedDocumentView" class="amount">
+            {{ pagesLength }}</span>
+          <span *ngIf="isRejectedDocumentView" class="amount">
+            {{ currentDocument.pages.length }}</span>
+        </span>
+        <span class="col-lg-6">
+          {{ "BatchId" | translate }}:
+          <span class="amount"> {{ currentBatch.id }}</span>
+        </span>
+        <span *ngIf="isRejectedDocumentView" class="col-lg-6">
+          {{ "DocumentId" | translate }}:
+          <span class="amount"> {{ currentDocument.id }}</span>
+        </span>
+      </div>
+      <div class="panel-footer no-padder center">
+        {{ "BatchInformation" | translate }}
+      </div>
+    </div>
+
+    <div class="br-l br-r c-ribbon pl-3 pr-3 scanner-profiles-box" *ngIf="isReadyToWork">
+      <div class="c-ribbon-group p-0 pt-3" style="width: 267px;">
+        <div class="col-lg-6 no-padder pr-2">
+          <label>{{ "ScannerDescription" | translate }}</label>
+          <select id="scannerSource" [(ngModel)]="selectedTwainSource" (change)="storeScannerSource()"
+            class="form-control">
+            <option *ngFor="let source of twainSources" [ngValue]="source">{{
+              source.name
+              }}</option>
+          </select>
+        </div>
+        <div class="col-lg-6 no-padder pr-2">
+          <label>{{ "ScannerProfileDescription" | translate }}</label>
+          <select id="scannerProfile" name="scannerProfile" (change)="onChangeScannerProfile()"
+            [(ngModel)]="selectedScannerProfile" class="form-control">
+            <option *ngFor="let scannerProfile of uniqueScannerProfiles()" [ngValue]="scannerProfile">
+              {{ scannerProfile.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="c-ribbon-footer">
+        {{ "ScannerConfiguration" | translate }}
+      </div>
+    </div>
+
+    <div class="br-l c-ribbon p-3" *ngIf="isReadyToWork && selectedScannerProfile && canUpdateScannerProfile">
+      <label>{{ "Color" | translate }}</label>
+      <!-- <p-dropdown [options]="pixelTypes" optionLabel="name" (onChange)="setScannerColorConfiguration($event)"
+        [(ngModel)]="selectedScannerProfile.pixelTypeConfiguration">
+        <ng-template let-item pTemplate="selectedItem">
+          <img style="width:16px;vertical-align:middle" [src]="getPixelTypeIcon(item.value)" />
+          <span style="vertical-align:middle; margin-left: .5em">{{
+            item.label
+            }}</span>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+          <div style="width: 14em;" class="ui-helper-clearfix">
+            <img class="pull-left" [src]="getPixelTypeIcon(item.value)" />
+            <div style="font-size:14px;float:right;margin-top:4px">
+              {{ item.label }}
+            </div>
+          </div>
+        </ng-template>
+      </p-dropdown> -->
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <app-modal></app-modal>
+</app-slider>
