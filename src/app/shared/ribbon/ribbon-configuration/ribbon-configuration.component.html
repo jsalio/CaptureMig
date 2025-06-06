@@ -15,9 +15,9 @@
             class="c-ribbon br-r">
             <div class="c-ribbon-group">
                 <app-ribbon-button label="Workflows" iconClass="applications-icon ribbon-icon" tooltip="bottom"
-                    tooltipText="Workflows" [onButtonClick]="goBack" [display]="canShowWorkflowList()" />
+                    tooltipText="Workflows" [onButtonClick]="showWorkflowList" [display]="canShowWorkflowList()" />
                 <app-ribbon-button label="NewWorkflow" iconClass="new-app-icon ribbon-icon" tooltip="bottom"
-                    tooltipText="NewWorkflow" [onButtonClick]="goBack" [display]="showCreateWorkflow()" />
+                    tooltipText="NewWorkflow" [onButtonClick]="showNewWorkflowScreen" [display]="showCreateWorkflow()" />
             </div>
             <div *ngIf="workflowAdministrationActive; else workflowAdministrationInactive" class="c-ribbon-footer">
                 {{ "Workflows" | translate }}

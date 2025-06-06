@@ -57,7 +57,8 @@ export const SITE_ROUTES: Routes = [
       },
       {
         path:'configuration',
-        loadComponent:() => import('./configuration/configuration.component').then(c => c.ConfigurationComponent),
+        loadChildren:() => import('./configuration/configuration.route').then(r =>r.CONFIGURATION_ROUTES),
+        // loadComponent:() => import('./configuration/configuration.component').then(c => c.ConfigurationComponent),
         data: { animation: 'configuration',ribbon:'RibbonConfiguration' }
       },
       {

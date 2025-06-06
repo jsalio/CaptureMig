@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { WorkflowListComponent } from './sections/workflow/workflow-list/workflow-list.component';
+import { WorkflowFormComponent } from './sections/workflow/workflow-form/workflow-form.component';
 
 export const CONFIGURATION_ROUTES: Routes = [
     {
@@ -7,15 +9,18 @@ export const CONFIGURATION_ROUTES: Routes = [
         children:[
             {
                 path:'workflow',
-                loadComponent:() => import('./sections/workflow-list/workflow-list.component').then(x => x.WorkflowListComponent)
+                component:WorkflowListComponent
+                // loadComponent:() => import('./sections/workflow/workflow-list/workflow-list.component').then(x => x.WorkflowListComponent)
             },
             {
                 path:'workflow-new',
-                loadComponent:() => import('./sections/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
+                component: WorkflowFormComponent
+                // loadComponent:() => import('./sections/workflow/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
             },
             {
                 path:'worlflow/:id',
-                loadComponent:() => import('./sections/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
+                component:WorkflowFormComponent
+                // loadComponent:() => import('./sections/workflow/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
             }
         ]
     },
@@ -23,5 +28,5 @@ export const CONFIGURATION_ROUTES: Routes = [
         path: '',
         redirectTo: '',
         pathMatch: 'full'
-      }
+    }
 ];
