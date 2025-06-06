@@ -3,13 +3,15 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
     selector: 'app-ribbon',
     standalone: true,
     imports: [CommonModule],
     templateUrl: './ribbon.component.html',
-    styleUrl: './ribbon.component.css'
+    styleUrl: './ribbon.component.css',
+    providers:[CurrentUserService]
 })
 export class RibbonComponent implements OnInit, OnDestroy {
     @ViewChild('ribbonContainer', { read: ViewContainerRef, static: true })

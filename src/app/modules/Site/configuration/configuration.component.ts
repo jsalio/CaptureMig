@@ -8,8 +8,7 @@ import { ConfigurationService } from '../../../services/ribbons/configuration.se
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './configuration.component.html',
-  styleUrl: './configuration.component.css',
-  providers:[ConfigurationService]
+  styleUrl: './configuration.component.css'
 })
 export class ConfigurationComponent {
   private workflowListSubscription: Subscription;
@@ -43,7 +42,6 @@ export class ConfigurationComponent {
     this.workflowListSubscription = this.configurationRibbonService
       .listWorkflowEventListener()
       .subscribe(() => {
-        debugger
         this.router.navigate(['site/configuration/workflow']);
       });
 

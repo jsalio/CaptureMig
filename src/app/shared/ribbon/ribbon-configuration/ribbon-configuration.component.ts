@@ -14,7 +14,7 @@ import { ConfigurationService } from '../../../services/ribbons/configuration.se
   imports: [CommonModule, TranslateModule, SliderComponent, RibbonButtonComponent, ModalComponent],
   templateUrl: './ribbon-configuration.component.html',
   styleUrl: './ribbon-configuration.component.css',
-  providers: [ConfigurationService]
+  providers:[CurrentUserService]
 })
 export class RibbonConfigurationComponent {
   showGoBackButton = signal<boolean>(false);
@@ -58,6 +58,7 @@ export class RibbonConfigurationComponent {
   resetCacheModalIsOpen = signal<boolean>(false)
 
   showAllSections = () => {
+    debugger
     this.showWorkflowSection.set(true);
     this.showRolesSection.set(true);
     this.showScannerProfilesSection.set(true);
@@ -75,6 +76,7 @@ export class RibbonConfigurationComponent {
   }
 
   setRibbonWorkflowSection = () => {
+    debugger
     this.hideAllSections();
     this.canShowWorkflowList.set(false);
     this.showWorkflowSection.set(true);
@@ -217,10 +219,10 @@ export class RibbonConfigurationComponent {
   }
 
   routesActionsDictionary = {
-    ['/site/configuration']: this.showAllSections,
-    ['/site/configuration/workflow-List']: this.setRibbonWorkflowSection,
-    ['/site/configuration/new-workflow']: this.setRibbonWorkWorkflowSection,
-    ['/site/configuration/edit-workflow']: this.setRibbonWorkWorkflowSection,
+    ['/site/configuration']: this.showAllSections.bind(this),
+    ['/site/configuration/workflow']: this.setRibbonWorkflowSection.bind(this),
+    ['/site/configuration/new-workflow']: this.setRibbonWorkWorkflowSection.bind(this),
+    ['/site/configuration/edit-workflow']: this.setRibbonWorkWorkflowSection.bind(this),
     ['/site/configuration/licenses']: this.setRibbonVolumeSection.bind(this),
     ['/site/configuration/chart-parameters']: this.showChartMetricModule.bind(this),
     ['/site/configuration/roles/']: this.setRibbonUpdateRoleSection.bind(this),
@@ -245,9 +247,14 @@ export class RibbonConfigurationComponent {
    */
   constructor(public readonly currentUserService: CurrentUserService, private readonly route: Router, private readonly ribbonConfigurationService: ConfigurationService) {
 
-    // const urlBase = this.route.url.split('/');
-    // const numberTree = 3;
-    // this.routesActionsDictionary[urlBase.length === numberTree ? '/' + urlBase[1] : '/' + urlBase[1] + '/' + urlBase[numberTree]]();
+    const urlBase = this.route.url.split('/');
+    const numberTree = 3;
+    let uri = ('/' + urlBase[1] + '/' + urlBase[2] + '/' + urlBase[numberTree]).replaceAll('undefined', '')
+    if (uri.endsWith('/')) {
+      uri = uri.substring(0, uri.length - 1)
+    }
+    debugger
+    this.routesActionsDictionary[uri]();
 
     this.ribbonConfigurationService.setScanProfileInactiveEvent().subscribe(() => {
       this.scanProfileActive.set(false);
@@ -432,5 +439,9 @@ export class RibbonConfigurationComponent {
 
   showNewWorkflowScreen = () => {
     this.ribbonConfigurationService.emitNewWorkflowEvent();
+  }
+
+  checkAccesToWorkflow = ():boolean => {
+    return this.showWorkflowSection() && this.currentUserService.currentUser.specialPermissions.hasWorkflowsAdministration
   }
 }

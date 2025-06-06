@@ -7,7 +7,6 @@ import { ConfigurationService } from '../../../../../../services/ribbons/configu
   imports: [],
   templateUrl: './workflow-list.component.html',
   styleUrl: './workflow-list.component.css',
-  providers:[ConfigurationService]
 })
 export class WorkflowListComponent implements OnInit {
   /**

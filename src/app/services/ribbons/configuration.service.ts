@@ -49,12 +49,10 @@ export class ConfigurationService {
   private deleteAllCacheDataSubject = new Subject();
 
   emitListWorkflowEvent() {
-    debugger
     this.listWorkflowSubject.next(undefined);
   }
 
   listWorkflowEventListener() {
-    debugger
     return this.listWorkflowSubject;
   }
 

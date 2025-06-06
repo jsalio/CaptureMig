@@ -1,4 +1,4 @@
-<app-slider>
+<!-- <app-slider> -->
     <div class="c-ribbon-container">
         <!-- Navigation section -->
         <div *ngIf="showGoBackButton" class="c-ribbon br-r">
@@ -11,7 +11,7 @@
         <!-- Navigation section  -->
 
         <!-- Worflow/batch class section -->
-        <div *ngIf="showWorkflowSection && currentUserService?.currentUser?.specialPermissions?.hasWorkflowsAdministration"
+        <div *ngIf="checkAccesToWorkflow()"
             class="c-ribbon br-r">
             <div class="c-ribbon-group">
                 <app-ribbon-button label="Workflows" iconClass="applications-icon ribbon-icon" tooltip="bottom"
@@ -28,6 +28,7 @@
                 </div>
             </ng-template>
         </div>
+        
         <!-- Worflow/batch class section -->
 
         <!-- Roles sections-->
@@ -235,7 +236,7 @@
         </div>
         <!-- System metricts -->
     </div>
-</app-slider>
+<!-- </app-slider> -->
 
 <app-modal [isOpen]="resetCacheModalIsOpen()" title="CleanCacheDataTitle" [optionType]="'Accept/Reject'"
     [headerType]="'warning'" (accept)="onAccept($event)" (cancel)="onCancel()" (onCloseModal)="closeModal($event)"
