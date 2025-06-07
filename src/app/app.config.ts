@@ -7,16 +7,17 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { routes } from './app.routes';
 import { translateModule } from './translate-config';
 import { TranslateService } from '@ngx-translate/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { httpInterceptor } from './core/interceptors/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     provideRouter(routes),
     provideAnimations(),
     provideToastr(),

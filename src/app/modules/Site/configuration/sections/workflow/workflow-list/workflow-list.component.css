@@ -1,0 +1,34 @@
+table{
+    text-align: center!important;
+    width:auto;
+}
+td {
+    text-align: center!important;
+}
+th {
+    text-align: center!important;
+}
+
+.panel .table td, .panel .table th {
+    padding: 2px 15px!important;
+    border-top: 1px solid #eaeef1;
+}
+
+.navegationBar{
+    background-color: #91aecb;
+    color: #ffffff;
+}
+
+.tabClass .nav-tabs.nav-justified a.nav-link.active {
+    border: none !important;
+}
+::ng-deep .tabClass .nav-tabs.nav-justified{
+    width: 600px;
+}
+
+@media screen and (max-width: 650px){
+    ::ng-deep .tabClass .nav-tabs.nav-justified{
+        width: 100%;
+    }
+}
+
