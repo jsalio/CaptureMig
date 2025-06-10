@@ -1,0 +1,61 @@
+<div [ngStyle]="{'visibility': visible ? 'hidden':'visible'}" class="tabla col-lg-12 no-padder">
+  <div class="panel panel-default">
+    <div *ngIf="tableHeader !== ''" class="panel-heading" style="height: 55px;">
+      {{ tableHeader |translate }}
+      <div *ngIf="displaySelectorOfPagination" class="col-lg-1 col-sm-2" style="margin-top: -5px;">
+        <p-dropdown [options]="rowsPerPages" [(ngModel)]="rowPerPages" placeholder="{{'rows per pages' | translate}}">
+        </p-dropdown>
+      </div>
+      <div *ngIf="enableFilter" class="pull-right" id="filter">
+        <em class="fa fa-search indent"></em>
+        <input #filter [ngStyle]="{'visibility': visible ? 'hidden' : 'visible'}" type="text" class="search-filter"
+          pInputText size="small" [(ngModel)]="filterText" placeholder="{{'Search' | translate}}"
+          (ngModelChange)="emitFilterValue($event)" (input)="dt.filterGlobal($any($event).target.value, 'contains')">
+      </div>
+    </div>
+    <div class="panel-body no-padder">
+      <div class="table-responsive">
+        <p-table #dt [columns]="cols" [value]="dataSet" [responsive]="responsive" (onFilter)="onFilter($event)"
+        [paginator]="enablePagination" [rows]="rowPerPages" styleClass="table" selectionMode="single"
+        (onRowSelect)="onRowSelect($event)" dataKey="id">
+
+          <ng-template #header let-columns let-index>
+            <tr>
+              <ng-template ngFor let-column [ngForOf]="getAvailableCols(true)">
+                <th [ngStyle]="column?.style" [pSortableColumn]="column.field">
+                  {{column.header | translate}} <p-sortIcon [field]="column.field" />
+                </th>
+              </ng-template>
+            </tr>
+          </ng-template>
+
+          <ng-template #body let-rowSet>
+            <tr [pSelectableRow]="rowSet" styleClass="centerText">
+              <td *ngFor="let cell of getAvailableCols()">
+                <div [ngStyle]="cell.cellStyle" [ngClass]="cell.cellStyleClass">
+                  <app-app-custom-row [text]="applyPipe(rowSet[cell.field], cell)"
+                    [containerType]="cell.extra ? cell.extra.containerType : 'none'"
+                    [className]="cell.extra ? cell.extra.className(rowSet) : ''"
+                    [tooltipText]="cell.extra? cell.extra.toolTipText ? cell.extra.toolTipText(rowSet) :'' : ''">
+                  </app-app-custom-row>
+                </div>
+              </td>
+              <td *ngIf="enableActionsCols" [ngStyle]="actionStyle" [ngClass]="actionStyleClass">
+                <ng-container *ngIf="actionTemplateRef" [ngTemplateOutlet]="actionTemplateRef"
+                  [ngTemplateOutletContext]="{$implicit:rowSet}">
+                </ng-container>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage" let-dataSet>
+            <tr>
+              <td [attr.colspan]="dataSet.length" style="text-align: center;">
+                {{emptyMessage | translate }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

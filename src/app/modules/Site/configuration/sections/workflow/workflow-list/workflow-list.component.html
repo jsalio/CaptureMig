@@ -1,1 +1,14 @@
 <p>workflow-list works!</p>
+<app-shared-table
+  [tableHeader]="'WorkflowList'"
+  [dataSet]="workflows"
+  [cols]="cols"
+  [enableFilter]="true"
+  [displaySelectorOfPagination]="false"
+  [enableActionsCols]="true"
+  (onClientSelectRow)="onRowSelect($event)">
+  
+  <ng-template let-row #actions>
+    <span>NXC</span>
+  </ng-template>  
+</app-shared-table>

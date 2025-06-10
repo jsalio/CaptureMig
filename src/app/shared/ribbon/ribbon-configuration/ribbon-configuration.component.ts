@@ -63,7 +63,6 @@ export class RibbonConfigurationComponent {
   });
 
   showAllSections = () => {
-    debugger
     this.showWorkflowSection.set(true);
     this.showRolesSection.set(true);
     this.showScannerProfilesSection.set(true);
@@ -257,7 +256,6 @@ export class RibbonConfigurationComponent {
     if (uri.endsWith('/')) {
       uri = uri.substring(0, uri.length - 1)
     }
-    debugger
     this.routesActionsDictionary[uri]();
 
     this.ribbonConfigurationService.setScanProfileInactiveEvent().subscribe(() => {

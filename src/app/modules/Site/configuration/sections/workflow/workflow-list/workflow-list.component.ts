@@ -6,16 +6,34 @@ import { WorkflowList } from '../../../../../../models/workflow-list';
 import { Workflow } from '../../../../../../models/workflow';
 import { ApiWorkflowService } from '../../../../../../services/api-workflow.service';
 import { ToastNotificationService, ToastType } from '../../../../../../services/toast-notification.service';
+import { SharedTableComponent } from '../../../../../../shared/components/table/table.component';
 
 @Component({
   selector: 'app-workflow-list',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, SharedTableComponent],
   templateUrl: './workflow-list.component.html',
   styleUrl: './workflow-list.component.css',
 })
 export class WorkflowListComponent implements OnInit,OnDestroy {
   
+
+  // columns = [
+  //   { field: 'name', header: 'Name', sortable: true },
+  //   { field: 'age', header: 'Age', sortable: true },
+  //   // ... more columns
+  // ];
+
+  // data = [
+  //   { name: 'John', age: 30 },
+  //   { name: 'Jane', age: 25 },
+  //   // ... more data
+  // ];
+
+  // onRowSelect(event: any) {
+  //   console.log('Selected row:', event);
+  // }
+
   
   workflows: WorkflowList[];
   cols: any[];
@@ -48,7 +66,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
     this.cols = [
       { field: 'name', header: 'WorkflowName' },
       { field: 'creationDate', header: 'CreationDate' },
-      { field: 'batches', header: 'Batches' }
+      { field: 'batches', header: 'Batches' },
     ];
     this.loadAllWorkflows()
   }
@@ -64,6 +82,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
       this.workflows = data;
       this.loading = false;
       this.loadingData = false;
+      console.log(data)
     });
   }
 
@@ -72,7 +91,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
   }
 
   // tslint:disable-next-line:no-unused-variable
-  private onRowSelect(event) {
+  onRowSelect(event:any) {
     const currentWorkflow = event.data.id as any;
     this.router.navigate(['configuration/edit-workflow', currentWorkflow]);
   }
