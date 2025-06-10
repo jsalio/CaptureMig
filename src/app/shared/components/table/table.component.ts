@@ -63,7 +63,7 @@ export class SharedTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() onValueFilterChange = new EventEmitter<string>();
   @Output() onApplyLocalFilter = new EventEmitter<Array<any>>();
 
-  @ContentChild("actions", { read: false }) actionTemplateRef: TemplateRef<any>;
+  @ContentChild("actions") actionTemplateRef: TemplateRef<any>;
 
   @ViewChild("dt") dataTable: Table;
   @ViewChild("filter") filterInput: any;

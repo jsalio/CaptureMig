@@ -8,6 +8,7 @@ import { ApiWorkflowService } from '../../../../../../services/api-workflow.serv
 import { ToastNotificationService, ToastType } from '../../../../../../services/toast-notification.service';
 import { SharedTableComponent } from '../../../../../../shared/components/table/table.component';
 
+
 @Component({
   selector: 'app-workflow-list',
   standalone: true,
@@ -64,9 +65,10 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
     this.configurationRibbonService.emitShowCreateWorkflow();
     this.configurationRibbonService.emitSetWorkflowAdministrationActive();
     this.cols = [
-      { field: 'name', header: 'WorkflowName' },
-      { field: 'creationDate', header: 'CreationDate' },
-      { field: 'batches', header: 'Batches' },
+      { field: 'name', header: 'WorkflowName',cellStyle: { textAlign: 'center' }  },
+      { field: 'creationDate', header: 'CreationDate' , isDate:true ,cellStyle: { textAlign: 'center' } },
+      { field: 'batches', header: 'Batches' ,cellStyle: { textAlign: 'center' } },
+      { field: 'actions', header: 'Actions', translate: true ,cellStyle: { textAlign: 'center' } }
     ];
     this.loadAllWorkflows()
   }
@@ -97,7 +99,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
   }
 
   // tslint:disable-next-line:no-unused-variable
-  private archive(workflow: any) {
+  archive(workflow: any) {
     this.currentWorkflow = workflow as Workflow;
     if (this.currentWorkflow.isArchived) {
       this.messageBody = 'UnArchiveWorkflowQuestion';
@@ -171,4 +173,6 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
       this.loading = false;
     });
   }
+
+
 }
