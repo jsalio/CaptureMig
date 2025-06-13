@@ -1,0 +1,18 @@
+<div class="tab-heading">
+    {{ 'CompoundSplittersTitle' | translate}}
+  </div>
+  <div class="col-xl-8 col-lg-12 p-0">
+    <p-pickList #compoundSplitterTransferPanel [source]="availableListItem" [responsive]="true"
+      [target]="assignedListItem" sourceHeader="{{ 'availableCompoundSplitters' | translate}}"
+      targetHeader="{{ 'assignedCompoundSplitters' | translate}}" [showSourceControls]="false"
+      [showTargetControls]="false" [sourceStyle]="{'height':'250px'}" [targetStyle]="{'height':'250px'}" filterBy="name"
+      sourceFilterPlaceholder="{{'Search' | translate}}" targetFilterPlaceholder="{{'Search' | translate}}"
+      (onMoveToTarget)="resetTransferPanelFilter($event)" (onMoveToSource)="resetTransferPanelFilter($event)">
+      <ng-template let-compoundSplitter pTemplate="item">
+        <div class="ui-helper-clearfix">
+          <div style="font-size:14px;float:right;margin:12px 0px 7px 9px"> {{ compoundSplitter.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-pickList>
+  </div>

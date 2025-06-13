@@ -1,4 +1,4 @@
-import { SplitterElementType } from '../enum/splitter-element-type.enum';
+// import { SplitterElementType } from '../enum/splitter-element-type.enum';
 import { ComposedBarcodeConfigurationDetails } from './composed-barcode-configuration-details';
 
 /**

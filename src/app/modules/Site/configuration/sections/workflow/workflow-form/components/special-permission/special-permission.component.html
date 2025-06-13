@@ -1,0 +1,75 @@
+<div [formGroup]="specialPermissionsForm">
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deletePageScan" id="DeletePageInScanID" />
+        <i></i>
+        <label for="DeletePageInScanID">{{ "DeletePageInScan" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deletePageQaScan" id="DeletePageInQaScanID" />
+        <i></i>
+        <label for="DeletePageInQaScanID">{{ "DeletePageInQaScan" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deletePageIndex" id="DeletePageInIndexID" />
+        <i></i>
+        <label for="DeletePageInIndexID">{{ "DeletePageInIndex" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deletePageQaIndex" id="DeletePageInQaIndexID" />
+        <i></i>
+        <label for="DeletePageInQaIndexID">{{ "DeletePageInQaIndex" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deletePageInIndexSupervision" id="DeletePagesInIndexSupervisionID" />
+        <i></i>
+        <label for="DeletePagesInIndexSupervisionID">{{ "DeletePagesInIndexSupervision" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="approveAllDocumentsQaScan" id="ApproveAllDocumentsQaScanID" />
+        <i></i>
+        <label for="ApproveAllDocumentsQaScanID">{{ "ApproveAllDocumentsQaScan" | translate }}</label>
+      </label>
+    </div>
+  
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="approveAllDocumentsQaIndex" id="ApproveAllDocumentsQaIndexID" />
+        <i></i>
+        <label for="ApproveAllDocumentsQaIndexID">{{ "ApproveAllDocumentsQaIndex" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="deleteDocuments" id="deleteDocuments" />
+        <i></i>
+        <label for="deleteDocuments">{{ "CantDeleteDocument" | translate }}</label>
+      </label>
+    </div>
+  
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" formControlName="ignoreDefaultDocumentType" id="ignoreDefaultDocumentType" />
+        <i></i>
+        <label for="ignoreDefaultDocumentType">{{ "IgnoreDefaultDocumentType" | translate }}</label>
+      </label>
+    </div>
+  
+  </div>

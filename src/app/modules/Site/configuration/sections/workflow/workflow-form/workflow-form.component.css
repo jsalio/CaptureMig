@@ -1,0 +1,134 @@
+::ng-deep .table-step .ui-table-responsive .ui-table-thead>tr>th:nth-child(2){
+    text-align: left !important;
+  }
+  
+  
+  .switch2 {
+      position: relative;
+      display: inline-block;
+      width: 45px;
+      height: 17px;
+    }
+  
+    .switch2 input {
+      display: none;
+    }
+  
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ca2222;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    .pointer-finger{
+      cursor: pointer;
+    }
+  .input-group-addon {
+  
+    line-height: 1px!important;
+    width: 40px;
+  
+  }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 13px;
+      width: 13px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+  
+    input:checked + .slider {
+      background-color: #2ab934;
+    }
+  
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+  
+    input:checked + .slider:before {
+      -webkit-transform: translateX(28px);
+      -ms-transform: translateX(28px);
+      transform: translateX(28px);
+    }
+  
+  
+    /*------ ADDED CSS ---------*/
+  
+    .on {
+      display: none;
+    }
+  
+    .on,
+    .off {
+      color: white;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 25%;
+      left: 25%;
+      font-size: 10px;
+      font-family: Verdana, sans-serif;
+    }
+  
+    .on {
+      top: 8px;
+    }
+  
+    .off {
+      left: auto;
+      right: -5px;
+      top: 8px;
+    }
+  
+    input:checked+ .slider .on {
+      display: block;
+    }
+  
+    input:checked + .slider .off {
+      display: none;
+    }
+  
+  
+    /*--------- END --------*/
+  
+  
+    /* Rounded sliders */
+  
+    .slider.round {
+      border-radius: 17px;
+    }
+  
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  .ui-helper-clearfix > div{
+    margin: 7px 14px!important;
+  }
+  
+  
+  .ui-helper-clearfix > div{
+    margin: 7px 14px!important;
+  }
+
+  /* .tab-content > .tab-pane {
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}
+
+.tab-content > .active {
+    visibility: visible;
+    position: relative;
+    height: auto;
+    overflow: visible;
+} */
+  

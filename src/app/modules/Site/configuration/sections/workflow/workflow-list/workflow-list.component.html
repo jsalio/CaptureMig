@@ -1,14 +1,62 @@
-<p>workflow-list works!</p>
-<app-shared-table [cols]="cols" [dataSet]="workflows" [enableActionsCols]="true" [enableFilter]="true"
-  [displaySelectorOfPagination]="false" (onClientSelectRow)="onRowSelect($event)">
-  <ng-template #actions let-rowData>
-    <div class="d-flex gap-2 justify-content-center">
-      <button class="btn btn-primary btn-sm" (click)="editWorkflow(rowData)">
-        <i class="fa fa-edit"></i>
-      </button>
-      <button class="btn btn-warning btn-sm" (click)="archive(rowData)">
-        <i class="fa fa-archive"></i>
-      </button>
-    </div>
+<app-modal app-modal [isOpen]="archiveModalIsOpen" [title]="'ArchiveWorkflow'" [showDontAskAgain]="false"
+  [headerType]="'info'" [optionType]="'Ok/Cancel'" [remenberKey]="''" (accept)="onAccept($event)" (cancel)="onCancel()"
+  (onCloseModal)="closeModal($event)" [position]="'center'">
+  <ng-template #modalContent>
+    <p>{{ messageBody | translate}}
+      <strong> {{currentWorkflow.name}}</strong> ?
+    </p>
   </ng-template>
-</app-shared-table>
+</app-modal>
+
+<tabset #viewTabs [justified]="true" class="col-lg-12 m-t-md tabClass">
+  <tab heading="{{'AllWorkflowTitle' | translate}}" (selectTab)="loadAllWorkflows()" id="tab1">
+    <app-shared-table [cols]="cols" [dataSet]="workflows" [enableActionsCols]="true" [enableFilter]="true"
+      [displaySelectorOfPagination]="false" (onClientSelectRow)="onRowSelect($event)">
+      <ng-template #actions let-rowData>
+        <div class="d-flex gap-2 justify-content-center">
+          <a class="btn btn-default xs" (click)="editWorkflow(rowData)">
+            <i class="fa fa-pencil"></i> {{'Edit' | translate}}
+          </a>
+          <a class="btn btn-default xs" *ngIf="rowData.isArchived; else elseBlock" (click)="archive(rowData)">
+            <i class="fa fa-undo"></i> {{'UnarchiveDescription' | translate}}
+          </a>
+          <ng-template #elseBlock>
+            <a class="btn btn-default xs" (click)="archive(rowData)">
+              <i class="fa fa-archive"></i> {{'ArchiveDescription' | translate}}
+            </a>
+          </ng-template>
+        </div>
+      </ng-template>
+    </app-shared-table>
+  </tab>
+  <tab heading="{{'OnlyUnarchivedTitle' | translate}}" (selectTab)="filterByIsArchivedStatus(false)">
+    <app-shared-table [cols]="cols" [dataSet]="workflows" [enableActionsCols]="true" [enableFilter]="true"
+      [displaySelectorOfPagination]="false" (onClientSelectRow)="onRowSelect($event)">
+      <ng-template #actions let-rowData>
+        <div class="d-flex gap-2 justify-content-center">
+          <a class="btn btn-default xs" (click)="editWorkflow(rowData)">
+            <i class="fa fa-pencil"></i> {{'Edit' | translate}}
+          </a>
+          <a class="btn btn-default xs" (click)="archive(rowData)">
+            <i class="fa fa-archive"></i> {{'ArchiveDescription' | translate}}
+          </a>
+        </div>
+      </ng-template>
+    </app-shared-table>
+  </tab>
+  <tab heading="{{'OnlyArchivedTitle' | translate}}" (selectTab)="filterByIsArchivedStatus(true)">
+    <app-shared-table [cols]="cols" [dataSet]="workflows" [enableActionsCols]="true" [enableFilter]="true"
+      [displaySelectorOfPagination]="false" (onClientSelectRow)="onRowSelect($event)">
+      <ng-template #actions let-rowData>
+        <div class="d-flex gap-2 justify-content-center">
+          <a class="btn btn-default xs" (click)="editWorkflow(rowData)">
+            <i class="fa fa-pencil"></i> {{'Edit' | translate}}
+          </a>
+          <a class="btn btn-default xs" (click)="archive(rowData)">
+            <i class="fa fa-undo"></i> {{'UnarchiveDescription' | translate}}
+          </a>
+        </div>
+      </ng-template>
+    </app-shared-table>
+  </tab>
+</tabset>

@@ -1,4 +1,6 @@
-import { SplitterElementType } from '../enum/splitter-element-type.enum';
+// import { SplitterElementType } from '../enum/splitter-element-type.enum';
+
+import { SplitterElementType } from "../enums/splitter-element-type.enum";
 
 /**
  * Represents the documents splitter configuration details

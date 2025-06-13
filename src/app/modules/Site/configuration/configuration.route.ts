@@ -18,7 +18,7 @@ export const CONFIGURATION_ROUTES: Routes = [
                 // loadComponent:() => import('./sections/workflow/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
             },
             {
-                path:'worlflow/:id',
+                path:'workflow/:id',
                 component:WorkflowFormComponent
                 // loadComponent:() => import('./sections/workflow/workflow-form/workflow-form.component').then(x => x.WorkflowFormComponent)
             }

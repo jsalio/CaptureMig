@@ -4,37 +4,21 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { WorkflowList } from '../../../../../../models/workflow-list';
 import { Workflow } from '../../../../../../models/workflow';
-import { ApiWorkflowService } from '../../../../../../services/api-workflow.service';
+import { ApiWorkflowService } from '../../../../../../services/api/api-workflow.service';
 import { ToastNotificationService, ToastType } from '../../../../../../services/toast-notification.service';
 import { SharedTableComponent } from '../../../../../../shared/components/table/table.component';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CommonModule } from '@angular/common';
+import { ModalComponent } from "../../../../../../shared/modal/modal.component";
 
 @Component({
   selector: 'app-workflow-list',
   standalone: true,
-  imports: [TranslateModule, SharedTableComponent],
+  imports: [TranslateModule, SharedTableComponent, TabsModule, CommonModule, ModalComponent],
   templateUrl: './workflow-list.component.html',
   styleUrl: './workflow-list.component.css',
 })
 export class WorkflowListComponent implements OnInit,OnDestroy {
-  
-
-  // columns = [
-  //   { field: 'name', header: 'Name', sortable: true },
-  //   { field: 'age', header: 'Age', sortable: true },
-  //   // ... more columns
-  // ];
-
-  // data = [
-  //   { name: 'John', age: 30 },
-  //   { name: 'Jane', age: 25 },
-  //   // ... more data
-  // ];
-
-  // onRowSelect(event: any) {
-  //   console.log('Selected row:', event);
-  // }
-
   
   workflows: WorkflowList[];
   cols: any[];
@@ -45,6 +29,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
   messageBody: string;
   editingWorkflow = false;
   loadingData = false;
+  archiveModalIsOpen = false;
 
   
   /**
@@ -77,25 +62,24 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
     this.configurationRibbonService.emitHidingCreateWorkflowButton();
   }
 
-  private loadAllWorkflows() {
+  loadAllWorkflows() {
     this.loadingData = true;
     this.workflowService.getAllWorkflows().then(data => {
       this.workflows = [];
       this.workflows = data;
       this.loading = false;
       this.loadingData = false;
-      console.log(data)
     });
   }
 
   editWorkflow(workflow: any) {
-    this.router.navigate(['configuration/edit-workflow', workflow.id]);
+    this.router.navigate(['site/configuration/workflow', workflow.id]);
   }
 
   // tslint:disable-next-line:no-unused-variable
   onRowSelect(event:any) {
     const currentWorkflow = event.data.id as any;
-    this.router.navigate(['configuration/edit-workflow', currentWorkflow]);
+    this.router.navigate(['site/configuration/edit-workflow', currentWorkflow]);
   }
 
   // tslint:disable-next-line:no-unused-variable
@@ -107,6 +91,7 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
       this.messageBody = 'ArchiveWorkflowQuestion';
     }
     this.displayMessage = true;
+    this.archiveModalIsOpen = true
   }
 
   // tslint:disable-next-line:no-unused-variable
@@ -131,8 +116,6 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
       .then((workflow: any) => {
         this.displaySuccessMessage();
         this.loadAllWorkflows();
-        // this.staticTabs.tabs[0].active = true;
-        // this.archiveQuestionModal.hide();
         this.editingWorkflow = false;
       })
       .catch(error => {
@@ -174,5 +157,11 @@ export class WorkflowListComponent implements OnInit,OnDestroy {
     });
   }
 
+  closeModal = (event:any) => {
+    this.archiveModalIsOpen = false
+  }
 
+  onAccept = (event:any) => {}
+
+  onCancel = () => {}
 }

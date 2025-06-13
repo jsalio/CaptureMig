@@ -1,4 +1,5 @@
-import { DocumentTypesStatus } from '../enum/document-type.enum';
+import { DocumentTypesStatus } from "../enums/document-type.enum";
+
 
 /**
  * Represents a document type.

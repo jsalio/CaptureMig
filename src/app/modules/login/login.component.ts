@@ -8,7 +8,7 @@ import { LoginModel } from '../../models/login-model'
 import { CustomErrorHandler } from '../../models/CustomErrorHandler'
 import { UserProfile } from '../../models/user-profile'
 import { AuthService } from '../../services/auth.service'
-import { ConfigurationService } from '../../services/configuration.service'
+import { ApiConfigurationService } from '../../services/api/configuration.service'
 import { BlockUI, NgBlockUI, BlockUIModule } from 'ng-block-ui';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { BlockUIComponent } from "../../shared/block-ui/block-ui.component";
@@ -28,7 +28,7 @@ import { BlockUIComponent } from "../../shared/block-ui/block-ui.component";
 ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [AuthService, ConfigurationService]
+  providers: [AuthService, ApiConfigurationService]
 })
 export class LoginComponent implements OnInit {
   blocked:boolean = false
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     //private toastNotificationsService: ToastNotificationsService,
     public translateService: TranslateService,
-    public configurationService: ConfigurationService,
+    public configurationService: ApiConfigurationService,
     // private offlineWorkService: OfflineWorkService
     // private readonly BlockUiServ : BlockUIService
   ) {

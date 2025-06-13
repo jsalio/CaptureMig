@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environments/environment'
+import {environment} from '../../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {AutoName} from '../models/auto-name'
-import {ChartMetric} from '../models/ChartMetric'
-import {OcrEngine} from '../enums/ocr-engine.enum'
-import {CacheData} from '../models/cache'
+import {AutoName} from '../../models/auto-name'
+import {ChartMetric} from '../../models/ChartMetric'
+import {OcrEngine} from '../../enums/ocr-engine.enum'
+import {CacheData} from '../../models/cache'
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigurationService {
+export class ApiConfigurationService {
 
   constructor(private http: HttpClient) {
   }
