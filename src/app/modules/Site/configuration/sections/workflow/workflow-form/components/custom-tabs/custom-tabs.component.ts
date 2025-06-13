@@ -24,6 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
       position: relative;
       height: auto;
       overflow: visible;
+      min-height:400px;
+      max-height:400px;
     }
   `]
 })
@@ -90,14 +92,14 @@ export class CustomTabComponent {
       padding: 1rem 0;
     }
     .nav-tabs.nav-justified {
-      display: flex;
+      display: block;
       justify-content: flex-start;
       width: 100%;
     }
     .nav-tabs.nav-justified .nav-item {
       flex: 0 0 auto;
     }
-    .nav-tabs::-webkit-scrollbar {
+     .nav-tabs::-webkit-scrollbar {
       height: 6px;
     }
     .nav-tabs::-webkit-scrollbar-track {

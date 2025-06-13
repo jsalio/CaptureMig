@@ -32,11 +32,14 @@ import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SpecialPermissionComponent } from './components/special-permission/special-permission.component';
 import { CustomTabComponent, CustomTabsComponent } from './components/custom-tabs/custom-tabs.component';
+import { ExternalPropertiesConfigurationComponent } from "./components/external-properties-configuration/external-properties-configuration.component";
+import { AutoNameComponent } from "./components/auto-name/auto-name.component";
+import { StepConfigurationComponent } from "./components/step-configuration/step-configuration.component";
 
 @Component({
   selector: 'app-workflow-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule, CommonModule, TabsModule, SpecialPermissionComponent, CustomTabComponent,CustomTabsComponent],
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule, CommonModule, TabsModule, SpecialPermissionComponent, CustomTabComponent, CustomTabsComponent, ExternalPropertiesConfigurationComponent, AutoNameComponent, StepConfigurationComponent],
   templateUrl: './workflow-form.component.html',
   styleUrl: './workflow-form.component.css',
   providers:[CurrentUserService]

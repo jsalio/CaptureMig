@@ -1,0 +1,223 @@
+<form [formGroup]="stepConfigurationForm" novalidate>
+    <div class="col-lg-12 border-content">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tab-heading">
+            {{ "StepConfigurationTitle" | translate }}
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-12 col-xl-6 col-xxl-5">
+              <div class="row">
+                <div class="col-12">
+                  <div class="checkbox i-checks">
+                    <label>
+                      <input type="checkbox" [checked]="isActiveQaScan" formControlName="isActiveQaScan"
+                        (change)="changeQaScanConfigurationVisibility()" id="QaScanID" />
+                      <i></i>
+                      <label for="QaScanID"> {{ "QaScan" | translate }}</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="isActiveQaScan">
+                  {{ "QaScanScannedDocumentsPercent" | translate }}
+                  <div class="input-group input-group-w100 mt-1 mb-2">
+                    <p-inputnumber formControlName="qaScanScannedDocumentsPercent" [min]="0" [max]="100"></p-inputnumber>
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <span class="text-danger" *ngIf="isFieldInvalid('qaScanScannedDocumentsPercent')">
+                    {{ "InvalidQaScanScannedDocumentsPercent" | translate }}
+                  </span>
+  
+                  <div class="checkbox i-checks">
+                    <label>
+                      <input (change)="validateIfReturnAll()" type="checkbox" [checked]="hasToReturnAllDocumentFromQAScan"
+                        formControlName="hasToReturnAllDocumentFromQAScan" id="ShowAllDocumentsID" />
+                      <i></i>
+                      <label for="ShowAllDocumentsID"> {{ "RejectAllDocumentsWhenOneFail" | translate }}</label>
+                    </label>
+                  </div>
+                </div>
+  
+                <div class="col-lg-6 col-md-6" *ngIf="isActiveQaScan">
+                  {{ "QaScanDocumentsApprovementPercent" | translate }}
+                  <div class="input-group  input-group-w100 mt-1 mb-2">
+                    <p-inputnumber [disabled]="disableQaScanDocumentsApprovementPercent"
+                      formControlName="qaScanDocumentsApprovementPercent" [min]="0" [max]="100"></p-inputnumber>
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <span class="text-danger" *ngIf="isFieldInvalid('qaScanDocumentsApprovementPercent')">
+                    {{ "InvalidQaScanDocumentsApprovementPercent" | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-xl-6 col-xxl-5">
+              <div class="row">
+                <div class="col-12">
+                  <div class="checkbox i-checks">
+                    <label>
+                      <input type="checkbox" [checked]="isActiveQaIndex" formControlName="isActiveQaIndex"
+                        (change)="changeQaIndexConfigurationVisibility()" id="QAIndexID" />
+                      <i></i>
+                      <label for="QAIndexID">{{ "QAIndex" | translate }}</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="isActiveQaIndex">
+                  {{ "QaIndexScannedDocumentsPercent" | translate }}
+                  <div class="input-group  input-group-w100 mt-1 mb-2">
+                    <p-inputnumber formControlName="qaIndexScannedDocumentsPercent" [min]="0" [max]="100"></p-inputnumber>
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <span class="text-danger" *ngIf="isFieldInvalid('qaIndexScannedDocumentsPercent')">
+                    {{ "InvalidQaIndexScannedDocumentsPercent" | translate }}
+                  </span>
+  
+                  <div class="checkbox i-checks">
+                    <label>
+                      <input type="checkbox" (change)="validateIfReturnAll()"
+                        [checked]="hasToReturnAllDocumentFromQAIndex" formControlName="hasToReturnAllDocumentFromQAIndex"
+                        id="ShowAllDocumentsID" />
+                      <i></i>
+                      <label for="ShowAllDocumentsID"> {{ "RejectAllDocumentsWhenOneFail" | translate }}</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6" *ngIf="isActiveQaIndex">
+                  {{ "QaIndexDocumentsApprovementPercent" | translate }}
+                  <div class="input-group  input-group-w100 mt-1 mb-2">
+                    <p-inputnumber [disabled]="disableQaIndexDocumentsApprovementPercent"
+                      formControlName="qaIndexDocumentsApprovementPercent" [min]="0" [max]="100"></p-inputnumber>
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <span class="text-danger" *ngIf="isFieldInvalid('qaIndexDocumentsApprovementPercent')">
+                    {{
+                    "InvalidQaIndexDocumentsApprovementPercent" | translate
+                    }}</span>
+                </div>
+              </div>
+  
+  
+            </div>
+          </div>
+          <div class="row">
+            <div class="line col-lg-12 line-dashed b-b line-lg pull-in"></div>
+            <div class="col-lg-2 col-sm-6">
+  
+              <div class="checkbox i-checks">
+                <label>
+                  <input type="checkbox" [checked]="isActiveMultipleIndexing" formControlName="isMultipleIndexingActive"
+                    (change)="changeIndexingNumberConfigurationVisibility()" id="MultipleIndexingID" />
+                  <i></i>
+                  <label for="MultipleIndexingID"> {{ "MultipleIndexing" | translate }} </label>
+                </label>
+              </div>
+              <div class="col p-0" *ngIf="isActiveMultipleIndexing">
+                {{ "IndexingQuantity" | translate }}
+                <div class="input-group input-group-w100 mt-1 mb-2">
+                  <p-inputnumber formControlName="indexingNumbers" [min]="1" [max]="10"></p-inputnumber>
+                </div>
+                <span class="text-danger" *ngIf="isFieldInvalid('indexingNumbers')">
+                  {{ "InvalidIndexingNumberForMultipleIndexing" | translate }}
+                </span>
+              </div>
+  
+            </div>
+            <div class="line col-lg-12 line-dashed b-b line-lg pull-in"></div>
+            <div class="col-lg-12">
+              <div class="checkbox i-checks">
+                <label>
+                  <input type="checkbox" [checked]="hasIndexSupervision" formControlName="hasIndexSupervision"
+                    id="IndexSupervisionID" />
+                  <i></i>
+                  <label for="IndexSupervisionID"> {{ "IndexSupervision" | translate }}</label>
+                </label>
+              </div>
+            </div>
+            <div class="line col-lg-12 line-dashed b-b line-lg pull-in"></div>
+            <div class="col-lg-12">
+              <div class="checkbox i-checks">
+                <label>
+                  <input type="checkbox" [checked]="hasExternalValidation" formControlName="hasExternalValidation"
+                    id="ExternalValidationID" />
+                  <i></i>
+                  <label for="ExternalValidationID"> {{ "ExternalValidation" | translate }}</label>
+                </label>
+              </div>
+            </div>
+            <div class="line col-lg-12 line-dashed b-b line-lg pull-in"></div>
+            <div class="col-lg-12">
+              <div class="checkbox i-checks">
+                <label>
+                  <input type="checkbox" [checked]="hasToConvertToPdfToRelease"
+                    formControlName="hasToConvertToPdfToRelease" id="ConvertToPdfToReleaseID" />
+                  <i></i>
+                  <label for="ConvertToPdfToReleaseID"> {{ "ConvertToPdfToRelease" | translate }}</label>
+                </label>
+                <ul *ngIf="getHasToConvertToPdfToReleaseValue()" style="margin-top: 15px">
+                  <li>
+                    <label>
+                      <input type="checkbox" [checked]="convertDocumentsToSearchablePdf"
+                        formControlName="convertDocumentsToSearchablePdf" id="ConvertToPdfToReleaseID" />
+                      <i></i>
+                      <label for="ConvertToPdfToReleaseID"> {{ "ConvertDocumentsToSearchablePdf" | translate }}</label>
+                    </label>
+                  </li>
+                  <ul *ngIf="hasToConvertToPdfSearchable()" style="margin-top: 15px">
+                    <div>
+                      <p-radioButton inputId="engine1" formControlName="pdfSearchableEngine" name="pdfSearchableEngine"
+                        value="Tesseract"></p-radioButton>
+                      <label for="engine1"> {{ "UseTesseract" | translate }}</label>
+                    </div>
+                    <div *ngIf="canUseIrisEngine">
+                      <p-radioButton inputId="engine3" formControlName="pdfSearchableEngine" name="pdfSearchableEngine"
+                        value="OcrModuleLicense"></p-radioButton>
+                      <label for="engine3"> {{ "UseIris" | translate }}</label>
+                    </div>
+                    <div *ngIf="canUseAbbyyEngine">
+                      <p-radioButton inputId="engine2" formControlName="pdfSearchableEngine" name="pdfSearchableEngine"
+                        value="Abbyy"></p-radioButton>
+                      <label for="engine2"> {{ "UseABBYY" | translate }}</label>
+                    </div>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- <div class="table-responsive table-step">
+    <p-table #dt [columns]="cols" *ngIf="checkConvertToPdfControl()" [value]="documentTypesSelected" [responsive]="true"
+      [paginator]="true" [rows]="10" styleClass="table" class="bottom" selectionMode="single" dataKey="id">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            <p-checkbox [ngModel]="isAllDocumentTypesWillBeConvertToPdf()" (click)="checkAllDocumentTypesToConvertToPdf()"
+              *ngIf="col.field === 'convertToPdf'" binary="true" inputId="allConvertToPdf"></p-checkbox>
+            <p-checkbox [ngModel]="isAllDocumentTypesWillBeConvertToPdfOCR()"
+              (click)="checkAllDocumentTypesToRecognizeDocumentOCR()" *ngIf="col.field === 'ocr'" binary="true"
+              inputId="allOCR"></p-checkbox>
+            {{col.header | translate}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-docType>
+        <tr [pSelectableRow]="docType" styleClass="centerText">
+          <td style="text-align: center;">{{docType.documentType.id}}</td>
+          <td>{{docType.documentType.name}}</td>
+          <td style="text-align: center;">
+            <p-checkbox [(ngModel)]="docType.convertToPdf" (click)="checkChangeOnConvertToPdf(docType)" binary="true"
+              inputId="convertToPdf"></p-checkbox>
+          </td>
+          <td *ngIf="checkConvertToPdfOCRControl()" style="text-align: center;">
+            <p-checkbox [(ngModel)]="docType.recognizeDocumentOcr" (click)="checkChangeOnRecognizeOcr(docType)"
+              binary="true" inputId="ok"></p-checkbox>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div> -->
+  

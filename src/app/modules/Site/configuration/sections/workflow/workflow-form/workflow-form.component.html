@@ -1,84 +1,127 @@
 <div *ngIf="!loaded; else elseBlock" align="center">
-    <img class="text-center" src="../../../../assets/images/loading.gif">
-  </div>
-  <ng-template #elseBlock>
-    <form [formGroup]="workflowForm" novalidate>
-      <div class="tabla col-lg-12 no-padder">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <strong *ngIf="!isEditMode">{{'CreateWorkflowModalTitle' |translate }}</strong>
-            <strong *ngIf="isEditMode">{{'EditWorkflowTitle' |translate }}</strong>
-            <div class="pull-right">
-            </div>
+  <img class="text-center" src="../../../../assets/images/loading.gif">
+</div>
+<ng-template #elseBlock>
+  <form [formGroup]="workflowForm" novalidate>
+    <div class="tabla col-lg-12 no-padder">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong *ngIf="!isEditMode">{{'CreateWorkflowModalTitle' |translate }}</strong>
+          <strong *ngIf="isEditMode">{{'EditWorkflowTitle' |translate }}</strong>
+          <div class="pull-right">
           </div>
-          <div class="panel-body">
-            <div class="col-lg-12 no-padder mb-2">
-              <div class="row">
-                <div class="col-lg-4 mb-3">
-                  <label for="nameEdit" class="">{{'WorkflowNameLabel' | translate}}</label>
-                  <input id="nameEdit" class="form-control" formControlName="name" type="text">
-                </div>
-                <div class="col-lg-5">
-                  <label> {{'SelectVolumeForWorkflow' | translate}}</label>
-                  <p-dropdown [options]="volumes" formControlName="volumeId" [readonly]="isEditMode"
-                    placeholder="{{'SelectVolumeMessage' | translate}}">
-                  </p-dropdown>
-                </div>
-                <div class="col-lg-3">
-                  <div style="margin-top:30px" class="checkbox i-checks">
-                    <label>
-                      <input type="checkbox" formControlName="hasAutomaticAssignmentForDocuments"
-                        id="hasAutomaticAssignmentForDocumentsID">
-                      <i></i>
-                      <label for="hasAutomaticAssignmentForDocumentsID">
-                        {{'DynamicDocumentAssignation' | translate}}</label>
-                    </label>
-                  </div>
+        </div>
+        <div class="panel-body">
+          <div class="col-lg-12 no-padder mb-2">
+            <div class="row">
+              <div class="col-lg-4 mb-3">
+                <label for="nameEdit" class="">{{'WorkflowNameLabel' | translate}}</label>
+                <input id="nameEdit" class="form-control" formControlName="name" type="text">
+              </div>
+              <div class="col-lg-5">
+                <label> {{'SelectVolumeForWorkflow' | translate}}</label>
+                <p-dropdown [options]="volumes" formControlName="volumeId" [readonly]="isEditMode"
+                  placeholder="{{'SelectVolumeMessage' | translate}}">
+                </p-dropdown>
+              </div>
+              <div class="col-lg-3">
+                <div style="margin-top:30px" class="checkbox i-checks">
+                  <label>
+                    <input type="checkbox" formControlName="hasAutomaticAssignmentForDocuments"
+                      id="hasAutomaticAssignmentForDocumentsID">
+                    <i></i>
+                    <label for="hasAutomaticAssignmentForDocumentsID">
+                      {{'DynamicDocumentAssignation' | translate}}</label>
+                  </label>
                 </div>
               </div>
             </div>
-            <!-- Esto es el desastre de los tabs -->
-            <app-custom-tabs [justified]="true" class="col-lg-12 m-t-md tabClass">
-              <app-custom-tab heading="AutoName">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="DocumentaryConfiguration">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="Restrictions">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="StepsConfiguration">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="BatchSeparator">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="DocumentSeparator">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="WorkflowSpecialPermisions">
-                <app-special-permission [editMode]="isEditMode" [specialPermissions]="getSpecialPermissions()" />
-              </app-custom-tab>
-              <app-custom-tab heading="ExternalProperties">
-                x
-              </app-custom-tab>
-              <app-custom-tab heading="CompoundSplitters">
-                x
-              </app-custom-tab>
-            </app-custom-tabs>
           </div>
+          <!-- Esto es el desastre de los tabs -->
+          <app-custom-tabs [justified]="true" class="col-lg-12 m-t-md tabClass">
+            <app-custom-tab heading="AutoName">
+              <!-- <app-auto-name [currentAutoName]="autoNameControl.value" /> -->
+              <div class="col-lg-12 border-content">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="tab-heading">
+                      {{'AutoNameTabDescription' | translate}}
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-lg-6 col-xxl-4">
+                    <section class="panel b-a m-t">
+                      <div class="panel-heading b-b">
+                        {{'AvailableVariables' | translate}}
+                      </div>
+                      <div class="panel-body">
+                        <label *ngFor="let autoName of autoNames" class="pointer-finger">
+                          <a type="button" class=" btn-primary btn-xs" (click)="addToAutoName(autoName)">
+                            {{autoName.name | translate}}
+                          </a>
+                          <i class="fa fa-right"></i>
+                        </label>
+                      </div>
+                    </section>
+                  </div>
+                  <div class="col-lg-4 col-lg-6 col-xxl-5">
+                    <section class="panel b-a m-t">
+                      <div class="panel-heading b-b">
+                        {{'AvailableVariables' | translate}}
+                      </div>
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <label>{{'AutoNameHelp' | translate}}</label>
+                          <input type="text" formControlName="autoName" class="form-control" placeholder="Enter name">
+                        </div>
+                        <div class="alert alert-info">
+                          <strong>{{'ExampleDescription' | translate}}:</strong> {{autoNameExample}}
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </app-custom-tab>
+            <app-custom-tab heading="DocumentaryConfiguration">
+              x
+            </app-custom-tab>
+            <app-custom-tab heading="Restrictions">
+              x
+            </app-custom-tab>
+            <app-custom-tab heading="StepsConfiguration">
+              <app-step-configuration [isEditMode]="isEditMode" [documentTypesSelected]="assignedDocumentTypes"
+                [stepConfiguration]="workflowStepConfiguration" />
+            </app-custom-tab>
+            <app-custom-tab heading="BatchSeparator">
+              x
+            </app-custom-tab>
+            <app-custom-tab heading="DocumentSeparator">
+              x
+            </app-custom-tab>
+            <app-custom-tab heading="WorkflowSpecialPermisions">
+              <app-special-permission [editMode]="isEditMode" [specialPermissions]="getSpecialPermissions()" />
+            </app-custom-tab>
+            <app-custom-tab heading="ExternalProperties">
+              <app-external-properties-configuration (onSelectionChange)="onExternalPropertyChange($event)"
+                [availableExternalProperties]="externalProperties"
+                [assignedExternalProperties]="assignedExternalProperties" />
+            </app-custom-tab>
+            <app-custom-tab heading="CompoundSplitters">
+              x
+            </app-custom-tab>
+          </app-custom-tabs>
         </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 mt-3">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default" (click)="goToWorkflowList()">{{'CancelDescription' | translate}}
+        </button>
+        <button class="btn btn-primary" (click)="onSubmit()" [disabled]="isFormInvalid()">{{'SaveChange' | translate}}
+        </button>
       </div>
 
-      <div class="col-lg-12 mt-3">
-        <div class="pull-right">
-          <button type="button" class="btn btn-default" (click)="goToWorkflowList()">{{'CancelDescription' | translate}}
-          </button>
-          <button class="btn btn-primary" (click)="onSubmit()" [disabled]="isFormInvalid()">{{'SaveChange' | translate}}
-          </button>
-        </div>
-  
-      </div>
-    </form>
-  </ng-template>
+    </div>
+  </form>
+</ng-template>
