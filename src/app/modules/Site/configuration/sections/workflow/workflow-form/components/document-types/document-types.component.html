@@ -10,49 +10,8 @@
             </div>
             <div class="row m-0">
                 <div class="col-xxl-6">
-                    <!-- <p-pickList [filterBy]="'asigned.documentType.name'" (onSourceFilter)="filterString($event)" (onTargetSelect)="onTargetSelect($event)"
-              [source]="documentTypes" [responsive]="true" [target]="assignedDocumentTypes"
-              sourceHeader="{{ 'AvailableDocumentTypes' | translate}}"
-              targetHeader="{{ 'AssignedDocumentTypes' | translate}}" [showSourceControls]="false"
-              [showTargetControls]="false" [sourceStyle]="{'height':'250px'}"
-              [targetStyle]="{'height':'250px'}" sourceFilterPlaceholder="{{'Search' | translate}}"
-              targetFilterPlaceholder="{{'Search' | translate}}" (onMoveToSource)="onMoveToSource($event)"
-              (onMoveAllToSource)="onMoveAllToSource($event)" (onMoveToTarget)="onMoveToTarget($event)"
-              (onMoveAllToTarget)="onMoveAllToTarget($event)"
-              breakpoint="1400px"
-              scrollHeight="30rem"
-              >
-              <ng-template let-asigned pTemplate="item">
-                <div class="flex-1 flex flex-col">
-                    <span class="font-medium text-sm">
-                        {{asigned.documentType.name}}
-                        {{asigned.isDefault ? getDefaultMessage() : ''}}
-                    </span>
-                </div>
-              </ng-template>
-            </p-pickList> -->
-                    <!-- <p-pickList filterBy="documentType.name" (onSourceFilter)="filterString($event)"
-                        (onTargetSelect)="onTargetSelect($event)" [source]="documentTypes" [responsive]="true"
-                        [target]="assignedDocumentTypes" sourceHeader="{{ 'AvailableDocumentTypes' | translate}}"
-                        targetHeader="{{ 'AssignedDocumentTypes' | translate}}" [showSourceControls]="false"
-                        [showTargetControls]="false" [sourceStyle]="{'height':'250px'}"
-                        [targetStyle]="{'height':'250px'}" sourceFilterPlaceholder="{{'Search' | translate}}"
-                        targetFilterPlaceholder="{{'Search' | translate}}" (onMoveToSource)="onMoveToSource($event)"
-                        (onMoveAllToSource)="onMoveAllToSource($event)" (onMoveToTarget)="onMoveToTarget($event)"
-                        (onMoveAllToTarget)="onMoveAllToTarget($event)" breakpoint="1400px" scrollHeight="30rem">
-                        <ng-template let-asigned pTemplate="item">
-                            <div class="flex-1 flex flex-col">
-                                <span class="font-medium text-sm">
-                                    {{asigned.documentType.name}}
-                                    {{asigned.isDefault ? getDefaultMessage() : ''}}
-                                </span>
-                            </div>
-                        </ng-template>
-                    </p-pickList> -->
-
                     <app-transfer-panel [sourceItems]="documentTypes" [targetItems]="assignedDocumentTypes"
-                        [displayProperty]="'documentType.name'" (itemsChanged)="onItemsChanged($event)" />
-
+                        [displayProperty]="'documentType.name'" (itemsChanged)="onItemsChanged($event)" [enableMultiSelect]="false" />
                 </div>
                 <div class="col-xxl-4">
                     <div class="panel panel-default">

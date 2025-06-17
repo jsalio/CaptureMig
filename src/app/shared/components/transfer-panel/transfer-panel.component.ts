@@ -20,6 +20,8 @@ export class TransferPanelComponent {
   @Input() displayProperty: string = 'name';
   @Input() sourcePlaceholder: string = 'Search source items...';
   @Input() targetPlaceholder: string = 'Search target items...';
+  @Input() minListHeight: string = '300px';
+  @Input() enableMultiSelect: boolean = true;
 
   @Output() itemsChanged = new EventEmitter<{
     source: TransferItem[];
@@ -59,6 +61,11 @@ export class TransferPanelComponent {
   }
 
   toggleSourceSelection(item: TransferItem): void {
+    if (!this.enableMultiSelect) {
+      this.selectedSourceItems = [item];
+      return;
+    }
+
     const index = this.selectedSourceItems.indexOf(item);
     if (index === -1) {
       this.selectedSourceItems.push(item);
@@ -68,6 +75,11 @@ export class TransferPanelComponent {
   }
 
   toggleTargetSelection(item: TransferItem): void {
+    if (!this.enableMultiSelect) {
+      this.selectedTargetItems = [item];
+      return;
+    }
+
     const index = this.selectedTargetItems.indexOf(item);
     if (index === -1) {
       this.selectedTargetItems.push(item);
