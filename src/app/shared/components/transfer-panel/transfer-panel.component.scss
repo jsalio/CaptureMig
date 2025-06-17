@@ -1,0 +1,56 @@
+.transfer-panel {
+  .transfer-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+
+    .list-group-item {
+      cursor: pointer;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.active {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: white;
+      }
+
+      &:hover:not(.active) {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+
+  .btn-group-vertical {
+    .btn {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .card {
+    height: 100%;
+    
+    .card-body {
+      padding: 1rem;
+    }
+  }
+} 

@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { DocumentType } from '../../../../../../../../models/document-types';
 import { DocumentTypesStatus } from '../../../../../../../../enums/document-type.enum';
 import { PickListModule } from 'primeng/picklist';
+import { TransferPanelComponent } from "../../../../../../../../shared/components/transfer-panel/transfer-panel.component";
 import { WorkflowDocumentTypeAssignment } from '../../../../../../../../models/workflow-document-type-assignment';
 
 @Component({
   selector: 'app-document-types',
   standalone: true,
-  imports: [CommonModule, PickListModule, TranslateModule],
+  imports: [CommonModule, PickListModule, TranslateModule, TransferPanelComponent],
   templateUrl: './document-types.component.html',
   styleUrl: './document-types.component.css'
 })
@@ -117,6 +118,10 @@ export class DocumentTypesComponent {
   }
 
   filterString = (e:any)=>{
+    console.log(e)
+  }
+
+  onItemsChanged = (e:any) => {
     console.log(e)
   }
 }

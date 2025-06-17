@@ -1,0 +1,101 @@
+<div class="transfer-panel container-fluid">
+    <div class="row">
+      <!-- Source List -->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Source Items</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                [placeholder]="sourcePlaceholder"
+                [(ngModel)]="sourceFilter"
+              >
+            </div>
+            <div class="list-group transfer-list">
+              <button
+                *ngFor="let item of filteredSourceItems"
+                class="list-group-item list-group-item-action"
+                [class.active]="selectedSourceItems.includes(item)"
+                (click)="toggleSourceSelection(item)"
+              >
+                {{ getItemDisplayValue(item) }}
+              </button>
+              <div *ngIf="filteredSourceItems.length === 0" class="text-center text-muted py-3">
+                No items found
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Transfer Controls -->
+      <div class="col-md-2 d-flex align-items-center justify-content-center">
+        <div class="btn-group-vertical">
+          <button
+            class="btn btn-primary mb-2"
+            (click)="transferToTarget()"
+            [disabled]="selectedSourceItems.length === 0"
+          >
+            <i class="bi bi-chevron-right"> > </i>
+          </button>
+          <button
+            class="btn btn-primary mb-2"
+            (click)="transferToSource()"
+            [disabled]="selectedTargetItems.length === 0"
+          >
+            <i class="bi bi-chevron-left"> < </i>
+          </button>
+          <button
+            class="btn btn-secondary mb-2"
+            (click)="transferAllToTarget()"
+            [disabled]="sourceItems.length === 0"
+          >
+            <i class="bi bi-chevron-double-right"> >> </i>
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="transferAllToSource()"
+            [disabled]="targetItems.length === 0"
+          >
+            <i class="bi bi-chevron-double-left"> >> </i>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Target List -->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Target Items</h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                [placeholder]="targetPlaceholder"
+                [(ngModel)]="targetFilter"
+              >
+            </div>
+            <div class="list-group transfer-list">
+              <button
+                *ngFor="let item of filteredTargetItems"
+                class="list-group-item list-group-item-action"
+                [class.active]="selectedTargetItems.includes(item)"
+                (click)="toggleTargetSelection(item)"
+              >
+                {{ getItemDisplayValue(item) }}
+              </button>
+              <div *ngIf="filteredTargetItems.length === 0" class="text-center text-muted py-3">
+                No items found
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
