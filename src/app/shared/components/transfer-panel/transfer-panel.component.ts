@@ -87,6 +87,20 @@ export class TransferPanelComponent {
     }
   }
 
+  handleSourceDoubleClick(item: TransferItem): void {
+    if (!this.enableMultiSelect) {
+      this.selectedSourceItems = [item];
+      this.transferToTarget();
+    }
+  }
+
+  handleTargetDoubleClick(item: TransferItem): void {
+    if (!this.enableMultiSelect) {
+      this.selectedTargetItems = [item];
+      this.transferToSource();
+    }
+  }
+
   toggleTargetSelection(item: TransferItem): void {
     if (!this.enableMultiSelect) {
       this.selectedTargetItems = [item];

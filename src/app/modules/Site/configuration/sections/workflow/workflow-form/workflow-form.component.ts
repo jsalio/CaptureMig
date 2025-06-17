@@ -29,6 +29,7 @@ import { ExternalPropertiesAssigments } from '../../../../../../models/external-
 import { ExternalPropertiesConfigurationComponent } from "./components/external-properties-configuration/external-properties-configuration.component";
 import { ExternalProperty } from '../../../../../../models/external-property';
 import { Restriction } from '../../../../../../models/Restriction';
+import { RestrictionsComponent } from "./components/restrictions/restrictions.component";
 import { RoleWorkflowsAssignment } from '../../../../../../models/role-workflows-assignmets';
 import { SpecialPermissionComponent } from './components/special-permission/special-permission.component';
 import { StepConfigurationComponent } from "./components/step-configuration/step-configuration.component";
@@ -43,7 +44,7 @@ import { WorkflowStepsConfiguration } from '../../../../../../models/workflow-st
   selector: 'app-workflow-form',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule, CommonModule, TabsModule, SpecialPermissionComponent, CustomTabComponent, CustomTabsComponent, ExternalPropertiesConfigurationComponent,
-     AutoNameComponent, StepConfigurationComponent, DocumentSplitConfigurationComponent, DocumentTypesComponent],
+    AutoNameComponent, StepConfigurationComponent, DocumentSplitConfigurationComponent, DocumentTypesComponent, RestrictionsComponent],
   templateUrl: './workflow-form.component.html',
   styleUrl: './workflow-form.component.css',
   providers: [CurrentUserService]

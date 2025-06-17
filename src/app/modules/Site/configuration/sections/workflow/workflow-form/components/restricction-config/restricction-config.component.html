@@ -1,0 +1,29 @@
+<div [formGroup]="restrictionForm" novalidate class="col-lg-12 no-padder">
+    <div class="checkbox i-checks">
+      <label>
+        <input type="checkbox" [checked]="isRestrictionActive" formControlName="restrictionActive"
+          (change)="updateRestrictionVisibility()" id="RestrictionActiveID">
+        <i></i>
+        <label for="RestrictionActiveID">
+          {{ restrictionName | translate}}</label>
+      </label>
+    </div>
+    <div class="row row-cols-lg-4 row-cols-xl-4 row-cols-xxl-6" *ngIf="isRestrictionActive">
+      <div class="col">
+        {{ warningLimitLabel | translate}} ({{extraLabel?.warning | translate}})
+        <div class="input-group mt-1 mb-2">
+          <p-input-number (onChange)="emit()" size="large" formControlName="restrictionWarningValue" [min]="0"></p-input-number>
+        </div>
+        <span class="text-danger" *ngIf="isFieldInvalid('restrictionWarningValue')">{{'InvalidLimitWarning' |
+          translate }}</span>
+      </div>
+      <div class="col">
+        {{ limitLabel | translate}} ({{extraLabel?.limit | translate}})
+        <div class="input-group mt-1 mb-2">
+          <p-input-number (onChange)="emit()" size="large" formControlName="restrictionValue" [min]="0"></p-input-number>
+        </div>
+        <span class="text-danger" *ngIf="isFieldInvalid('restrictionValue')">{{'InvalidLimit'
+          | translate }}</span>
+      </div>
+    </div>
+  </div>

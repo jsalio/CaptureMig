@@ -44,12 +44,16 @@
                 (onAutoNameChanges)="onAutoNameChange($event)" />
             </app-custom-tab>
             <app-custom-tab heading="DocumentaryConfiguration">
-              <app-document-types [areDocumentTypeLoaded]="areDocumentTypeLoaded" [assignedDocumentTypes]="assignedDocumentTypes" 
-              [currentAssignmentDocumentType]="currentAssignmentDocumentType" [documentTypes]="documentTypes" [isBtnDefaultVisible]="isBtnDefaultVisible" 
-              [currentDefaultDocumentType]="currentDefaultDocumentType"/>
+              <app-document-types [areDocumentTypeLoaded]="areDocumentTypeLoaded"
+                [assignedDocumentTypes]="assignedDocumentTypes"
+                [currentAssignmentDocumentType]="currentAssignmentDocumentType" [documentTypes]="documentTypes"
+                [isBtnDefaultVisible]="isBtnDefaultVisible" [currentDefaultDocumentType]="currentDefaultDocumentType" />
             </app-custom-tab>
             <app-custom-tab heading="Restrictions">
-              x
+              <app-restrictions 
+                [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch" [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch"
+                [pageSizePerBatchLimit]="pageSizePerBatchLimit" [pageSizePerBatchLimitWarning]="pageSizePerBatchLimitWarning" 
+                [pageSizePerImageLimitWarning]="pageSizePerImageLimitWarning" [isActivePageLimitPerBatch]="isActivePageLimitPerBatch" />
             </app-custom-tab>
             <app-custom-tab heading="StepsConfiguration">
               <app-step-configuration [isEditMode]="isEditMode" [documentTypesSelected]="assignedDocumentTypes"

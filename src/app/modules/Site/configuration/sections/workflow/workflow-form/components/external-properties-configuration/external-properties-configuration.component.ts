@@ -1,14 +1,16 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ExternalProperty } from '../../../../../../../../models/external-property';
-import { ExternalPropertiesAssigments } from '../../../../../../../../models/external-properties-assigments';
-import { ActivatedRoute } from '@angular/router';
 import { PickList, PickListModule } from 'primeng/picklist';
+
+import { ActivatedRoute } from '@angular/router';
+import { ExternalPropertiesAssigments } from '../../../../../../../../models/external-properties-assigments';
+import { ExternalProperty } from '../../../../../../../../models/external-property';
+import { TransferPanelComponent } from "../../../../../../../../shared/components/transfer-panel/transfer-panel.component";
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-external-properties-configuration',
   standalone: true,
-  imports: [PickListModule, TranslateModule],
+  imports: [PickListModule, TranslateModule, TransferPanelComponent],
   templateUrl: './external-properties-configuration.component.html',
   styleUrl: './external-properties-configuration.component.css'
 })
@@ -40,4 +42,6 @@ export class ExternalPropertiesConfigurationComponent {
     this.transferPanel.resetFilter();
     this.onSelectionChange.emit(this.getAssignedExternalProperties());
   }
+
+ 
 }

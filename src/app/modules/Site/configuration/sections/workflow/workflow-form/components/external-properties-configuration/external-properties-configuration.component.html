@@ -2,7 +2,7 @@
     {{ 'ExternalPropertiesTitle' | translate}}
   </div>
   <div class="col-xl-8 col-lg-12  p-0">
-    <p-pickList #externalPropertyTransferPanel [source]="availableExternalProperties" [responsive]="true"
+    <!-- <p-pickList #externalPropertyTransferPanel [source]="availableExternalProperties" [responsive]="true"
       [target]="assignedExternalProperties" sourceHeader="{{ 'AvailableExternalProperties' | translate}}"
       targetHeader="{{ 'AssignedExternalProperties' | translate}}" [showSourceControls]="false"
       [showTargetControls]="false" [sourceStyle]="{'height':'250px'}" [targetStyle]="{'height':'250px'}" filterBy="name"
@@ -13,5 +13,9 @@
           <div style="font-size:14px;float:right;margin:12px 0px 7px 9px"> {{ externalProperties.name }}</div>
         </div>
       </ng-template>
-    </p-pickList>
+    </p-pickList> -->
+    <app-transfer-panel [sourceItems]="availableExternalProperties" [targetItems]="assignedExternalProperties"
+    [sourceTitle]="'AvailableExternalProperties'" [targetTitle]="'AssignedExternalProperties'" [enableMultiSelect]="false"
+    sourcePlaceholder='Search' targetPlaceholder="Search" [displayProperty]="'name'"  >
+    </app-transfer-panel>
   </div>

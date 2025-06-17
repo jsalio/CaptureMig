@@ -1,0 +1,9 @@
+<!-- <app-restricction-config emitChanges)="emit($event)" [limit]="pageSizeLimit" [limitWarning]="pageSizeLimitWarning"
+[limitStartAt]="0" [limitEndAt]="60000" [limitWarningStartAt]="0" [limitWarningEndAt]="3080"
+[restrictionName]="labelField" [warningLimitLabel]="'AlertWhenFileSizeOf'" [limitLabel]="'AlertFileSizeOf'"
+[extraLabel]="extraData"/> -->
+<app-restricction-config [restrictionName]="labelField" [limit]="pageSizeLimit" [limitWarning]="pageSizeLimitWarning"
+    [extraLabel]="extraData" [limitStartAt]="0" [limitEndAt]="60000" [limitWarningStartAt]="0"
+    [limitWarningEndAt]="3080" [restrictionName]="labelField" [warningLimitLabel]="'AlertWhenFileSizeOf'" [limitLabel]="'AlertFileSizeOf'" 
+    [extraLabel]="extraData" (emitChanges)="emit($event)"
+    />

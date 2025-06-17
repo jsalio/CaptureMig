@@ -1,0 +1,30 @@
+<div class="col-lg-12 border-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tab-heading">
+                {{'DocumentLimitDescription' | translate}}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <app-restriction-size [labelField]="'DocumentLimitPerBatchQuantity'"
+                [pageSizeLimit]="documentLimitPerBatchQuantity()"
+                [pageSizeLimitWarning]="documentLimitPerBatchQuantityWarning()"
+                (emitChanges)="documentLimitPerBatchChange($event)" />
+            <app-divider></app-divider>
+            <div class="col-lg-12 no-padder">
+                <app-restriction-size [labelField]="'PageLimitPerBatchQuantity'"
+                    [pageSizeLimit]="PageLimitPerBatchQuantity()"
+                    [pageSizeLimitWarning]="PageLimitPerBatchQuantityWarning()"
+                    (emitChanges)="PageLimitPerBatchQuantityChange($event)" />
+            </div>
+            <app-divider></app-divider>
+            <app-restriction-size (emitChanges)="setLimitSizePerPage($event)" [pageSizeLimit]="pageSizePerImageLimit()"
+                [pageSizeLimitWarning]="pageSizePerImageLimitWarning()"
+                [labelField]="'LimitSizeOfPage'"></app-restriction-size>
+            <app-divider></app-divider>
+            <app-restriction-size (emitChanges)="setLimitSizePerBatch($event)" [pageSizeLimit]="pageSizePerBatchLimit()"
+                [pageSizeLimitWarning]="pageSizePerBatchLimitWarning()"
+                [labelField]="'LimitSizeOfBatch'"></app-restriction-size>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,7 @@
                   [class.active]="selectedSourceItems.includes(item)"
                   [class.single-select]="!enableMultiSelect"
                   (click)="toggleSourceSelection(item)"
+                  (dblclick)="handleSourceDoubleClick(item)"
                 >
                   <ng-container *ngIf="sourceItemTemplate; else defaultSourceTemplate">
                     <ng-container *ngTemplateOutlet="sourceItemTemplate; context: { $implicit: item }">
@@ -70,7 +71,7 @@
             (click)="transferAllToSource()"
             [disabled]="targetItems.length === 0"
           >
-            <i class="bi bi-chevron-double-left"> >> </i>
+            <i class="bi bi-chevron-double-left"> << </i>
           </button>
         </div>
       </div>
@@ -98,6 +99,7 @@
                   [class.active]="selectedTargetItems.includes(item)"
                   [class.single-select]="!enableMultiSelect"
                   (click)="toggleTargetSelection(item)"
+                  (dblclick)="handleTargetDoubleClick(item)"
                 >
                   <ng-container *ngIf="targetItemTemplate; else defaultTargetTemplate">
                     <ng-container *ngTemplateOutlet="targetItemTemplate; context: { $implicit: item }">
