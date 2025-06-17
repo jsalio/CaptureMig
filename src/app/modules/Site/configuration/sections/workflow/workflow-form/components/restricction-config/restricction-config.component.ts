@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslateModule, InputNumberModule],
   templateUrl: './restricction-config.component.html',
-  styleUrl: './restricction-config.component.css'
+  styleUrl: './restricction-config.component.css',
 })
 export class RestricctionConfigComponent {
   isRestrictionActive = false;
@@ -35,21 +35,17 @@ export class RestricctionConfigComponent {
     this.restrictionForm = this.fb.group({
       restrictionValue: new FormControl(this.limit, [
         Validators.required,
-        // Validators.min(this.limitStartAt),
-        // Validators.max(this.limitEndAt)
       ]),
       restrictionActive: new FormControl(this.limit > 0),
       restrictionWarningValue: new FormControl(this.limitWarning, [
         Validators.required,
-      //   Validators.min(this.limitWarningStartAt),
-      //   Validators.max(this.limitWarningEndAt)
       ])
     })
   }
 
 
   ngOnInit() {
-    console.log(this.extraLabel);
+    console.log(this);
     this.isRestrictionActive = this.limit > 0;
     ;
   }
@@ -60,11 +56,11 @@ export class RestricctionConfigComponent {
   }
 
   emit = () => {
-    // const cfg: Restriction = {
-    //   limit: this.restrictionForm.controls['restrictionValue'].value,
-    //   limitWarning: this.restrictionForm.controls['restrictionWarningValue'].value
-    // }
-    // this.emitChanges.emit(cfg);
+    const cfg: Restriction = {
+      limit: this.restrictionForm.controls['restrictionValue'].value,
+      limitWarning: this.restrictionForm.controls['restrictionWarningValue'].value
+    }
+    this.emitChanges.emit(cfg);
   }
 
   updateRestrictionVisibility() {

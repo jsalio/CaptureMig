@@ -52,8 +52,10 @@
             <app-custom-tab heading="Restrictions">
               <app-restrictions 
                 [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch" [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch"
-                [pageSizePerBatchLimit]="pageSizePerBatchLimit" [pageSizePerBatchLimitWarning]="pageSizePerBatchLimitWarning" 
-                [pageSizePerImageLimitWarning]="pageSizePerImageLimitWarning" [isActivePageLimitPerBatch]="isActivePageLimitPerBatch" />
+                [pageSizePerImageLimit]="pageSizePerBatchLimit" [pageSizePerBatchLimitWarning]="pageSizePerBatchLimitWarning" 
+                [isActivePageLimitPerBatch]="isActivePageLimitPerBatch" 
+                [isActivePageSizePerBatch]="true"  [pageSizePerBatchLimit]="25" [pageSizePerBatchLimitWarning]="450"
+                [isActiveSizePerPage]="true" [pageSizePerImageLimit]="54" [pageSizePerImageWarning]="600"/>
             </app-custom-tab>
             <app-custom-tab heading="StepsConfiguration">
               <app-step-configuration [isEditMode]="isEditMode" [documentTypesSelected]="assignedDocumentTypes"

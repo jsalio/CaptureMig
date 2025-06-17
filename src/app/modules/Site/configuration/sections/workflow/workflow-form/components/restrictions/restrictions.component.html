@@ -18,13 +18,13 @@
                     (emitChanges)="PageLimitPerBatchQuantityChange($event)" />
             </div>
             <app-divider></app-divider>
-            <app-restriction-size (emitChanges)="setLimitSizePerPage($event)" [pageSizeLimit]="pageSizePerImageLimit()"
-                [pageSizeLimitWarning]="pageSizePerImageLimitWarning()"
-                [labelField]="'LimitSizeOfPage'"></app-restriction-size>
-            <app-divider></app-divider>
-            <app-restriction-size (emitChanges)="setLimitSizePerBatch($event)" [pageSizeLimit]="pageSizePerBatchLimit()"
+            <app-restriction-size (emitChanges)="setLimitSizePerPage($event)" [pageSizeLimit]="pageSizePerBatchLimit()"
                 [pageSizeLimitWarning]="pageSizePerBatchLimitWarning()"
-                [labelField]="'LimitSizeOfBatch'"></app-restriction-size>
+                [labelField]="'LimitSizeOfPage'"/>
+            <app-divider></app-divider>
+            <app-restriction-size (emitChanges)="setLimitSizePerBatch($event)" [pageSizeLimit]="pageSizePerImageLimit()"
+                [pageSizeLimitWarning]="pageSizePerImageWarning()"
+                [labelField]="'LimitSizeOfBatch'"/>
         </div>
     </div>
 </div>

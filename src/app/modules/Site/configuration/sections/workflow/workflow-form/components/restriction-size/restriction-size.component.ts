@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { RestricctionConfigComponent } from "../restricction-config/restricction-config.component";
 import { Restriction } from '../../../../../../../../models/Restriction';
@@ -10,7 +10,7 @@ import { Restriction } from '../../../../../../../../models/Restriction';
   templateUrl: './restriction-size.component.html',
   styleUrl: './restriction-size.component.css'
 })
-export class RestrictionSizeComponent {
+export class RestrictionSizeComponent implements OnInit {
   @Input() pageSizeLimit: number;
   @Input() pageSizeLimitWarning: number;
   @Input() labelField: string;
@@ -22,6 +22,10 @@ export class RestrictionSizeComponent {
 
   // tslint:disable-next-line: no-empty
   constructor() { }
+
+  ngOnInit(): void {
+    console.log(this)
+  }
 
   @Output() emitChanges = new EventEmitter<Restriction>();
   measureUnit: 'KB' | 'KB(MB)' | 'GB' = 'KB';
