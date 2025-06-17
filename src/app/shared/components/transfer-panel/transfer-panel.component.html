@@ -6,8 +6,8 @@
           <div class="card-header">
             <h5 class="mb-0">Source Items</h5>
           </div>
-          <div class="card-body">
-            <div class="mb-3">
+          <div class="card-body p-0">
+            <div class="search-container">
               <input
                 type="text"
                 class="form-control"
@@ -15,16 +15,18 @@
                 [(ngModel)]="sourceFilter"
               >
             </div>
-            <div class="list-group transfer-list">
-              <button
-                *ngFor="let item of filteredSourceItems"
-                class="list-group-item list-group-item-action"
-                [class.active]="selectedSourceItems.includes(item)"
-                (click)="toggleSourceSelection(item)"
-              >
-                {{ getItemDisplayValue(item) }}
-              </button>
-              <div *ngIf="filteredSourceItems.length === 0" class="text-center text-muted py-3">
+            <div class="list-container">
+              <div class="list-group transfer-list">
+                <button
+                  *ngFor="let item of filteredSourceItems"
+                  class="list-group-item list-group-item-action"
+                  [class.active]="selectedSourceItems.includes(item)"
+                  (click)="toggleSourceSelection(item)"
+                >
+                  {{ getItemDisplayValue(item) }}
+                </button>
+              </div>
+              <div *ngIf="filteredSourceItems.length === 0" class="empty-state">
                 No items found
               </div>
             </div>
@@ -72,8 +74,8 @@
           <div class="card-header">
             <h5 class="mb-0">Target Items</h5>
           </div>
-          <div class="card-body">
-            <div class="mb-3">
+          <div class="card-body p-0">
+            <div class="search-container">
               <input
                 type="text"
                 class="form-control"
@@ -81,16 +83,18 @@
                 [(ngModel)]="targetFilter"
               >
             </div>
-            <div class="list-group transfer-list">
-              <button
-                *ngFor="let item of filteredTargetItems"
-                class="list-group-item list-group-item-action"
-                [class.active]="selectedTargetItems.includes(item)"
-                (click)="toggleTargetSelection(item)"
-              >
-                {{ getItemDisplayValue(item) }}
-              </button>
-              <div *ngIf="filteredTargetItems.length === 0" class="text-center text-muted py-3">
+            <div class="list-container">
+              <div class="list-group transfer-list">
+                <button
+                  *ngFor="let item of filteredTargetItems"
+                  class="list-group-item list-group-item-action"
+                  [class.active]="selectedTargetItems.includes(item)"
+                  (click)="toggleTargetSelection(item)"
+                >
+                  {{ getItemDisplayValue(item) }}
+                </button>
+              </div>
+              <div *ngIf="filteredTargetItems.length === 0" class="empty-state">
                 No items found
               </div>
             </div>
