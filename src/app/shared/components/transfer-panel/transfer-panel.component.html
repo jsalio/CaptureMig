@@ -4,14 +4,14 @@
       <div class="col-md-5">
         <div class="card">
           <div class="card-header">
-            <h5 class="mb-0">Source Items</h5>
+            <h5 class="mb-0">{{sourceTitle() | translate}}</h5>
           </div>
           <div class="card-body p-0">
             <div class="search-container">
               <input
                 type="text"
                 class="form-control"
-                [placeholder]="sourcePlaceholder"
+                [placeholder]="sourcePlaceholder() | translate"
                 [(ngModel)]="sourceFilter"
               >
             </div>
@@ -79,14 +79,14 @@
       <div class="col-md-5">
         <div class="card">
           <div class="card-header">
-            <h5 class="mb-0">Target Items</h5>
+            <h5 class="mb-0">{{targetTitle() | translate}}</h5>
           </div>
           <div class="card-body p-0">
             <div class="search-container">
               <input
                 type="text"
                 class="form-control"
-                [placeholder]="targetPlaceholder"
+                [placeholder]="targetPlaceholder() | translate"
                 [(ngModel)]="targetFilter"
               >
             </div>

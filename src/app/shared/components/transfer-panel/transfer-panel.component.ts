@@ -1,7 +1,8 @@
-import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, signal } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, input, signal } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface TransferItem {
   [key: string]: any;
@@ -10,7 +11,7 @@ export interface TransferItem {
 @Component({
   selector: 'app-transfer-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './transfer-panel.component.html',
   styleUrls: ['./transfer-panel.component.scss']
 })
@@ -18,10 +19,15 @@ export class TransferPanelComponent {
   @Input() sourceItems: TransferItem[] = [];
   @Input() targetItems: TransferItem[] = [];
   @Input() displayProperty: string = 'name';
-  @Input() sourcePlaceholder: string = 'Search source items...';
-  @Input() targetPlaceholder: string = 'Search target items...';
+  
   @Input() minListHeight: string = '300px';
   @Input() enableMultiSelect: boolean = true;
+  
+  sourceTitle = input<string>('Source Items')
+  targetTitle = input<string>('Target Items')
+  sourcePlaceholder=input<string>('Search source items...');
+  targetPlaceholder=input<string>('Search target items...');
+
 
   @ContentChild('sourceItemTemplate') sourceItemTemplate?: TemplateRef<any>;
   @ContentChild('targetItemTemplate') targetItemTemplate?: TemplateRef<any>;

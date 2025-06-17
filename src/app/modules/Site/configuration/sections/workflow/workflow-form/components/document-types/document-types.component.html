@@ -12,7 +12,9 @@
                 <div class="col-xxl-6">
                     <app-transfer-panel [sourceItems]="documentTypes" [targetItems]="assignedDocumentTypes"
                         [displayProperty]="'documentType.name'" (itemsChanged)="onItemsChanged($event)"
-                        [enableMultiSelect]="false"  (targetItemSelected)="onTargetItemSelected($event)">
+                        [enableMultiSelect]="false"  (targetItemSelected)="onTargetItemSelected($event)"
+                        [sourceTitle]="'AvailableDocumentTypes'" [targetTitle]="'AssignedDocumentTypes'" 
+                        [sourcePlaceholder]="'Search'" [targetPlaceholder]="'Search'">
                         <!-- Template para elementos de la lista de origen -->
                         <ng-template #sourceItemTemplate let-item>
                             {{ getText(item) }}
