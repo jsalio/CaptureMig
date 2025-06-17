@@ -1,6 +1,7 @@
 .transfer-panel {
+  max-height: 378px;
   .card {
-    height: 100%;
+    height: 95%;
     
     .card-body {
       display: flex;
@@ -20,7 +21,7 @@
   }
 
   .transfer-list {
-    max-height: 400px;
+    height: 250px;
     overflow-y: auto;
     border: none;
     border-radius: 0;
