@@ -31,6 +31,9 @@ export class TransferPanelComponent {
     target: TransferItem[];
   }>();
 
+  @Output() sourceItemSelected = new EventEmitter<TransferItem>();
+  @Output() targetItemSelected = new EventEmitter<TransferItem>();
+
   sourceFilter = signal<string>('')
   targetFilter: string = '';
   selectedSourceItems: TransferItem[] = [];
@@ -66,6 +69,7 @@ export class TransferPanelComponent {
   toggleSourceSelection(item: TransferItem): void {
     if (!this.enableMultiSelect) {
       this.selectedSourceItems = [item];
+      this.sourceItemSelected.emit(item);
       return;
     }
 
@@ -80,6 +84,7 @@ export class TransferPanelComponent {
   toggleTargetSelection(item: TransferItem): void {
     if (!this.enableMultiSelect) {
       this.selectedTargetItems = [item];
+      this.targetItemSelected.emit(item);
       return;
     }
 

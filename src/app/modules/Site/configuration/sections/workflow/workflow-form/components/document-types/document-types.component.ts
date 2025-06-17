@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { TransferItem, TransferPanelComponent } from "../../../../../../../../shared/components/transfer-panel/transfer-panel.component";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { CommonModule } from '@angular/common';
 import { DocumentType } from '../../../../../../../../models/document-types';
 import { DocumentTypesStatus } from '../../../../../../../../enums/document-type.enum';
 import { PickListModule } from 'primeng/picklist';
-import { TransferPanelComponent } from "../../../../../../../../shared/components/transfer-panel/transfer-panel.component";
 import { WorkflowDocumentTypeAssignment } from '../../../../../../../../models/workflow-document-type-assignment';
 
 @Component({
@@ -23,23 +23,6 @@ export class DocumentTypesComponent {
   @Input() assignedDocumentTypes: Array<WorkflowDocumentTypeAssignment> = [];
   @Input() currentAssignmentDocumentType: any;
   @Input() currentDefaultDocumentType: DocumentType;
-
-  sourceAssignments: WorkflowDocumentTypeAssignment[] = [
-    {
-      documentTypeId: 1,
-      isDefault: false,
-      workflowId: 100,
-      documentType: { id: 1, name: 'Contrato', status: DocumentTypesStatus.Active }
-    },
-    {
-      documentTypeId: 2,
-      isDefault: true,
-      workflowId: 100,
-      documentType: { id: 2, name: 'Factura', status: DocumentTypesStatus.Active }
-    }
-  ];
-  targetAssignments: WorkflowDocumentTypeAssignment[] = [];
-
 
   /**
    *
@@ -63,6 +46,7 @@ export class DocumentTypesComponent {
       return documentType;
     });
     this.currentAssignmentDocumentType.isDefault = true;
+    this.currentDefaultDocumentType = this.currentAssignmentDocumentType
   }
 
   onMoveToSource(event) {
@@ -127,5 +111,14 @@ export class DocumentTypesComponent {
 
   getText = (e:any) => {
     return e.documentType.name
+  }
+
+  onTargetItemSelected = (item: TransferItem): void => {
+    if (item['documentTypeId'] === this.currentDefaultDocumentType.id){
+      this.isBtnDefaultVisible = false
+    } else {
+      this.isBtnDefaultVisible = true
+      this.currentAssignmentDocumentType = item
+    }
   }
 }
