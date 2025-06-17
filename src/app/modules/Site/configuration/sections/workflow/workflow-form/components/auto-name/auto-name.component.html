@@ -1,40 +1,40 @@
 <div class="col-lg-12 border-content">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="tab-heading">
-          {{'AutoNameTabDescription' | translate}}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="tab-heading">
+        {{'AutoNameTabDescription' | translate}}
+      </div>
+    </div>
+    <div class="col-lg-4 col-lg-6 col-xxl-4">
+      <section class="panel b-a m-t">
+        <div class="panel-heading b-b">
+          {{'AvailableVariables' | translate}}
         </div>
-      </div>
-      <div class="col-lg-4 col-lg-6 col-xxl-4">
-        <section class="panel b-a m-t">
-          <div class="panel-heading b-b">
-            {{'AvailableVariables' | translate}}
-          </div>
-          <div class="panel-body">
-            <label *ngFor="let autoName of autoNames" class="pointer-finger">
-              <a type="button" class=" btn-primary btn-xs" (click)="addToAutoName(autoName)">
-                {{autoName.name | translate}}
-              </a>
-              <i class="fa fa-right"></i>
-            </label>
-          </div>
-        </section>
-      </div>
-      <div class="col-lg-4 col-lg-6 col-xxl-5">
-        <section class="panel b-a m-t">
-          <div class="panel-heading b-b">
-            {{'AvailableVariables' | translate}}
-          </div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label>{{'AutoNameHelp' | translate}}</label>
-              <input type="text" formControlName="autoName" class="form-control" placeholder="Enter name">
-            </div>
-            <div class="alert alert-info">
-              <strong>{{'ExampleDescription' | translate}}:</strong> {{autoNameExample}}
-            </div>
-          </div>
-        </section>
-      </div>
+        <div class="panel-body">
+          <label *ngFor="let autoNameTag of tagNames" class="pointer-finger">
+            <a type="button" class=" btn-primary btn-xs" (click)="addToAutoName(autoNameTag)">
+              {{autoNameTag.name | translate}}
+            </a>
+            <i class="fa fa-right"></i>
+          </label>
+        </div>
+      </section>
     </div>
+    <div class="col-lg-4 col-lg-6 col-xxl-5">
+      <section class="panel b-a m-t">
+        <div class="panel-heading b-b">
+          {{'AvailableVariables' | translate}}
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>{{'AutoNameHelp' | translate}}</label>
+            <input type="text" [(ngModel)]="nameExpression" class="form-control" placeholder="Enter name">
+          </div>
+          <div class="alert alert-info">
+            <strong>{{'ExampleDescription' | translate}}:</strong> {{autoNameExample}}
+          </div>
+        </div>
+      </section>
     </div>
+  </div>
+</div>

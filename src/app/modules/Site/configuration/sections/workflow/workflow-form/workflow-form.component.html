@@ -40,50 +40,13 @@
           <!-- Esto es el desastre de los tabs -->
           <app-custom-tabs [justified]="true" class="col-lg-12 m-t-md tabClass">
             <app-custom-tab heading="AutoName">
-              <!-- <app-auto-name [currentAutoName]="autoNameControl.value" /> -->
-              <div class="col-lg-12 border-content">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="tab-heading">
-                      {{'AutoNameTabDescription' | translate}}
-                    </div>
-                  </div>
-                  <div class="col-lg-4 col-lg-6 col-xxl-4">
-                    <section class="panel b-a m-t">
-                      <div class="panel-heading b-b">
-                        {{'AvailableVariables' | translate}}
-                      </div>
-                      <div class="panel-body">
-                        <label *ngFor="let autoName of autoNames" class="pointer-finger">
-                          <a type="button" class=" btn-primary btn-xs" (click)="addToAutoName(autoName)">
-                            {{autoName.name | translate}}
-                          </a>
-                          <i class="fa fa-right"></i>
-                        </label>
-                      </div>
-                    </section>
-                  </div>
-                  <div class="col-lg-4 col-lg-6 col-xxl-5">
-                    <section class="panel b-a m-t">
-                      <div class="panel-heading b-b">
-                        {{'AvailableVariables' | translate}}
-                      </div>
-                      <div class="panel-body">
-                        <div class="form-group">
-                          <label>{{'AutoNameHelp' | translate}}</label>
-                          <input type="text" formControlName="autoName" class="form-control" placeholder="Enter name">
-                        </div>
-                        <div class="alert alert-info">
-                          <strong>{{'ExampleDescription' | translate}}:</strong> {{autoNameExample}}
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </div>
-              </div>
+              <app-auto-name [autonameExample]="autoNameExample" [nameExpression]="workflowNameExpression"
+                (onAutoNameChanges)="onAutoNameChange($event)" />
             </app-custom-tab>
             <app-custom-tab heading="DocumentaryConfiguration">
-              x
+              <app-document-types [areDocumentTypeLoaded]="areDocumentTypeLoaded" [assignedDocumentTypes]="assignedDocumentTypes" 
+              [currentAssignmentDocumentType]="currentAssignmentDocumentType" [documentTypes]="documentTypes" [isBtnDefaultVisible]="isBtnDefaultVisible" 
+              [currentDefaultDocumentType]="currentDefaultDocumentType"/>
             </app-custom-tab>
             <app-custom-tab heading="Restrictions">
               x
@@ -96,7 +59,9 @@
               x
             </app-custom-tab>
             <app-custom-tab heading="DocumentSeparator">
-              x
+              <app-document-split-configuration [useCompose]="useComposed"
+                [splitDocumentConfiguration]="documentSplitterConfiguration" [editMode]="isEditMode"
+                [workflowId]="workflowid" />
             </app-custom-tab>
             <app-custom-tab heading="WorkflowSpecialPermisions">
               <app-special-permission [editMode]="isEditMode" [specialPermissions]="getSpecialPermissions()" />

@@ -1,61 +1,63 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ApiConfigurationService } from '../../../../../../../../services/api/configuration.service';
 import { AutoName } from '../../../../../../../../models/auto-name';
+import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auto-name',
   standalone: true,
-  imports: [CommonModule,FormsModule, ReactiveFormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './auto-name.component.html',
   styleUrl: './auto-name.component.css'
 })
 export class AutoNameComponent {
-  @Input() currentAutoName: string;
+  @Input() nameExpression: string;
+  @Input() autonameExample: string;
+
   autoName: string;
-  autoNames: Array<AutoName> = [];
+  tagNames: Array<AutoName> = [];
   autoNameExample = '';
   // tslint:disable-next-line: no-output-on-prefix
-  @Output() onAutoNameChanges = new EventEmitter();
-  autoNameControl: AbstractControl;
+  @Output() onAutoNameChanges = new EventEmitter<{nameExpression:string, example:string}>();
 
-  constructor() { }
+
+  constructor(private readonly configurationService: ApiConfigurationService) { }
 
   ngOnInit() {
-    this.addDefaultAutoName();
-    this.autoName = this.currentAutoName;
-    this.onAutoNameChanges.emit(this.autoName);
-  }
-
-  addToAutoName(currentAutoName: AutoName): void {
-    const currentAutoNameValue = this.autoNameControl.value + currentAutoName.value;
-    this.autoNameControl.setValue(currentAutoNameValue);
-    this.refreshAutoNameExample(currentAutoNameValue);
-  }
-
-  prepareAutoNameRefreshSubscription(): void {
-    const autoNameControl = this.autoNameControl;
-    autoNameControl.valueChanges.forEach((value: string) => {
-      this.refreshAutoNameExample(value);
+    this.onAutoNameChanges.emit({nameExpression:this.nameExpression,example:''});
+    this.configurationService.getAutoNameVariables().then(autoNames => {
+      this.tagNames = autoNames;
+      this.addDefaultAutoName();
+      this.refreshAutoNameExample(this.autonameExample);
     });
   }
 
-  private refreshAutoNameExample(value: string): void {
-    this.autoNameExample = value;
-    for (const autoName of this.autoNames) {
-      const expression = new RegExp(autoName.value, 'g');
-      this.autoNameExample = this.autoNameExample.replace(expression, autoName.example);
+  addToAutoName(currentAutoName: AutoName): void {
+    const currentAutoNameValue = this.autonameExample + currentAutoName.value;
+    this.autonameExample = currentAutoNameValue;
+    this.refreshAutoNameExample(currentAutoNameValue);
+  }
+
+  private refreshAutoNameExample(tagValue: string): void {
+    this.nameExpression = tagValue
+    this.autoNameExample = this.nameExpression
+    for (const tag of this.tagNames) {
+      const ex = new RegExp(tag.value, 'g')
+      this.autoNameExample = this.autoNameExample.replaceAll(ex, tag.example)
     }
+    this.onAutoNameChanges.emit({nameExpression:this.nameExpression,example:this.autoNameExample})
   }
 
   private addDefaultAutoName(): void {
     let defaultAutoNameValues = '';
-    for (const autoName of this.autoNames) {
+    for (const autoName of this.tagNames) {
       if (autoName.isDefault) {
         defaultAutoNameValues += autoName.value;
       }
     }
-    this.autoNameControl.setValue(defaultAutoNameValues);
+    this.autonameExample = defaultAutoNameValues;
   }
 }

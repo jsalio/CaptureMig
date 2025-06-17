@@ -11,3 +11,5 @@ export class WorkflowDocumentTypeAssignment {
   workflowId: number;
   documentType: DocumentType;
 }
+
+

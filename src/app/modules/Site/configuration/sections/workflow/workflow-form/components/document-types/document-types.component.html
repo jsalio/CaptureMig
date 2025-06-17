@@ -1,0 +1,89 @@
+<div class="col-lg-12 border-content">
+    <div *ngIf="!areDocumentTypeLoaded" align="center">
+        <img class="text-center" src="../../../assets/images/loading.gif">
+        <p>Loading .....</p>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" *ngIf="areDocumentTypeLoaded">
+            <div class="tab-heading">
+                {{'AssignDocumentTypeDescription' | translate}}
+            </div>
+            <div class="row m-0">
+                <div class="col-xxl-6">
+                    <!-- <p-pickList [filterBy]="'asigned.documentType.name'" (onSourceFilter)="filterString($event)" (onTargetSelect)="onTargetSelect($event)"
+              [source]="documentTypes" [responsive]="true" [target]="assignedDocumentTypes"
+              sourceHeader="{{ 'AvailableDocumentTypes' | translate}}"
+              targetHeader="{{ 'AssignedDocumentTypes' | translate}}" [showSourceControls]="false"
+              [showTargetControls]="false" [sourceStyle]="{'height':'250px'}"
+              [targetStyle]="{'height':'250px'}" sourceFilterPlaceholder="{{'Search' | translate}}"
+              targetFilterPlaceholder="{{'Search' | translate}}" (onMoveToSource)="onMoveToSource($event)"
+              (onMoveAllToSource)="onMoveAllToSource($event)" (onMoveToTarget)="onMoveToTarget($event)"
+              (onMoveAllToTarget)="onMoveAllToTarget($event)"
+              breakpoint="1400px"
+              scrollHeight="30rem"
+              >
+              <ng-template let-asigned pTemplate="item">
+                <div class="flex-1 flex flex-col">
+                    <span class="font-medium text-sm">
+                        {{asigned.documentType.name}}
+                        {{asigned.isDefault ? getDefaultMessage() : ''}}
+                    </span>
+                </div>
+              </ng-template>
+            </p-pickList> -->
+                    <p-pickList filterBy="documentType.name" (onSourceFilter)="filterString($event)"
+                        (onTargetSelect)="onTargetSelect($event)" [source]="documentTypes" [responsive]="true"
+                        [target]="assignedDocumentTypes" sourceHeader="{{ 'AvailableDocumentTypes' | translate}}"
+                        targetHeader="{{ 'AssignedDocumentTypes' | translate}}" [showSourceControls]="false"
+                        [showTargetControls]="false" [sourceStyle]="{'height':'250px'}"
+                        [targetStyle]="{'height':'250px'}" sourceFilterPlaceholder="{{'Search' | translate}}"
+                        targetFilterPlaceholder="{{'Search' | translate}}" (onMoveToSource)="onMoveToSource($event)"
+                        (onMoveAllToSource)="onMoveAllToSource($event)" (onMoveToTarget)="onMoveToTarget($event)"
+                        (onMoveAllToTarget)="onMoveAllToTarget($event)" breakpoint="1400px" scrollHeight="30rem">
+                        <ng-template let-asigned pTemplate="item">
+                            <div class="flex-1 flex flex-col">
+                                <span class="font-medium text-sm">
+                                    {{asigned.documentType.name}}
+                                    {{asigned.isDefault ? getDefaultMessage() : ''}}
+                                </span>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+
+
+
+<p-picklist 
+  [source]="sourceAssignments" 
+  [target]="targetAssignments" 
+  [dragdrop]="true" 
+  [responsive]="true" 
+  [sourceStyle]="{ height: '30rem' }" 
+  [targetStyle]="{ height: '30rem' }" 
+  filterBy="documentType.name" 
+  sourceFilterPlaceholder="Buscar por nombre" 
+  targetFilterPlaceholder="Buscar por nombre" 
+  breakpoint="1400px">
+  <ng-template let-assignment #item>
+    {{ assignment.documentType.name }}
+  </ng-template>
+</p-picklist>
+
+                </div>
+                <div class="col-xxl-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{'ChooseAssignDocumentType' | translate}}</div>
+                        <div class="panel-body">
+                            <button type="button" *ngIf="isBtnDefaultVisible" class="btnbtn-block btn-primary"
+                                (click)="onSetDefaultDocumentType()">
+                                {{currentAssignmentDocumentType.documentType.name }} {{'AsSetDefault'| translate}}
+                            </button>
+                            <button *ngIf="!isBtnDefaultVisible" class="btnbtn-block btn-default" disabled>
+                                {{getDefaultDocumentType()}} {{'AsSetDefault'| translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

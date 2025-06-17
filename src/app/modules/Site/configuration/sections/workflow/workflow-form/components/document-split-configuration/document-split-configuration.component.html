@@ -1,0 +1,83 @@
+<!-- <div (onHidden)="hideModal()" bsModal #barcodeConfiguration="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div style="height: 763px" class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          {{ "ComponentsRequired" | translate }}
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-barcode-reader #barcodeReader [separatorMode]="true" (barcodeChange)="barcodeUpdated = $event"
+          (barcodeAdvanceConfigurationSelected)="onBarcodeConfigurationSelectedOnAdvanceMode($event)"
+          (barcodeConfigurationSelected)="onBarcodeConfigurationSelected($event)"
+          [advanceConfiguration]="barcodeOnAdvanceMode" (clear)="clearBarcodeData()"></app-barcode-reader>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="hideModal()">
+          {{ "Ok" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="col-lg-12 no-padder">
+  <div class="tab-heading">
+    {{ "SelectDocumentSplitTypeTitle" | translate }}
+  </div>
+  <form [formGroup]="splitDocumentConfigurationForm" novalidate>
+    <div class="row">
+      <div class="col-lg-5 col-xxl-3no-bg">
+        <label>{{ "DocumentSplitTypeTitile" | translate }}</label>
+        <select id="documentSplitterTypeDropDown" name="documentSplitterType" [(ngModel)]="splitterType"
+          formControlName="documentSplitterType" class="form-control">
+          <option *ngFor="let splitterType of documentSplitterTypes" [ngValue]="splitterType">
+            {{ splitterType.name | translate }}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-3" *ngIf="showPageQuantityConfiguration">
+        {{ "SplitDocumentForTitle" | translate }}
+        <div class="input-group m-b" style="padding-top: 15px">
+          <p-inputnumber [min]="1" formControlName="pageQuantity"></p-inputnumber>
+        </div>
+        <span *ngIf="splitDocumentConfigurationForm.invalid" class="text-danger">{{ "InvalidDocumentSplitterValue" |
+          translate }}</span>
+      </div>
+
+      <div [class]="!isBarcodeComposedSelected() ? 'col-xxl-2 col-lg-3' : 'col-xxl-2 col-lg-3 hidden-section'"
+        *ngIf="showMixedBarcodeConfiguration">
+        <label>{{ "DocumentSeparator" | translate }}</label>
+        <div class="input-group m-b">
+          <button class="btn-barcodeconfig" >
+            <i class="fa fa-cog mr-2" aria-hidden="true"></i>
+            {{ "ConfigureBarcode" | translate }}
+          </button>
+        </div>
+        <span *ngIf="splitDocumentConfigurationForm.invalid || (!barcodeConfigurationSelected && !barcodeOnAdvanceMode)"
+          class="text-danger">{{ "InvalidDocumentSplitterValue" | translate }}</span>
+      </div>
+      <div class="col-lg-4">
+        <div class="col-md-6" *ngIf="showUseComposeConfiguration">
+          <label>{{ "UseCompose" | translate }}</label>
+          <div class="input-group m-b">
+            <input class="col-lg-3" style="
+                height: 18px;
+            " formControlName="useCompose" type="checkbox" />
+          </div>
+        </div>
+        <div class="col-md-6" *ngIf="showKeepPageSeparator">
+          <label>{{ "KeepPageSeparator" | translate }}</label>
+          <div class="input-group m-b">
+            <input class="col-lg-3 " style="
+                height: 18px;
+            " formControlName="keepPageSeparator" type="checkbox" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

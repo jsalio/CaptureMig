@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { UserProfile } from '../models/user-profile';
-
-import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, interval } from 'rxjs';
 
 import { DocumentTypeForm } from '../interface/document-type-form';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserProfile } from '../models/user-profile';
+import { environment } from '../../environments/environment';
 import moment from 'moment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -49,11 +47,11 @@ export class CurrentUserService {
   }
 
   startCountdown() {
-    this.countdownSubscription = interval(1000)
-    .subscribe((remaindSecond) => {
-      var remainTime = this.calcularTiempoRestante(moment(this.currentUser.tokenExpirationDate).toDate());
-      this.countdownSubject.next(remainTime);
-    })
+    // this.countdownSubscription = interval(1000)
+    // .subscribe((remaindSecond) => {
+    //   var remainTime = this.calcularTiempoRestante(moment(this.currentUser.tokenExpirationDate).toDate());
+    //   this.countdownSubject.next(remainTime);
+    // })
   }
   
 

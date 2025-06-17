@@ -1,48 +1,52 @@
-import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ExternalProperty } from '../../../../../../models/external-property';
-import { ComposedBarcodeConfiguration } from '../../../../../../models/composed-barcode-configuration';
-import { CompoundSplittersAssignments } from '../../../../../../models/compound-splitters-assigments';
-import { ExternalPropertiesAssigments } from '../../../../../../models/external-properties-assigments';
-import { DocumentsSplitter } from '../../../../../../interface/documents-splitter';
-import { WorkflowSplitterModel } from '../../../../../../models/workflow-splitter-model';
-import { Volume } from '../../../../../../interface/volume';
-import { WorkflowStepsConfiguration } from '../../../../../../models/workflow-steps-configuration';
-import { WorkflowDocumentTypeAssignment } from '../../../../../../models/workflow-document-type-assignment';
-import { AutoName } from '../../../../../../models/auto-name';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomTabComponent, CustomTabsComponent } from './components/custom-tabs/custom-tabs.component';
 import { ToastNotificationService, ToastType } from '../../../../../../services/toast-notification.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ApiWorkflowService } from '../../../../../../services/api/api-workflow.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CurrentUserService } from '../../../../../../services/current-user.service';
-import { ConfigurationService } from '../../../../../../services/ribbons/configuration.service';
-import { ApiConfigurationService } from '../../../../../../services/api/configuration.service';
-import { ApiRoleService } from '../../../../../../services/api/api-role.service';
+
 import { ApiComposeBarcodeConfigurationService } from '../../../../../../services/api/api-compose-barcode-configuration.service';
-import { ApiExternalPropertiesService } from '../../../../../../services/api/api-external-properties.service';
-import { ApiVolumeService } from '../../../../../../services/api/api-volume.service';
-import { DocumentSeparatorType } from '../../../../../../enums/document-separator-type.enum';
-import { Workflow } from '../../../../../../models/workflow';
+import { ApiConfigurationService } from '../../../../../../services/api/configuration.service';
 import { ApiDocumentTypeService } from '../../../../../../services/api/api-document-type.service';
-import { DocumentType } from '../../../../../../models/document-types';
-import { RoleWorkflowsAssignment } from '../../../../../../models/role-workflows-assignmets';
-import { Restriction } from '../../../../../../models/Restriction';
-import { DropdownModule } from 'primeng/dropdown';
-import { CommonModule } from '@angular/common';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { SpecialPermissionComponent } from './components/special-permission/special-permission.component';
-import { CustomTabComponent, CustomTabsComponent } from './components/custom-tabs/custom-tabs.component';
-import { ExternalPropertiesConfigurationComponent } from "./components/external-properties-configuration/external-properties-configuration.component";
+import { ApiExternalPropertiesService } from '../../../../../../services/api/api-external-properties.service';
+import { ApiRoleService } from '../../../../../../services/api/api-role.service';
+import { ApiVolumeService } from '../../../../../../services/api/api-volume.service';
+import { ApiWorkflowService } from '../../../../../../services/api/api-workflow.service';
+import { AutoName } from '../../../../../../models/auto-name';
 import { AutoNameComponent } from "./components/auto-name/auto-name.component";
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ComposedBarcodeConfiguration } from '../../../../../../models/composed-barcode-configuration';
+import { CompoundSplittersAssignments } from '../../../../../../models/compound-splitters-assigments';
+import { ConfigurationService } from '../../../../../../services/ribbons/configuration.service';
+import { CurrentUserService } from '../../../../../../services/current-user.service';
+import { DocumentSeparatorType } from '../../../../../../enums/document-separator-type.enum';
+import { DocumentSplitConfigurationComponent } from "./components/document-split-configuration/document-split-configuration.component";
+import { DocumentType } from '../../../../../../models/document-types';
+import { DocumentTypesComponent } from './components/document-types/document-types.component';
+import { DocumentsSplitter } from '../../../../../../interface/documents-splitter';
+import { DropdownModule } from 'primeng/dropdown';
+import { ExternalPropertiesAssigments } from '../../../../../../models/external-properties-assigments';
+import { ExternalPropertiesConfigurationComponent } from "./components/external-properties-configuration/external-properties-configuration.component";
+import { ExternalProperty } from '../../../../../../models/external-property';
+import { Restriction } from '../../../../../../models/Restriction';
+import { RoleWorkflowsAssignment } from '../../../../../../models/role-workflows-assignmets';
+import { SpecialPermissionComponent } from './components/special-permission/special-permission.component';
 import { StepConfigurationComponent } from "./components/step-configuration/step-configuration.component";
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { Volume } from '../../../../../../interface/volume';
+import { Workflow } from '../../../../../../models/workflow';
+import { WorkflowDocumentTypeAssignment } from '../../../../../../models/workflow-document-type-assignment';
+import { WorkflowSplitterModel } from '../../../../../../models/workflow-splitter-model';
+import { WorkflowStepsConfiguration } from '../../../../../../models/workflow-steps-configuration';
 
 @Component({
   selector: 'app-workflow-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule, CommonModule, TabsModule, SpecialPermissionComponent, CustomTabComponent, CustomTabsComponent, ExternalPropertiesConfigurationComponent, AutoNameComponent, StepConfigurationComponent],
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule, DropdownModule, CommonModule, TabsModule, SpecialPermissionComponent, CustomTabComponent, CustomTabsComponent, ExternalPropertiesConfigurationComponent,
+     AutoNameComponent, StepConfigurationComponent, DocumentSplitConfigurationComponent, DocumentTypesComponent],
   templateUrl: './workflow-form.component.html',
   styleUrl: './workflow-form.component.css',
-  providers:[CurrentUserService]
+  providers: [CurrentUserService]
 })
 export class WorkflowFormComponent {
   workflowForm: FormGroup;
@@ -80,6 +84,7 @@ export class WorkflowFormComponent {
   pageSizePerImageLimitWarning: number;
   administratorRoleId = '1';
   permissionTo: 'AllRoles' | 'OnlyAdminRole' | 'SetAccessLater' = 'SetAccessLater'
+  workflowNameExpression: string = ''
 
   // @ViewChild('barcodeConfig') barcodeconfig: BarCodeConfigurationComponent;
   // @ViewChild('splitDocumentConfigurationForm') splitDocumentConfiguration: DocumentSplitConfigurationComponent;
@@ -145,7 +150,7 @@ export class WorkflowFormComponent {
           this.pageSizePerBatchLimitWarning = workflowData.limitSizePerBatchWarning;
           this.pageSizePerImageLimit = workflowData.limitSizeOfImage;
           this.pageSizePerImageLimitWarning = workflowData.limitSizeOfImageWarning;
-
+          this.workflowNameExpression = workflowData.autoName
 
           this.currentDefaultDocumentType = documentTypes.
             find(x => x.id === (workflowData as any).workflowDocumentsTypeAssignments
@@ -646,7 +651,7 @@ export class WorkflowFormComponent {
   }
 
   messages: string[] = [];
- 
+
   message(s: string) {
     console.log('Called')
     this.messages.push(s);
@@ -656,6 +661,11 @@ export class WorkflowFormComponent {
   getSpecialPermissions = () => {
     //console.log(this.currentSpecialPermissions)
     return this.currentSpecialPermissions
+  }
+
+  onAutoNameChange = (e: { nameExpression: string, example: string }) => {
+    this.autoNameExample = e.example;
+    this.workflowNameExpression = e.nameExpression
   }
 }
 
