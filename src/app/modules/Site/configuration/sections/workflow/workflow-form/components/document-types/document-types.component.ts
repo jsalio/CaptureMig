@@ -124,4 +124,8 @@ export class DocumentTypesComponent {
   onItemsChanged = (e:any) => {
     console.log(e)
   }
+
+  getText = (e:any) => {
+    return e.documentType.name
+  }
 }

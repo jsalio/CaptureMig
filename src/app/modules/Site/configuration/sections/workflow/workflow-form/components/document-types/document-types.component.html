@@ -11,7 +11,21 @@
             <div class="row m-0">
                 <div class="col-xxl-6">
                     <app-transfer-panel [sourceItems]="documentTypes" [targetItems]="assignedDocumentTypes"
-                        [displayProperty]="'documentType.name'" (itemsChanged)="onItemsChanged($event)" [enableMultiSelect]="false" />
+                        [displayProperty]="'documentType.name'" (itemsChanged)="onItemsChanged($event)"
+                        [enableMultiSelect]="false">
+                        <!-- Template para elementos de la lista de origen -->
+                        <ng-template #sourceItemTemplate let-item>
+                            {{ getText(item) }}
+                        </ng-template>
+
+                        <!-- Template para elementos de la lista de destino -->
+                        <ng-template #targetItemTemplate let-item>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>{{ getText(item) }}</span>
+                                <span *ngIf="item.isDefault" class="badge bg-primary">Default</span>
+                            </div>
+                        </ng-template>
+                    </app-transfer-panel>
                 </div>
                 <div class="col-xxl-4">
                     <div class="panel panel-default">

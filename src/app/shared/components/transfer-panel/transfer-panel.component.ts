@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, signal } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,9 @@ export class TransferPanelComponent {
   @Input() targetPlaceholder: string = 'Search target items...';
   @Input() minListHeight: string = '300px';
   @Input() enableMultiSelect: boolean = true;
+
+  @ContentChild('sourceItemTemplate') sourceItemTemplate?: TemplateRef<any>;
+  @ContentChild('targetItemTemplate') targetItemTemplate?: TemplateRef<any>;
 
   @Output() itemsChanged = new EventEmitter<{
     source: TransferItem[];
