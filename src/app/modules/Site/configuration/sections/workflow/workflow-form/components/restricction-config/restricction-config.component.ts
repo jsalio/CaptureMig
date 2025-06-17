@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Restriction } from '../../../../../../../../models/Restriction';
+import { Subscription } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -13,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './restricction-config.component.html',
   styleUrl: './restricction-config.component.css',
 })
-export class RestricctionConfigComponent {
+export class RestricctionConfigComponent implements OnDestroy {
   isRestrictionActive = false;
   restrictionForm: FormGroup;
   @Output() emitChanges = new EventEmitter<Restriction>();
@@ -30,24 +31,46 @@ export class RestricctionConfigComponent {
     warning?: string;
     limit?: string;
   };
+  private subscription: Subscription;
 
   constructor(private fb: FormBuilder) {
     this.restrictionForm = this.fb.group({
-      restrictionValue: new FormControl(this.limit, [
-        Validators.required,
-      ]),
-      restrictionActive: new FormControl(this.limit > 0),
-      restrictionWarningValue: new FormControl(this.limitWarning, [
-        Validators.required,
-      ])
+      restrictionValue: new FormControl(0, [Validators.required]),
+      restrictionActive: new FormControl(false),
+      restrictionWarningValue: new FormControl(0, [Validators.required])
+    });
+  }
+
+  ngOnInit() {
+    this.isRestrictionActive = this.limit > 0;
+    
+    if (this.isRestrictionActive) {
+      this.restrictionForm.patchValue({
+        restrictionValue: this.limit,
+        restrictionActive: true,
+        restrictionWarningValue: this.limitWarning
+      });
+    } else {
+      this.restrictionForm.patchValue({
+        restrictionValue: 0,
+        restrictionActive: false,
+        restrictionWarningValue: 0
+      });
+      this.restrictionForm.get('restrictionValue').disable();
+      this.restrictionForm.get('restrictionWarningValue').disable();
+    }
+
+    this.subscription = this.restrictionForm.valueChanges.subscribe((values) => {
+      const current: Restriction = {
+        limit:values['restrictionValue'],
+        limitWarning: values['restrictionWarningValue']
+      }
+      this.emitChanges.emit(current)
     })
   }
 
-
-  ngOnInit() {
-    console.log(this);
-    this.isRestrictionActive = this.limit > 0;
-    ;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
   isFieldInvalid = (field: string) => {
@@ -83,5 +106,10 @@ export class RestricctionConfigComponent {
       limitWarning: this.restrictionForm.controls['restrictionWarningValue'].value
     }
     this.emitChanges.emit(cfg);
+
+  }
+
+  validateChanges = (e:any) => {
+    console.log(e)
   }
 }

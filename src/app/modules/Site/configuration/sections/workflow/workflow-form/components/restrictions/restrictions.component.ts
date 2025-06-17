@@ -85,36 +85,54 @@ export class RestrictionsComponent implements OnInit {
   isFieldInvalid = (field: string) => { }
 
   setLimitSizePerPage = (event: Restriction) => {
+    console.log(event)
+    if (event.limit === undefined){
+      return
+    }
     this.restriction.update((value) => ({...value, SizePerPage:{
       isActive:this.restriction().SizePerPage.isActive,
       value:event.limit,
       warn: event.limitWarning
     }}))
+    console.log('Update', this.restriction())
   }
 
   setLimitSizePerBatch = (event: Restriction) => { 
+    console.log(event)
+    if (event.limit === undefined){
+      return
+    }
     this.restriction.update((value) => ({...value, SizePerBatch:{
       isActive:this.restriction().SizePerBatch.isActive,
       value:event.limit,
       warn: event.limitWarning
     }}))
-
+    console.log('Update', this.restriction())
   }
 
   documentLimitPerBatchChange = (event: Restriction) => {
+    console.log(event)
+    if (event.limit === undefined){
+      return
+    }
     this.restriction.update((value) => ({...value, DocumentLimit:{
       isActive:this.restriction().DocumentLimit.isActive,
       value:event.limit,
       warn: event.limitWarning
     }}))
+    console.log('Update', this.restriction())
   }
 
-  PageLimitPerBatchQuantityChange = (event: Restriction) => { 
+  PageLimitPerBatchQuantityChange = (event: Restriction) => {
+    console.log(event)
+    if (event.limit === undefined){
+      return
+    }
     this.restriction.update((value) => ({...value, PageLimit:{
       isActive:this.restriction().PageLimit.isActive,
       value:event.limit,
       warn: event.limitWarning
     }}))
-
+    console.log('Update', this.restriction())
   }
 }

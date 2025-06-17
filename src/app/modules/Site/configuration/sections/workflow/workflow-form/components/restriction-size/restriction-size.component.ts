@@ -31,7 +31,6 @@ export class RestrictionSizeComponent implements OnInit {
   measureUnit: 'KB' | 'KB(MB)' | 'GB' = 'KB';
 
   emit = (e: Restriction) => {
-    console.log(e);
     if (e.limit >= this.limitOfKiloBytes) {
       this.extraData.limit = 'KB(MB)';
     }

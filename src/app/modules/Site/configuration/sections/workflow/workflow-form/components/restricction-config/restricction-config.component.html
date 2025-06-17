@@ -1,4 +1,4 @@
-<div [formGroup]="restrictionForm" novalidate class="col-lg-12 no-padder">
+<div [formGroup]="restrictionForm" novalidate class="col-lg-12 no-padder" (change)="validateChanges($event)">
     <div class="checkbox i-checks">
       <label>
         <input type="checkbox" [checked]="isRestrictionActive" formControlName="restrictionActive"
