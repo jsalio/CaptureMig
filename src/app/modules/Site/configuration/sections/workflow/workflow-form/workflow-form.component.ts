@@ -86,6 +86,10 @@ export class WorkflowFormComponent {
   administratorRoleId = '1';
   permissionTo: 'AllRoles' | 'OnlyAdminRole' | 'SetAccessLater' = 'SetAccessLater'
   workflowNameExpression: string = ''
+  documentLimitPerBatchQuantity =0
+  documentLimitPerBatchQuantityWarning = 0
+  pageLimitPerBatchQuantity = 0
+  pageLimitPerBatchQuantityWarning = 0
 
   // @ViewChild('barcodeConfig') barcodeconfig: BarCodeConfigurationComponent;
   // @ViewChild('splitDocumentConfigurationForm') splitDocumentConfiguration: DocumentSplitConfigurationComponent;
@@ -147,11 +151,17 @@ export class WorkflowFormComponent {
 
           this.workflowStepConfiguration = workflowData.workflowStepsConfiguration;
           this.workflowForm.patchValue(workflowData);
+
+          this.documentLimitPerBatchQuantity = workflowData.documentLimitPerBatchQuantity
+          this.documentLimitPerBatchQuantityWarning = workflowData.documentLimitPerBatchAlert
+          this.pageLimitPerBatchQuantity = workflowData.pageLimitPerBatchQuantity
+          this.pageLimitPerBatchQuantityWarning = workflowData.pageLimitPerBatchAlert
           this.pageSizePerBatchLimit = workflowData.limitSizePerBatch;
           this.pageSizePerBatchLimitWarning = workflowData.limitSizePerBatchWarning;
           this.pageSizePerImageLimit = workflowData.limitSizeOfImage;
           this.pageSizePerImageLimitWarning = workflowData.limitSizeOfImageWarning;
           this.workflowNameExpression = workflowData.autoName
+          console.log(this)
 
           this.currentDefaultDocumentType = documentTypes.
             find(x => x.id === (workflowData as any).workflowDocumentsTypeAssignments

@@ -24,6 +24,15 @@
     </div>
   </div>
 </div> -->
+<app-modal [isOpen]="isConfigurationOpen" [title]="'ComponentsRequired'" [headerType]="'default'" [optionType]="'Accept'" (accept)="closeModal()" (onCloseModal)="closeModal()">
+  <ng-template #modalContent>
+    <app-bar-code-reader  #barcodeReader [separatorMode]="true" (barcodeChange)="barcodeUpdated = $event"
+    (barcodeAdvanceConfigurationSelected)="onBarcodeConfigurationSelectedOnAdvanceMode($event)"
+    (barcodeConfigurationSelected)="onBarcodeConfigurationSelected($event)"
+    [advanceConfiguration]="barcodeOnAdvanceMode" (clear)="clearBarcodeData()"/>
+  </ng-template>
+</app-modal>
+
 <div class="col-lg-12 no-padder">
   <div class="tab-heading">
     {{ "SelectDocumentSplitTypeTitle" | translate }}
@@ -52,7 +61,7 @@
         *ngIf="showMixedBarcodeConfiguration">
         <label>{{ "DocumentSeparator" | translate }}</label>
         <div class="input-group m-b">
-          <button class="btn-barcodeconfig" >
+          <button class="btn-barcodeconfig" (click)="openConfigurationModal()">
             <i class="fa fa-cog mr-2" aria-hidden="true"></i>
             {{ "ConfigureBarcode" | translate }}
           </button>

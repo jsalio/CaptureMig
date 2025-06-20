@@ -1,0 +1,98 @@
+<div class="uploadBarcode-container">
+    <div *ngIf="!dataLoaded && !advanceConfiguration">
+      <h3 class="uploadBarcode__title">{{'BarcodeConfiguration' | translate}}</h3>
+      <p class="uploadBarcode__paragraph"> {{'ChargeBarcodeExample' | translate}} </p>
+      <p>{{'CanRealizeA' | translate}} <a style="text-decoration: underline; color: #0095ff"
+          (click)="setAdvanceConfigurationMode(true)" class="uploadBarcode__link">{{'AdvanceConfiguration' |
+          translate}}</a> {{'IfDoesntHaveImage' | translate}}</p>
+      <div class="uploadBarcode-box">
+        <p-fileUpload #fileUpload class="choose-button" mode="basic" chooseLabel="{{'Choose' | translate}}" [auto]="true"
+          customUpload="true" accept="image/png" maxFileSize="100000000" (uploadHandler)="onUpload($event)">
+        </p-fileUpload>
+        <br>
+        <div class="uploadBarcode__image">
+        </div>
+        <div class="uploadBarcode__text">
+          {{'LoadImagesPNGorJPG' | translate}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-lg-12 p-0" *ngIf="advanceConfiguration">
+      <form [formGroup]="composedBarcodeConfigurationForm">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="bc-label">
+              <label for="">{{'ExtractedExampleData' | translate}}:</label>
+              <input [class]="dataLoaded ? 'disabled input-group': 'input-group'" [readonly]="dataLoaded"
+                formControlName="extractedDataExample" type="text">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="bc-label">
+              <label for="">{{ 'BarcodeFormatTitle' | translate }}:</label>
+              <select [disabled]="dataLoaded"
+                [class]="dataLoaded ? 'btn dropdown-toggle select-border normal-dropdown disabled w-100': 'btn dropdown-toggle select-border normal-dropdown w-100'"
+                formControlName="barcodeFormat">
+                <option disabled selected="selected" value="-1">{{'ChooseAnOption' | translate}}
+                </option>
+                <option *ngFor="let item of barcodeFormats" [value]="item.key">{{item.label}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-12 mt-3">
+            <div class="bc-label">
+              <button (click)="configureAdvanceData()"
+                [disabled]="composedBarcodeConfigurationForm.invalid || !isBarcodeFormatValid()  || dataLoaded"
+                [class]="composedBarcodeConfigurationForm.invalid || !isBarcodeFormatValid() || dataLoaded ? 'btn-disabled btn btn-primary': 'btn btn-primary'">
+                {{ 'Configure' | translate }}
+              </button>
+              <button *ngIf="!dataLoaded" (click)="restartProcess()" class="btn btn-default">
+                {{ 'CancelDescription' | translate }}
+              </button>
+              <button *ngIf="dataLoaded" (click)="unloadDataEvent()" class="btn btn-primary">
+                {{ 'Restart' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- <app-loading [display]="isBarcodeLoading && !separatorMode"></app-loading> -->
+    <div [class]="separatorMode ? 'barcode-modal canvas-container' : 'canvas-container'">
+      <div *ngIf="!advanceConfiguration"
+        [class]="createMode ? 'instruction__text configuration-label bottom' : 'instruction__text configuration-label bottom'">
+        <div *ngIf="dataLoaded">
+          <p> {{'InstructionsToSelectedBarcode' | translate}}</p>
+        </div>
+      </div>
+      <div [class]="dataLoaded && !advanceConfiguration ? 'page-container' : 'page-hidden'">
+        <div id="canvas-images">
+          <canvas #examplePage [class]="dataLoaded ? '' : 'page-hidden'" width="500" height="500"
+            (click)="onCanvasClick($event)"></canvas>
+          <canvas *ngFor="let canva of barcodesRectangules"
+            [ngStyle]="{'left': canva.x + 'px','top': canva.y+'px', 'position': 'absolute', 'background-color': getColor(canva)}"
+            [id]="getElementId(canva)" [width]="canva.width" [height]="canva.height"
+            (click)="onCanvasClick(canva)"></canvas>
+        </div>
+        <div class="barcode-footer">
+          <div class="instruction__text tolerance-manage bottom">
+            <button type="button" (click)="increaseTolerance()">
+              <i class="fa fa-plus" style="font-size: 20px;" aria-hidden="true"></i>
+            </button>
+            <button type="button" (click)="decreaseTolerance()">
+              <i class="fa fa-minus" style="font-size: 20px;" aria-hidden="true"></i>
+            </button> {{'Tolerance' | translate}}
+          </div>
+          <button class="btn btn-danger choose-button bottom" (click)="clearFile()">
+            {{ 'Clear' | translate }}
+            <i class="fa fa-times-circle"></i>
+          </button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

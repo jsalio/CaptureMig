@@ -1,4 +1,5 @@
-import { PageStatus } from './../enum/page-status.enum';
+import { PageStatus } from "../enums/page-status.enum";
+
 /**
  * Represents the page data that needs to be created
  *

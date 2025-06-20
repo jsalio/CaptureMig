@@ -1,22 +1,25 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+import { ApiPageService } from '../../../../../../../../services/api/api-page.service';
+import { BarCodeReaderComponent } from "../bar-code-reader/bar-code-reader.component";
+import { CommonModule } from '@angular/common';
 import { DocumentSeparatorType } from '../../../../../../../../enums/document-separator-type.enum';
 import { DocumentsSplitter } from '../../../../../../../../interface/documents-splitter';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ModalComponent } from "../../../../../../../../shared/modal/modal.component";
 
 @Component({
   selector: 'app-document-split-configuration',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ReactiveFormsModule,InputNumberModule
-  ],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, InputNumberModule, ModalComponent, BarCodeReaderComponent],
   templateUrl: './document-split-configuration.component.html',
   styleUrl: './document-split-configuration.component.css'
 })
 export class DocumentSplitConfigurationComponent {
   public splitDocumentConfigurationForm: FormGroup;
-  // @ViewChild('barcodeReader') barcodeReaderComponent: BarcodeReaderComponent;
+  @ViewChild('barcodeReader') barcodeReaderComponent: BarCodeReaderComponent;
   // @ViewChild('barcodeConfiguration') barcodeConfigurationModal: ModalDirective;
   showPageQuantityConfiguration = false;
   showMixedBarcodeConfiguration = false;
@@ -33,6 +36,7 @@ export class DocumentSplitConfigurationComponent {
   barcodeConfigurationSelected: any;
   barcodeUpdated = false;
   barcodeOnAdvanceMode: boolean;
+  isConfigurationOpen:boolean = false
 
   /**
    * Represents the constructor of this component.
@@ -40,7 +44,7 @@ export class DocumentSplitConfigurationComponent {
   constructor(
     private splitDocumentFb: FormBuilder,
     private translateService: TranslateService,
-    // private pageService: PagesService
+    private pageService: ApiPageService
     ) {
     this.splitDocumentConfigurationForm = this.buildConfigurationForm();
     this.loadDocumentSplitterTypes();
@@ -139,7 +143,7 @@ export class DocumentSplitConfigurationComponent {
       configuration.barcodeLocationConfiguration = this.barcodeConfigurationSelected.barcodeLocationConfiguration;
 
       if (!this.barcodeOnAdvanceMode) {
-        // configuration.barcodeLocationConfiguration.base64String = this.barcodeReaderComponent.base64String;
+        configuration.barcodeLocationConfiguration.base64String = this.barcodeReaderComponent.base64String;
         configuration.barcodeLocationConfiguration.updated = this.barcodeUpdated;
         configuration.barcodeLocationConfiguration.resultPoints = configuration.barcodeLocationConfiguration
         .resultPoints.map((point: any) => {
@@ -187,20 +191,20 @@ export class DocumentSplitConfigurationComponent {
 
           const data = this.splitDocumentConfiguration.barcodeLocationConfiguration;
           if (data) {
-            // this.pageService
-            // .getComposedBarcodeConfigurationBase64Image(data.id).then( (base64String) => {
-            //   this.barcodeReaderComponent.createMode = false;
-            //   this.barcodeReaderComponent.uploadImage(base64String, data);
+            this.pageService
+            .getComposedBarcodeConfigurationBase64Image(data.id).then( (base64String) => {
+              this.barcodeReaderComponent.createMode = false;
+              this.barcodeReaderComponent.uploadImage(base64String, data);
 
-            //   this.splitDocumentConfigurationForm.controls['separatorExpectedValue']
-            //   .setValue(this.splitDocumentConfiguration.separatorExpectedValue);
-            //   this.barcodeConfigurationSelected = this.barcodeReaderComponent.barcodeSelected;
-            // });
+              this.splitDocumentConfigurationForm.controls['separatorExpectedValue']
+              .setValue(this.splitDocumentConfiguration.separatorExpectedValue);
+              this.barcodeConfigurationSelected = this.barcodeReaderComponent.barcodeSelected;
+            });
           } else {
             this.barcodeOnAdvanceMode = true;
             const barcode = this.splitDocumentConfigurationForm.getRawValue();
             barcode.extractedDataExample = barcode.separatorExpectedValue;
-            // this.barcodeReaderComponent.configureBarcodeData(barcode);
+            this.barcodeReaderComponent.configureBarcodeData(barcode);
           }
           this.splitDocumentConfigurationForm.controls['keepPageSeparator']
           .setValue(this.splitDocumentConfiguration.keepPageSeparator);
@@ -324,5 +328,13 @@ export class DocumentSplitConfigurationComponent {
         index: 4
       },
     };
+  }
+
+  closeModal = () => {
+    this.isConfigurationOpen = false
+  }
+
+  openConfigurationModal = () => {
+    this.isConfigurationOpen = true
   }
 }

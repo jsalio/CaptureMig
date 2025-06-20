@@ -50,12 +50,16 @@
                 [isBtnDefaultVisible]="isBtnDefaultVisible" [currentDefaultDocumentType]="currentDefaultDocumentType" />
             </app-custom-tab>
             <app-custom-tab heading="Restrictions">
-              <app-restrictions 
-                [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch" [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch"
-                [pageSizePerImageLimit]="pageSizePerBatchLimit" [pageSizePerBatchLimitWarning]="pageSizePerBatchLimitWarning" 
-                [isActivePageLimitPerBatch]="isActivePageLimitPerBatch" 
-                [isActivePageSizePerBatch]="true"  [pageSizePerBatchLimit]="25" [pageSizePerBatchLimitWarning]="450"
-                [isActiveSizePerPage]="true" [pageSizePerImageLimit]="54" [pageSizePerImageWarning]="600"/>
+              <app-restrictions [isActiveDocumentLimitPerBatch]="isActiveDocumentLimitPerBatch"
+                [documentLimitPerBatchQuantity]="documentLimitPerBatchQuantity"
+                [documentLimitPerBatchQuantityWarning]="documentLimitPerBatchQuantityWarning"
+                [isActivePageLimitPerBatch]="isActiveDocumentLimitPerBatch"
+                [PageLimitPerBatchQuantity]="pageLimitPerBatchQuantity"
+                [PageLimitPerBatchQuantityWarning]="pageLimitPerBatchQuantityWarning"
+                [isActivePageSizePerBatch]="pageSizePerBatchLimit > 0" [pageSizePerBatchLimit]="pageSizePerBatchLimit"
+                [pageSizePerBatchLimitWarning]="pageSizePerBatchLimitWarning"
+                [isActiveSizePerPage]="pageSizePerImageLimit > 0" [pageSizePerImageLimit]="pageSizePerImageLimit"
+                [pageSizePerImageWarning]="pageSizePerImageLimitWarning" />
             </app-custom-tab>
             <app-custom-tab heading="StepsConfiguration">
               <app-step-configuration [isEditMode]="isEditMode" [documentTypesSelected]="assignedDocumentTypes"

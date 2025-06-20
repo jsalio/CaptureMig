@@ -1,0 +1,180 @@
+.item-selected {
+    background-color: #2d7bef6b;
+}
+
+.page-example {
+    border: #d6d6d6; border-style: solid; border-width: 1px;
+}
+
+.bc-select__dropdown .dropdown-toggle::after {
+    margin-left: 5.255em;
+}
+.select-border {
+    border-radius: 10px;
+    box-shadow: 1px 2px #54545440; 
+    border-color: #545454;
+}
+.instruction__text{
+    font-size: 16px;
+    color: #707070;
+}
+
+.disabled {
+   background-color: #8080802b;
+   border: 1px solid #dadada;
+}
+
+.cog-btnPrimary.cog-btnPrimary--cancel {
+    background: #D1D1D1;
+    color: #707070;
+}
+.cog-btnPrimary.cog-btnPrimary--cancel:hover{
+    background: #c0c0c0;
+}
+
+.btn-disabled {
+    background-color: #2a579ab5 !important;
+ }
+
+.cog-btnPrimary {
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 40px;
+    background: #2a579a;
+    color: white;
+    transition: all .3s;
+}
+.cog-btnPrimary:hover{
+    background: #264e8a;
+}
+
+/*===================*/
+/*  COG CONTAINER    */
+/*===================*/
+.bc-information{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 20px 0;
+}
+.bc-label{
+    font-size: 16px; 
+}
+.bc-label label{
+    margin-right: 30px;
+}
+.bc-label span{
+    font-weight: 500;
+}
+
+.normal-dropdown{
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    box-shadow: none;
+}
+
+.page-hidden {
+    display: none;
+}
+
+/*===================*/
+/* UPLOAD BARCODE    */
+/*===================*/
+
+.uploadBarcode-container{
+    padding: 10px;
+}
+.uploadBarcode__title{
+    color: #707070;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+.uploadBarcode__paragraph{
+    margin-bottom: 5px;
+}
+.uploadBarcode__link{
+    color: #2a579a;
+    text-decoration: underline;
+}
+.uploadBarcode-box{
+    border: 2px dashed #d6d6d685;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    margin-top: 30px;
+}
+.uploadBarcode__button {
+    background: #2a579a;
+    color: white;
+    padding: 15px 45px 15px 30px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s;
+}
+.uploadBarcode__button:hover{
+    background: #264e8a;
+}
+
+.uploadBarcode__icon{
+    margin-right: 25px;
+    font-size: 16px;
+}
+.uploadBarcode__image{
+    background: url("http://prodoctivity.info/ProDoctivity-img/img-placeholder.png");
+    background-size: cover;
+    width: 180px;
+    height: 100px;
+    border: 3px solid white;
+    box-shadow: 1px 1px 5px 0px #e6e6e6;
+    margin-top: 23px;
+}
+.uploadBarcode__text {
+    color: #2a579a;
+    margin-top: 10px;
+}
+.choose-button  span.ui-button.ui-fileupload-choose{
+    background: #2a579a;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 70px;
+    border-radius: 10px;
+}
+.barcode-modal .tolerance-manage.bottom button {
+    border: 0;
+    background: #EBEEF3;
+    border-radius: 3px;
+    width: 35px;
+    height: 30px;
+}
+
+.modal-body p{
+    padding: 0 !important;
+}
+.page-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: #d6d6d6;
+    border-style: solid;
+    border-width: 1px;
+}
+.barcode-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f5f7f9;
+    padding: 10px 20px;
+}
+
+#canvas-images {
+  position: relative!important;
+}
